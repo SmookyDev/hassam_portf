@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HASSAM TAHIR Portfolio</title>
+    <meta name="description" content="HASSAM TAHIR is a professional video editor specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HASSAM TAHIR Portfolio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://HaTh.com/">
+    <meta property="og:description" content="HASSAM TAHIR is a professional video editor specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="HASSAM TAHIR Portfolio">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@HaTh0021">
+    <meta name="twitter:title" content="HASSAM TAHIR Portfolio">
+    <meta name="twitter:description" content="HASSAM TAHIR is a professional video editor specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+    <meta name="twitter:creator" content="@HaTh0021">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href="images/hero/shadow-image.png" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero/fv-moving-sp.png" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero/fv-moving.png" fetchpriority="high">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js for 3D elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/video-player.css">
+
+    <style>
+        /* Footer Fix */
+        
+        #footer-wrapper {
+            position: relative;
+            margin-top: 5rem;
+            overflow: visible;
+        }
+        
+        #footer {
+            position: relative;
+            top: 0;
+            transform: none;
+            padding: 4rem 0 2rem;
+        }
+        
+        #kinect-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        #kinect-video {
+            display: none;
+            /* hide raw video */
+        }
+        
+        #kinect-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body id="body" class="overflow-x-hidden font-serif text-taupe-gray transition-colors" data-bg-color="dark">
+
+    <!-- Background -->
+    <div id="bg" class="bg fixed left-0 top-0 -z-10 h-full w-screen" data-color="dark">
+        <div class="relative h-full w-full">
+            <div class="bg__dark absolute left-0 top-0 h-full w-full bg-mine-shaft-texture opacity-100"></div>
+            <div class="bg__bright absolute left-0 top-0 h-full w-full bg-gray-texture opacity-0"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="fixed left-0 top-0 z-30 w-screen transition-all" data-color="dark" data-mix-blend-mode="true">
+        <div class="container flex items-start px-5 py-5 md:px-20 md:py-10">
+            <a href="/" class="ts-logo transition-all hover:opacity-30" aria-label="HASSAM TAHIR">
+                <p class="h-auto md:w-[180px] text-3xl md:text-5xl">HASSAM TAHIR</p>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="ts-header-list ml-auto hidden max-h-[var(--header-list-height)] gap-8 transition-colors ease-in-out md:flex">
+                <li class="relative">
+                    <a href="contact.html" class="ts-text-link text-2xl vertical-rl md:text-lg" data-vertical="rl">
+                        Contact
+                    </a>
+                </li>
+                <li class="relative">
+                    <a href="works.html" class="ts-text-link text-2xl vertical-rl md:text-lg" data-vertical="rl">
+                        Works
+                    </a>
+                </li>
+                <li class="relative">
+                    <a href="about.html" class="ts-text-link text-2xl vertical-rl md:text-lg" data-vertical="rl">
+                        About
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Menu Button -->
+            <button class="ts-menu-open border-silver ml-auto md:ml-14 hover:bg-mine-shaft hover:text-pampas text-black font-serif-en border rounded-[30px] md:pt-[6px] md:pb-[5px] md:px-4 pt-[4px] pb-[3px] px-[12px] flex gap-2 items-center group transition duration-700"
+                data-color="dark">
+                <span class="inline-block">MENU</span>
+                <span class="block h-[0.375rem] w-[0.375rem] rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="menu" class="menu z-30 h-dvh w-screen bg-mine-shaft-texture hidden">
+        <div class="relative flex h-full w-full p-5 md:p-10">
+            <video class="hidden h-full max-w-[50%] items-center md:mr-4 md:flex" webkit-playsinline playsinline muted autoplay loop>
+                <source src="assets/videos/1.mp4" type="video/mp4">
+            </video>
+
+            <div class="flex w-full flex-col md:flex-1">
+                <button class="ts-menu-close text-pampas border-emperor absolute top-5 md:top-10 right-5 md:right-20 hover:bg-pampas hover:text-mine-shaft font-serif-en border rounded-[30px] md:pt-[6px] md:pb-[5px] md:px-4 pt-[4px] pb-[3px] px-[12px] flex gap-2 items-center group transition duration-700">
+                    <span class="inline-block">CLOSE</span>
+                    <span class="block h-[0.375rem] w-[0.375rem] rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+                </button>
+
+                <div class="flex w-full flex-1 flex-col items-center py-10">
+                    <div class="flex w-full flex-1 items-center justify-center">
+                        <ul class="flex h-full max-h-[22.2rem] w-full max-w-[85%] flex-row-reverse justify-between md:max-h-[30rem] md:w-auto md:max-w-full md:justify-normal md:gap-12">
+                            <li class="flex leading-none">
+                                <a href="index.html" class="group relative duration-[0.6s] vertical-rl hover:opacity-70">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(01)</span>
+                                    </span>
+                                    <span class="mt-[1.42rem] text-2xl text-pampas md:mt-8 md:text-[2rem]">Home</span>
+                                    <span class="mb-[0.85rem] mt-[1.14rem] h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                    </span>
+                                    <span class="font-serif-en text-[0.928rem] text-silver-chalice md:text-base">
+                                            <span>HOME</span>
+                                    </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="about.html" class="group relative duration-[0.6s] vertical-rl hover:opacity-70">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(02)</span>
+                                    </span>
+                                    <span class="mt-[1.42rem] text-2xl text-pampas md:mt-8 md:text-[2rem]">About</span>
+                                    <span class="mb-[0.85rem] mt-[1.14rem] h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                    </span>
+                                    <span class="font-serif-en text-[0.928rem] text-silver-chalice md:text-base">
+                                            <span>ABOUT</span>
+                                    </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="works.html" class="group relative duration-[0.6s] vertical-rl hover:opacity-70">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(03)</span>
+                                    </span>
+                                    <span class="mt-[1.42rem] text-2xl text-pampas md:mt-8 md:text-[2rem]">Works</span>
+                                    <span class="mb-[0.85rem] mt-[1.14rem] h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                    </span>
+                                    <span class="font-serif-en text-[0.928rem] text-silver-chalice md:text-base">
+                                            <span>WORKS</span>
+                                    </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="contact.html" class="group relative duration-[0.6s] vertical-rl hover:opacity-70">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(04)</span>
+                                    </span>
+                                    <span class="mt-[1.42rem] text-2xl text-pampas md:mt-8 md:text-[2rem]">Contact</span>
+                                    <span class="mb-[0.85rem] mt-[1.14rem] h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                    </span>
+                                    <span class="font-serif-en text-[0.928rem] text-silver-chalice md:text-base">
+                                            <span>CONTACT</span>
+                                    </span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="mt-4 flex gap-8">
+                        <li>
+                            <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link font-serif-en text-xl text-pampas">
+                                X (Twitter)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link font-serif-en text-xl text-pampas">
+                                INSTAGRAM
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main" class="container px-[1.4rem] md:px-20 overflow-x-hidden">
+
+        <!-- Advanced Page Loader -->
+        <div class="ts-page-loader fixed left-0 top-0 z-50 h-dvh w-screen flex items-center justify-center transition-all duration-1000" data-color="dark">
+            <div class="loader-container relative">
+                <!-- Main Logo Animation -->
+                <div class="loader-logo-container mb-8">
+                    <a href="index.html" class="ts-logo transition-all hover:opacity-30" aria-label="HASSAM TAHIR">
+                        <p class="h-auto md:w-[180px] text-7xl">HASSAM TAHIR</p>
+                    </a>
+                </div>
+                <!-- Loading Text -->
+                <div class="loader-text-container text-center">
+                    <div class="loader-text font-serif-en text-sm tracking-widest opacity-0">PORTFOLIO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section id="hero" class="relative">
+            <div id="hero-container">
+
+                <div class="flex h-lvh flex-col justify-center overflow-y-hidden py-16 text-silver-chalice bg-mine-shaft-texture contents-full">
+
+                    <!-- Hero Video -->
+
+
+                    <div id="hero-video" class="is-loading absolute left-1/2 top-0 z-0 h-full w-screen -translate-x-1/2 overflow-hidden transition-all duration-700">
+                        <div id="kinect-container">
+                            <!-- The hidden video -->
+                            <video id="kinect-video" muted autoplay loop playsinline crossorigin="anonymous">
+                <source src="assets/videos/4.mp4" type="video/webm" />
+                <source src="assets/videos/4.mp4" type="video/mp4" />
+                </video>
+
+                            <!-- Canvas for effect -->
+                            <canvas id="kinect-canvas"></canvas>
+                        </div>
+
+
+                    </div>
+
+                    <p class="mt-14 font-serif-en md:text-xl">
+                        WEB DESIGN / GRAPHIC DESIGN / ART DIRECTION
+                    </p>
+
+                    <h1 class="mt-3 flex items-end justify-between gap-4 md:mt-0 md:justify-normal md:gap-10">
+                        <picture id="hero-logo" class="relative max-w-[19.6rem] md:max-w-[85rem]">
+                            <img src="images/Hp.png" alt="HASSAM TAHIR">
+                        </picture>
+                        <div class="flex flex-col justify-center lg:grid lg:grid-cols-3 lg:items-end">
+
+                            <p class="ml-auto mt-4 hidden w-96 font-serif-en md:block lg:m-0">
+                                I am HASSAM TAHIR, a visual designer. <br>I am good at balancing logical and intuitive thinking, function and emotion, stillness and movement, and seeking and expressing the best visual expression that fulfills user needs
+                                and objectives.
+                            </p>
+                        </div>
+
+                        <span class="inline-flex flex-col text-taupe-gray vertical-rl">
+                            <span class="whitespace-pre-line font-serif-en text-sm leading-none md:text-lg">
+                                <span>(PORTFOLIO)</span>
+                        </span>
+                        <span class="whitespace-pre-line text-[2rem] font-medium leading-none md:text-5xl">
+                                <span>Collection</span>
+                        </span>
+                        </span>
+                    </h1>
+                </div>
+
+                <!-- Scroll Navigation -->
+                <div class="scroll-nav absolute bottom-[5px] right-0 z-0 hidden h-[17.5rem] w-[1px] bg-emperor md:block">
+                    <div class="relative h-full w-full">
+                        <div class="scroll-nav__inside absolute left-0 top-0 h-10 w-full bg-silver-chalice"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parallax Gallery Section -->
+        <section id="parallax-gallery">
+            <div class="relative h-screen overflow-hidden py-[4.6rem] text-pampas contents-full md:py-44">
+                <div class="absolute left-0 top-0 h-full w-full bg-mine-shaft-texture"></div>
+                <div class="flex justify-between">
+                    <!-- Left Column -->
+                    <ul class="flex flex-1 flex-col items-start">
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-46 md:w-[27rem] md:ml-[10rem]">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="left-01" class="w-full">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-28 md:w-[14rem] mt-28 md:mt-[15rem] -ml-12 md:ml-0">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="left-02" class="w-full">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-46 md:w-[21rem] mt-40 md:mt-[3.75rem] ml-14 md:ml-[34rem]">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="left-03" class="w-full">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-32 md:w-[21rem] mt-7 md:mt-[7rem] -ml-3 md:ml-[2.8rem]">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="left-04" class="w-full">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                    </ul>
+
+                    <!-- Right Column -->
+                    <ul class="flex flex-1 flex-col items-end">
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-37 md:w-[26rem] mt-20 md:mt-[13rem] -mr-10 md:mr-[6rem]">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="right-01" class="w-full">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-28 md:w-[12.5rem] mt-20 md:mt-[6rem]">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="right-02" class="w-full">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-32 md:w-[22rem] mt-6 md:mt-[7.3rem] mr-3 md:mr-[24rem]">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="right-03" class="w-full">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-41 md:w-[30rem] mt-20 md:mt-[7rem] -mr-8 md:-mr-[3rem]">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="right-04" class="w-full">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Center Content -->
+                <div class="absolute left-1/2 top-1/2 z-20 flex h-screen w-screen -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
+                    <div class="text-taupe-gray">
+                        <h2 class="ts-focus-in text-current flex" data-active="true">
+                            <a href="about.html" class="md:vertical-rl grid gap-2 md:gap-4 vertical-rl">
+                                <span class="md:text-lg leading-none font-medium md:-mt-6 -mt-6">
+                                    <span>(About Me)</span>
+                                </span>
+                                <span class="flex flex-col gap-2 md:gap-4 text-[2rem] md:text-[2.625rem] leading-none font-medium">
+                                    <span>My Journey</span>
+                                <span>Philosophy</span>
+                                </span>
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="ts-focus-in mt-16 md:mt-[5.5rem]" data-active="true">
+                        <a href="about.html" class="ts-more group relative inline-block overflow-hidden rounded-[50%] border px-10 py-5 font-serif-en leading-none transition-colors duration-[0.6s] md:px-12 md:py-6 md:text-lg" data-color="bright">
+                            <span class="absolute left-1/2 top-1/2 z-0 h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] transition-all duration-[0.6s] group-hover:h-full group-hover:w-full" data-color="bright"></span>
+                            <span class="relative z-0">MORE</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works Gallery Section -->
+        <section id="works-gallery" class="relative py-24 text-current contents-full md:py-[17.5rem]">
+            <div class="flex md:justify-end md:pr-[20%]">
+                <h2 class="ts-focus-in text-current flex" data-active="true">
+                    <a href="works.html" class="md:vertical-rl grid gap-2 md:gap-4">
+                        <span class="md:text-lg leading-none font-medium md:-mt-6">
+                            <span>(Portfolio)</span>
+                        </span>
+                        <span class="flex flex-col gap-2 md:gap-4 text-[2rem] md:text-[2.625rem] leading-none font-medium">
+                            <span>Function & Emotion</span>
+                        <span>Creative Works</span>
+                        </span>
+                    </a>
+                </h2>
+            </div>
+
+            <!-- Video Portfolio Showcase -->
+            <div class="ts-focus-in mb-16" data-active="true">
+                <h3 class="text-xl md:text-2xl font-medium mb-8 text-center">
+                    Video Portfolio Reel
+                </h3>
+                <div class="relative overflow-hidden rounded-lg bg-black max-w-4xl mx-auto">
+                    <video class="w-full h-auto" controls poster="images/1.jpg">
+                        <source src="assets/videos/2.mp4" type="video/mp4">
+                        <source src="images/profile.jpg" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h4 class="text-xl font-medium mb-2">Portfolio Reel 2024</h4>
+                        <p class="text-base opacity-90">Best of my video editing work</p>
+                    </div>
+                </div>
+
+                <!-- Video Project Types -->
+                <div class="grid md:grid-cols-3 gap-6 mt-8 max-w-4xl mx-auto">
+                    <div class="text-center p-4 border border-silver rounded-lg">
+                        <div class="text-2xl mb-2">🎬</div>
+                        <h4 class="font-medium mb-2">Commercial</h4>
+                        <p class="text-sm text-gray">Dynamic editing with precise timing</p>
+                    </div>
+                    <div class="text-center p-4 border border-silver rounded-lg">
+                        <div class="text-2xl mb-2">🎵</div>
+                        <h4 class="font-medium mb-2">Music Video</h4>
+                        <p class="text-sm text-gray">Creative storytelling & effects</p>
+                    </div>
+                    <div class="text-center p-4 border border-silver rounded-lg">
+                        <div class="text-2xl mb-2">📹</div>
+                        <h4 class="font-medium mb-2">Documentary</h4>
+                        <p class="text-sm text-gray">Emotional narrative editing</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Works List -->
+            <ul class="mt-9 md:mt-24">
+                <!-- Work 1: Textile Manufacturer -->
+                <li class="ts-image-link image-link group md:contents-right">
+                    <a href="works/textile-manufacturer.html" class="flex flex-col gap-4 border-t border-silver md:flex-row md:gap-16 md:border-none md:pl-[10%]">
+                        <div class="flex md:hidden justify-between pt-3 transition-colors duration-300">
+                            <span>(01)</span>
+                            <span class="font-serif-en">2024</span>
+                        </div>
+                        <div class="flex-1 md:pt-3 md:border-t border-silver flex flex-col relative z-10 order-2 md:order-1 transition-colors duration-300">
+                            <div class="hidden justify-between md:flex">
+                                <span>(01)</span>
+                                <span class="font-serif-en">2024</span>
+                            </div>
+                            <h3 class="font-medium text-[1.4rem] md:text-[1.75rem] md:mt-16 transition-colors duration-300">
+                                Textile Manufacturer
+                            </h3>
+                            <ul class="mt-3 font-serif-en transition-colors duration-300">
+                                <li>PRIVATE WORKS</li>
+                            </ul>
+                            <ul class="text-gray flex md:flex-col flex-wrap gap-y-2 gap-x-3 leading-none mt-7 md:mt-auto transition-colors duration-300">
+                                <li>ART DIRECTION</li>
+                                <li>WEB DESIGN</li>
+                                <li>GRAPHIC DESIGN</li>
+                            </ul>
+                        </div>
+                        <picture class="order-1 md:order-2 md:w-[75rem]">
+                            <img src="images/1.jpg" alt="Textile Manufacturer" class="w-full object-contain">
+                        </picture>
+                    </a>
+                </li>
+
+                <!-- Work 2: SAUNA1/f -->
+                <li class="ts-image-link image-link group md:contents-right">
+                    <a href="works/sauna1f.html" class="flex flex-col gap-4 border-t border-silver md:flex-row md:gap-16 md:border-none md:pl-[10%]">
+                        <div class="flex md:hidden justify-between pt-3 transition-colors duration-300">
+                            <span>(02)</span>
+                            <span class="font-serif-en">2024</span>
+                        </div>
+                        <div class="flex-1 md:pt-3 md:border-t border-silver flex flex-col relative z-10 order-2 md:order-1 transition-colors duration-300">
+                            <div class="hidden justify-between md:flex">
+                                <span>(02)</span>
+                                <span class="font-serif-en">2024</span>
+                            </div>
+                            <h3 class="font-medium text-[1.4rem] md:text-[1.75rem] md:mt-16 transition-colors duration-300">
+                                SAUNA1/f
+                            </h3>
+                            <ul class="mt-3 font-serif-en transition-colors duration-300">
+                                <li>PRIVATE WORKS</li>
+                            </ul>
+                            <ul class="text-gray flex md:flex-col flex-wrap gap-y-2 gap-x-3 leading-none mt-7 md:mt-auto transition-colors duration-300">
+                                <li>ART DIRECTION</li>
+                                <li>GRAPHIC DESIGN</li>
+                            </ul>
+                        </div>
+                        <picture class="order-1 md:order-2 md:w-[75rem]">
+                            <img src="images/works/sauna1f.jpg" alt="SAUNA1/f" class="w-full object-contain">
+                        </picture>
+                    </a>
+                </li>
+
+                <!-- Work 3: MISIA Forest -->
+                <li class="ts-image-link image-link group md:contents-right">
+                    <a href="works/misia-forest.html" class="flex flex-col gap-4 border-t border-silver md:flex-row md:gap-16 md:border-none md:pl-[10%]">
+                        <div class="flex md:hidden justify-between pt-3 transition-colors duration-300">
+                            <span>(03)</span>
+                            <span class="font-serif-en">2023</span>
+                        </div>
+                        <div class="flex-1 md:pt-3 md:border-t border-silver flex flex-col relative z-10 order-2 md:order-1 transition-colors duration-300">
+                            <div class="hidden justify-between md:flex">
+                                <span>(03)</span>
+                                <span class="font-serif-en">2023</span>
+                            </div>
+                            <h3 class="font-medium text-[1.4rem] md:text-[1.75rem] md:mt-16 transition-colors duration-300">
+                                MISIA Forest
+                            </h3>
+                            <ul class="mt-3 font-serif-en transition-colors duration-300">
+                                <li>PRIVATE WORKS</li>
+                            </ul>
+                            <ul class="text-gray flex md:flex-col flex-wrap gap-y-2 gap-x-3 leading-none mt-7 md:mt-auto transition-colors duration-300">
+                                <li>ART DIRECTION</li>
+                                <li>WEB DESIGN</li>
+                                <li>GRAPHIC DESIGN</li>
+                            </ul>
+                        </div>
+                        <picture class="order-1 md:order-2 md:w-[75rem]">
+                            <img src="images/works/misia-forest.jpg" alt="MISIA Forest" class="w-full object-contain">
+                        </picture>
+                    </a>
+                </li>
+
+                <!-- Work 4: Sato Noodle Factory -->
+                <li class="ts-image-link image-link group md:contents-right">
+                    <a href="works/sato-noodle.html" class="flex flex-col gap-4 border-t border-silver md:flex-row md:gap-16 md:border-none md:pl-[10%]">
+                        <div class="flex md:hidden justify-between pt-3 transition-colors duration-300">
+                            <span>(04)</span>
+                            <span class="font-serif-en">2022</span>
+                        </div>
+                        <div class="flex-1 md:pt-3 md:border-t border-silver flex flex-col relative z-10 order-2 md:order-1 transition-colors duration-300">
+                            <div class="hidden justify-between md:flex">
+                                <span>(04)</span>
+                                <span class="font-serif-en">2022</span>
+                            </div>
+                            <h3 class="font-medium text-[1.4rem] md:text-[1.75rem] md:mt-16 transition-colors duration-300">
+                                Sato Noodle Factory
+                            </h3>
+                            <ul class="mt-3 font-serif-en transition-colors duration-300">
+                                <li>CLIENT WORKS</li>
+                            </ul>
+                            <ul class="text-gray flex md:flex-col flex-wrap gap-y-2 gap-x-3 leading-none mt-7 md:mt-auto transition-colors duration-300">
+                                <li>GRAPHIC DESIGN</li>
+                            </ul>
+                        </div>
+                        <picture class="order-1 md:order-2 md:w-[75rem]">
+                            <img src="images/works/sato-noodle.jpg" alt="Sato Noodle Factory" class="w-full object-contain">
+                        </picture>
+                    </a>
+                </li>
+
+                <!-- Work 5: Burst of Mana -->
+                <li class="ts-image-link image-link group md:contents-right">
+                    <a href="works/burst-of-mana.html" class="flex flex-col gap-4 border-t border-silver md:flex-row md:gap-16 md:border-none md:pl-[10%]">
+                        <div class="flex md:hidden justify-between pt-3 transition-colors duration-300">
+                            <span>(05)</span>
+                            <span class="font-serif-en">2024</span>
+                        </div>
+                        <div class="flex-1 md:pt-3 md:border-t border-silver flex flex-col relative z-10 order-2 md:order-1 transition-colors duration-300">
+                            <div class="hidden justify-between md:flex">
+                                <span>(05)</span>
+                                <span class="font-serif-en">2024</span>
+                            </div>
+                            <h3 class="font-medium text-[1.4rem] md:text-[1.75rem] md:mt-16 transition-colors duration-300">
+                                Burst of Mana
+                            </h3>
+                            <ul class="mt-3 font-serif-en transition-colors duration-300">
+                                <li>CLIENT WORKS</li>
+                            </ul>
+                            <ul class="text-gray flex md:flex-col flex-wrap gap-y-2 gap-x-3 leading-none mt-7 md:mt-auto transition-colors duration-300">
+                                <li>GRAPHIC DESIGN</li>
+                            </ul>
+                        </div>
+                        <picture class="order-1 md:order-2 md:w-[75rem]">
+                            <img src="images/works/burst-of-mana.jpg" alt="Burst of Mana" class="w-full object-contain">
+                        </picture>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- All Works Section -->
+            <div class="ts-focus-in mt-24 flex flex-col items-center md:mt-52" data-active="true">
+                <p class="text-3xl font-medium leading-none vertical-rl md:text-[2rem]">
+                    <span>All Works</span>
+                </p>
+                <span class="mt-4 h-7 w-[1px] bg-black md:mt-6 md:h-16"></span>
+                <a href="works.html" class="mb-8 mt-8 font-serif-en text-6xl leading-none md:mb-10 md:mt-10 md:text-[6.5rem]">ALL WORKS</a>
+                <a href="works.html" class="ts-more group relative inline-block overflow-hidden rounded-[50%] border px-10 py-5 font-serif-en leading-none transition-colors duration-[0.6s] md:px-12 md:py-6 md:text-lg" data-color="dark">
+                    <span class="absolute left-1/2 top-1/2 z-0 h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] transition-all duration-[0.6s] group-hover:h-full group-hover:w-full" data-color="dark"></span>
+                    <span class="relative z-0">MORE</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - Fixed -->
+    <div id="footer-wrapper">
+        <footer id="footer" class="relative w-full overflow-hidden text-pampas bg-mine-shaft-texture">
+            <div class="container px-5 pt-[4rem] md:px-20 md:pt-[6rem]">
+                <ul class="flex flex-row-reverse justify-center gap-8">
+                    <li class="relative flex flex-col items-center">
+                        <span class="absolute -top-4 left-1/2 h-[6px] w-[6px] -translate-x-1/2">
+                            <span class="block h-[0.375rem] w-[0.375rem] rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+                        </span>
+                        <a href="/" class="ts-text-link text-xl leading-none vertical-rl text-silver-chalice" data-vertical="rl">
+                            Home
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="about.html" class="ts-text-link text-xl leading-none vertical-rl" data-vertical="rl">
+                            About
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="works.html" class="ts-text-link text-xl leading-none vertical-rl" data-vertical="rl">
+                            Works
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="mailto:taaaaiki.mode@gmail.com?subject=Contact" target="_blank" class="ts-text-link text-xl leading-none vertical-rl" data-vertical="rl">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mt-[5.5rem] hidden justify-end md:flex">
+                    <a href="#" class="ts-text-link ts-anchor font-serif-en text-lg">BACK TO TOP</a>
+                </div>
+
+                <ul class="mt-12 flex flex-wrap items-center justify-center gap-x-7 gap-y-4 border-t border-emperor pt-10 font-serif-en md:mt-6 md:justify-between md:gap-8">
+                    <li class="inline-block">
+                        <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link md:text-xl">
+                            X (Twitter)
+                        </a>
+                    </li>
+                    <li class="inline-block">
+                        <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link md:text-xl">
+                            INSTAGRAM
+                        </a>
+                    </li>
+                    <li class="inline-block w-full text-center md:ml-auto md:w-auto">
+                        <small class="text-base text-silver-chalice">
+                            &copy; 2024 HASSAM TAHIR
+                        </small>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Large GET IN CONTACT Text -->
+            <div class="mt-9 pb-5 md:mt-10">
+                <div class="contact">
+                    <a href="mailto:taaaaiki.mode@gmail.com?subject=Contact" target="_blank" class="group flex flex-nowrap whitespace-nowrap" aria-label="GET IN CONTACT">
+                        <span class="mx-8 block md:mx-9">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1855 172" class="h-[100px] fill-taupe-gray transition-all duration-700 group-hover:fill-transparent group-hover:stroke-taupe-gray md:h-[172px]">
+                                <g>
+                                    <path d="M1783.06,65.76c0-16.64-.24-33.2-.72-49.68-4.16,0-8.56.08-13.2.24-4.48,0-9.04.16-13.68.48-4.48.16-8.88.4-13.2.72-4.16.32-7.92.72-11.28,1.2.8-2.88,1.2-5.44,1.2-7.68,0-1.76-.4-4.24-1.2-7.44,10.56.32,20.88.64,30.96.96,10.08.16,20.4.24,30.96.24s20.88-.08,30.96-.24c10.08-.32,20.4-.64,30.96-.96-.8,3.2-1.2,5.76-1.2,7.68,0,2.08.4,4.56,1.2,7.44-3.36-.48-7.2-.88-11.52-1.2-4.16-.32-8.56-.56-13.2-.72-4.48-.32-9.04-.48-13.68-.48-4.48-.16-8.8-.24-12.96-.24-.48,16.48-.72,33.04-.72,49.68v41.28c0,10.56.16,20.96.48,31.2.48,10.24.96,20.32,1.44,30.24-3.68-.32-7.6-.48-11.76-.48s-8.08.16-11.76.48c.48-9.92.88-20,1.2-30.24.48-10.24.72-20.64.72-31.2v-41.28Z"></path>
+                                </g>
+                            </svg>
+                        </span>
+                        <!-- Repeat for GET IN CONTACT text effect -->
+                        <span class="mx-8 block md:mx-9">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1855 172" class="h-[100px] fill-taupe-gray transition-all duration-700 group-hover:fill-transparent group-hover:stroke-taupe-gray md:h-[172px]">
+                                <g>
+                                    <path d="M1783.06,65.76c0-16.64-.24-33.2-.72-49.68-4.16,0-8.56.08-13.2.24-4.48,0-9.04.16-13.68.48-4.48.16-8.88.4-13.2.72-4.16.32-7.92.72-11.28,1.2.8-2.88,1.2-5.44,1.2-7.68,0-1.76-.4-4.24-1.2-7.44,10.56.32,20.88.64,30.96.96,10.08.16,20.4.24,30.96.24s20.88-.08,30.96-.24c10.08-.32,20.4-.64,30.96-.96-.8,3.2-1.2,5.76-1.2,7.68,0,2.08.4,4.56,1.2,7.44-3.36-.48-7.2-.88-11.52-1.2-4.16-.32-8.56-.56-13.2-.72-4.48-.32-9.04-.48-13.68-.48-4.48-.16-8.8-.24-12.96-.24-.48,16.48-.72,33.04-.72,49.68v41.28c0,10.56.16,20.96.48,31.2.48,10.24.96,20.32,1.44,30.24-3.68-.32-7.6-.48-11.76-.48s-8.08.16-11.76.48c.48-9.92.88-20,1.2-30.24.48-10.24.72-20.64.72-31.2v-41.28Z"></path>
+                                </g>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/futuristic-scroll-lock.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Vertex Shader -->
+    <script id="vs" type="x-shader/x-vertex">
+        uniform sampler2D map; uniform float width; uniform float height; uniform float nearClipping, farClipping; uniform float pointSize; uniform float zOffset; varying vec2 vUv; const float XtoZ = 1.11146; const float YtoZ = 0.83359; void main() { vUv = vec2(position.x
+        / width, position.y / height); vec4 color = texture2D(map, vUv); float depth = (color.r + color.g + color.b) / 3.0; float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping; vec4 pos = vec4( (position.x / width - 0.5) * z * XtoZ,
+        (position.y / height - 0.5) * z * YtoZ, -z + zOffset, 1.0 ); gl_PointSize = pointSize; gl_Position = projectionMatrix * modelViewMatrix * pos; }
+    </script>
+
+    <!-- Fragment Shader -->
+    <script id="fs" type="x-shader/x-fragment">
+        uniform sampler2D map; varying vec2 vUv; void main() { vec4 color = texture2D(map, vUv); gl_FragColor = vec4(color.r, color.g, color.b, 0.8); }
+    </script>
+
+    <!-- Main Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("kinect-container");
+            const video = document.getElementById("kinect-video");
+
+            // Force autoplay (some browsers block it unless muted)
+            video.muted = true;
+            video.autoplay = true;
+            video.loop = true;
+
+            // Try playing video
+            video.play().catch(err => {
+                console.warn("Autoplay blocked. User interaction required:", err);
+            });
+
+            video.addEventListener("loadeddata", () => {
+                console.log("Video ready, initializing effect...");
+
+                let scene, camera, renderer;
+                let geometry, mesh, material;
+                let mouse, center;
+
+                // Renderer
+                renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById("kinect-canvas"),
+                    alpha: true,
+                    antialias: true
+                });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(container.clientWidth, container.clientHeight);
+
+                // Camera
+                camera = new THREE.PerspectiveCamera(
+                    50,
+                    container.clientWidth / container.clientHeight,
+                    1,
+                    10000
+                );
+                camera.position.set(0, 0, 800);
+
+                // Scene
+                scene = new THREE.Scene();
+                center = new THREE.Vector3(0, 0, -1000);
+
+                // Texture
+                const texture = new THREE.VideoTexture(video);
+                texture.minFilter = THREE.NearestFilter;
+                texture.generateMipmaps = false;
+
+                const width = 780,
+                    height = 480;
+                const nearClipping = 850,
+                    farClipping = 4000;
+
+                // Geometry
+                geometry = new THREE.BufferGeometry();
+                const vertices = new Float32Array(width * height * 3);
+                for (let i = 0, j = 0, l = vertices.length; i < l; i += 3, j++) {
+                    vertices[i] = j % width;
+                    vertices[i + 1] = Math.floor(j / width);
+                }
+                geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+
+                // Material with shaders
+                material = new THREE.ShaderMaterial({
+                    uniforms: {
+                        opacity: {
+                            value: 0.5
+                        },
+                        map: {
+                            value: texture
+                        },
+                        width: {
+                            value: width
+                        },
+                        height: {
+                            value: height
+                        },
+                        nearClipping: {
+                            value: 3000
+                        },
+                        farClipping: {
+                            value: 2000
+                        },
+                        pointSize: {
+                            value: 1
+                        },
+                        zOffset: {
+                            value: 100
+                        }
+                    },
+                    vertexShader: document.getElementById("vs").textContent,
+                    fragmentShader: document.getElementById("fs").textContent,
+                    blending: THREE.AdditiveBlending,
+                    depthTest: false,
+                    depthWrite: false,
+                    transparent: true
+                });
+
+                // Mesh
+                mesh = new THREE.Points(geometry, material);
+                scene.add(mesh);
+
+                // Mouse interaction
+                mouse = new THREE.Vector3(0, 0, 1);
+                document.addEventListener("mousemove", onDocumentMouseMove);
+
+                function onDocumentMouseMove(event) {
+                    const rect = container.getBoundingClientRect();
+                    mouse.x = (event.clientX - rect.left - container.clientWidth / 2) * 8;
+                    mouse.y = (event.clientY - rect.top - container.clientHeight / 2) * 8;
+                }
+
+                // Resize
+                window.addEventListener("resize", onWindowResize);
+
+                function onWindowResize() {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+
+                // Animate
+                function animate() {
+                    requestAnimationFrame(animate);
+
+                    camera.position.x += (mouse.x - camera.position.x) * 0.05;
+                    camera.position.y += (-mouse.y - camera.position.y) * 0.05;
+                    camera.lookAt(center);
+
+                    renderer.render(scene, camera);
+                }
+
+                animate();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

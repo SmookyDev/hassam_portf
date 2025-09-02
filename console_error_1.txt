@@ -1,0 +1,87 @@
+Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+fv-moving-sp.png:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+fv-moving.png:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+(index):64 cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation
+(anonymous) @ (index):64Understand this warning
+assets/videos/1.mp4:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+assets/videos/2.mp4:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+assets/videos/1.mp4:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+assets/videos/2.mp4:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+assets/videos/3.mp4:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+assets/videos/4.mp4:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+assets/videos/1.mp4:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+assets/videos/2.mp4:1  Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+smooth-scroll-manager.js:34 Found 6 sections: Array(6)
+single-page-app.js:847 Single-page portfolio initialized successfully!
+advanced-fixed.js:379 Video loaded successfully
+advanced-fixed.js:389 Video autoplay prevented: AbortError: The play() request was interrupted because video-only background media was paused to save power. https://goo.gl/LdLk22
+(anonymous) @ advanced-fixed.js:389Understand this warning
+single-page-app.js:476 Autoplay blocked. User interaction required: AbortError: The play() request was interrupted because video-only background media was paused to save power. https://goo.gl/LdLk22
+(anonymous) @ single-page-app.js:476Understand this warning
+single-page-app.js:480 Video ready, initializing 3D effect...
+three.min.js:6 THREE.WebGLRenderer: Error creating WebGL context.
+ws @ three.min.js:6Understand this error
+three.min.js:6 Uncaught Error: Error creating WebGL context.Understand this error
+Advanced3DEffects.js:143 3D Controls available via window.control3D
+Advanced3DEffects.js:144 Try: window.control3D.setBounceHeight(1.0) or window.control3D.presets.energetic()
+18The resource <URL> was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.Understand this warning
+Advanced3DEffects.js:498 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:498:32
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardHover (Advanced3DEffects.js:492:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1134:42)Understand this error
+Advanced3DEffects.js:509 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:509:28
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardLeave (Advanced3DEffects.js:508:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1138:42)Understand this error
+Advanced3DEffects.js:498 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:498:32
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardHover (Advanced3DEffects.js:492:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1134:42)Understand this error
+Advanced3DEffects.js:509 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:509:28
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardLeave (Advanced3DEffects.js:508:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1138:42)Understand this error
+Advanced3DEffects.js:498 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:498:32
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardHover (Advanced3DEffects.js:492:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1134:42)Understand this error
+Advanced3DEffects.js:509 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:509:28
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardLeave (Advanced3DEffects.js:508:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1138:42)Understand this error
+Advanced3DEffects.js:498 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:498:32
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardHover (Advanced3DEffects.js:492:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1134:42)Understand this error
+Advanced3DEffects.js:509 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:509:28
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardLeave (Advanced3DEffects.js:508:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1138:42)Understand this error
+Advanced3DEffects.js:498 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:498:32
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardHover (Advanced3DEffects.js:492:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1134:42)Understand this error
+Advanced3DEffects.js:509 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:509:28
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardLeave (Advanced3DEffects.js:508:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1138:42)Understand this error
+Advanced3DEffects.js:498 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:498:32
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardHover (Advanced3DEffects.js:492:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1134:42)Understand this error
+Advanced3DEffects.js:509 Uncaught TypeError: Cannot read properties of undefined (reading 'emissive')
+    at Advanced3DEffects.js:509:28
+    at Array.forEach (<anonymous>)
+    at Advanced3DEffects.onSoftwareCardLeave (Advanced3DEffects.js:508:32)
+    at HTMLDivElement.<anonymous> (Advanced3DEffects.js:1138:42)

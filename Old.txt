@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HASSAM TAHIR Portfolio - Video Editor & Visual Designer</title>
+    <meta name="description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HASSAM TAHIR Portfolio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://HaTh.com/">
+    <meta property="og:description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="HASSAM TAHIR Portfolio">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@HaTh0021">
+    <meta name="twitter:title" content="HASSAM TAHIR Portfolio">
+    <meta name="twitter:description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+    <meta name="twitter:creator" content="@HaTh0021">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href="images/hero/shadow-image.png" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero/fv-moving-sp.png" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero/fv-moving.png" fetchpriority="high">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'taupe-gray': '#8B7D6B',
+                        'pampas': '#E5E1DC',
+                        'mine-shaft': '#2A2A2A',
+                        'silver-chalice': '#A5A5A5',
+                        'emperor': '#545454',
+                        'gray': '#808080',
+                        'silver': '#C0C0C0',
+                    },
+                    fontFamily: {
+                        'serif': ['Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'HG Mincho E', 'MS Mincho', 'serif'],
+                        'serif-en': ['Times New Roman', 'Times', 'serif'],
+                    },
+                    spacing: {
+                        '0.375': '0.375rem',
+                        '1.4': '1.4rem',
+                        '1.42': '1.42rem',
+                        '1.14': '1.14rem',
+                        '0.85': '0.85rem',
+                        '4.6': '4.6rem',
+                        '5.5': '5.5rem',
+                        '15.5': '15.5rem',
+                        '17.5': '17.5rem',
+                        '22.2': '22.2rem',
+                        '37': '9.25rem',
+                        '41': '10.25rem',
+                        '46': '11.5rem',
+                    },
+                    fontSize: {
+                        '0.928': '0.928rem',
+                        '1.4': '1.4rem',
+                        '1.75': '1.75rem',
+                        '2.625': '2.625rem',
+                        '6.5': '6.5rem',
+                    },
+                    borderRadius: {
+                        '30': '30px',
+                    },
+                    transitionDuration: {
+                        '600': '600ms',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Optimized CSS -->
+    <link rel="stylesheet" href="css/tailwind-optimized.css">
+
+    <!-- Three.js for 3D elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        /* Custom styles that can't be replaced with Tailwind */
+        .vertical-rl {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        
+        .horizontal-tb {
+            writing-mode: horizontal-tb;
+        }
+        
+        .contents-full {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+        
+        .bg-mine-shaft-texture {
+            background-color: #2A2A2A;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        
+        .bg-gray-texture {
+            background-color: #F5F5F5;
+            background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+
+        /* Section transitions */
+        .section-transition {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section-transition.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Background color transitions */
+        .bg[data-color="dark"] .bg__bright {
+            animation: bgAnimationRemove 1s ease-in-out forwards;
+        }
+        
+        .bg[data-color="dark"] .bg__dark,
+        .bg[data-color="bright"] .bg__bright {
+            animation: bgAnimationAdd 1s ease-in-out forwards;
+        }
+        
+        .bg[data-color="bright"] .bg__dark {
+            animation: bgAnimationRemove 1s ease-in-out forwards;
+        }
+        
+        @keyframes bgAnimationAdd {
+            0% { opacity: 0; visibility: hidden; }
+            100% { opacity: 1; visibility: visible; }
+        }
+        
+        @keyframes bgAnimationRemove {
+            0% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        /* Header color changes */
+        #header[data-color="dark"] { color: #E5E1DC; }
+        #header[data-color="bright"] { color: #000000; }
+
+        /* Scroll animations */
+        @keyframes textFocusIn {
+            0% { filter: blur(12px); opacity: 0; }
+            100% { filter: blur(0px); opacity: 1; }
+        }
+        
+        .ts-focus-in[data-active="true"] {
+            animation: textFocusIn 1s ease-in-out forwards;
+        }
+
+        /* Scroll navigation animation */
+        @keyframes scrollNav {
+            0% { top: 0; opacity: 1; }
+            40% { top: 50%; opacity: 0.5; }
+            80% { top: 100%; opacity: 0; }
+            100% { top: 0; opacity: 0; }
+        }
+        
+        .scroll-nav__inside {
+            animation: scrollNav 5s infinite;
+        }
+
+        /* Parallax gallery effects */
+        .ts-parallax-gallery-image {
+            transition: filter 0.5s ease;
+        }
+        
+        .ts-parallax-gallery-image img,
+        .ts-parallax-gallery-image .bg-layer {
+            transition: all 1s ease;
+        }
+        
+        .ts-parallax-gallery-image:nth-child(odd) .bg-layer {
+            transform: skewY(-10deg);
+        }
+        
+        .ts-parallax-gallery-image:nth-child(even) .bg-layer {
+            transform: skewY(10deg);
+        }
+        
+        .ts-parallax-gallery-image:not(.is-active) img {
+            filter: grayscale(100%);
+        }
+        
+        .ts-parallax-gallery-image.is-active img {
+            filter: grayscale(0);
+        }
+        
+        .ts-parallax-gallery-image.is-active .bg-layer {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        /* Video container styles */
+        #kinect-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        #kinect-video {
+            display: none;
+        }
+        
+        #kinect-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Project modal animations */
+        .project-modal {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .project-modal.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body id="body" class="overflow-x-hidden font-serif text-taupe-gray transition-colors scroll-smooth" data-bg-color="dark">
+
+    <!-- Background -->
+    <div id="bg" class="fixed left-0 top-0 -z-10 h-full w-screen" data-color="dark">
+        <div class="relative h-full w-full">
+            <div class="bg__dark absolute left-0 top-0 h-full w-full bg-mine-shaft-texture opacity-100"></div>
+            <div class="bg__bright absolute left-0 top-0 h-full w-full bg-gray-texture opacity-0"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="fixed left-0 top-0 z-30 w-screen transition-all duration-300" data-color="dark">
+        <div class="container flex items-start px-5 py-5 md:px-20 md:py-10 max-w-none">
+            <a href="#home" class="ts-logo transition-all hover:opacity-30" aria-label="HASSAM TAHIR">
+                <p class="h-auto text-3xl md:text-5xl font-medium">HASSAM TAHIR</p>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="ts-header-list ml-auto hidden gap-8 transition-colors ease-in-out md:flex">
+                <li class="relative">
+                    <a href="#contact" class="ts-text-link text-2xl vertical-rl md:text-lg nav-link transition-colors duration-300" data-section="contact">
+                        Contact
+                    </a>
+                </li>
+                <li class="relative">
+                    <a href="#works" class="ts-text-link text-2xl vertical-rl md:text-lg nav-link transition-colors duration-300" data-section="works">
+                        Works
+                    </a>
+                </li>
+                <li class="relative">
+                    <a href="#about" class="ts-text-link text-2xl vertical-rl md:text-lg nav-link transition-colors duration-300" data-section="about">
+                        About
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Menu Button -->
+            <button class="ts-menu-open border-silver ml-auto md:ml-14 hover:bg-mine-shaft hover:text-pampas text-black font-serif-en border rounded-[30px] pt-1 pb-0.5 px-3 md:pt-[6px] md:pb-[5px] md:px-4 flex gap-2 items-center group transition duration-700"
+                data-color="dark">
+                <span class="inline-block">MENU</span>
+                <span class="block h-1.5 w-1.5 rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="menu" class="fixed top-0 left-0 z-40 h-screen w-screen bg-mine-shaft-texture transform -translate-x-full transition-transform duration-500 ease-in-out">
+        <div class="relative flex h-full w-full p-5 md:p-10">
+            <video class="hidden h-full max-w-[50%] items-center md:mr-4 md:flex" webkit-playsinline playsinline muted autoplay loop>
+                <source src="assets/videos/1.mp4" type="video/mp4">
+            </video>
+
+            <div class="flex w-full flex-col md:flex-1">
+                <button class="ts-menu-close text-pampas border-emperor absolute top-5 md:top-10 right-5 md:right-20 hover:bg-pampas hover:text-mine-shaft font-serif-en border rounded-[30px] pt-1 pb-0.5 px-3 md:pt-[6px] md:pb-[5px] md:px-4 flex gap-2 items-center group transition duration-700">
+                    <span class="inline-block">CLOSE</span>
+                    <span class="block h-1.5 w-1.5 rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+                </button>
+
+                <div class="flex w-full flex-1 flex-col items-center py-10">
+                    <div class="flex w-full flex-1 items-center justify-center">
+                        <ul class="flex h-full max-h-[22.2rem] w-full max-w-[85%] flex-row-reverse justify-between md:max-h-[30rem] md:w-auto md:max-w-full md:justify-normal md:gap-12">
+                            <li class="flex leading-none">
+                                <a href="#home" class="group relative duration-[0.6s] vertical-rl hover:opacity-70 menu-nav-link" data-section="home">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(01)</span>
+                                        </span>
+                                        <span class="mt-6 text-2xl text-pampas md:mt-8 md:text-[2rem]">Home</span>
+                                        <span class="mb-3 mt-4 h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                        </span>
+                                        <span class="font-serif-en text-sm text-silver-chalice md:text-base">
+                                            <span>HOME</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="#about" class="group relative duration-[0.6s] vertical-rl hover:opacity-70 menu-nav-link" data-section="about">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(02)</span>
+                                        </span>
+                                        <span class="mt-6 text-2xl text-pampas md:mt-8 md:text-[2rem]">About</span>
+                                        <span class="mb-3 mt-4 h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                        </span>
+                                        <span class="font-serif-en text-sm text-silver-chalice md:text-base">
+                                            <span>ABOUT</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="#works" class="group relative duration-[0.6s] vertical-rl hover:opacity-70 menu-nav-link" data-section="works">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(03)</span>
+                                        </span>
+                                        <span class="mt-6 text-2xl text-pampas md:mt-8 md:text-[2rem]">Works</span>
+                                        <span class="mb-3 mt-4 h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                        </span>
+                                        <span class="font-serif-en text-sm text-silver-chalice md:text-base">
+                                            <span>WORKS</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="#contact" class="group relative duration-[0.6s] vertical-rl hover:opacity-70 menu-nav-link" data-section="contact">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(04)</span>
+                                        </span>
+                                        <span class="mt-6 text-2xl text-pampas md:mt-8 md:text-[2rem]">Contact</span>
+                                        <span class="mb-3 mt-4 h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                        </span>
+                                        <span class="font-serif-en text-sm text-silver-chalice md:text-base">
+                                            <span>CONTACT</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="mt-4 flex gap-8">
+                        <li>
+                            <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link font-serif-en text-xl text-pampas hover:opacity-70 transition-opacity">
+                                X (Twitter)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link font-serif-en text-xl text-pampas hover:opacity-70 transition-opacity">
+                                INSTAGRAM
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main" class="overflow-x-hidden">
+
+        <!-- Advanced Page Loader -->
+        <div class="ts-page-loader fixed left-0 top-0 z-50 h-screen w-screen flex items-center justify-center transition-all duration-1000 bg-gradient-to-br from-mine-shaft to-gray-800" data-color="dark">
+            <div class="loader-container relative max-w-md p-8">
+                <!-- Main Logo Animation -->
+                <div class="loader-logo-container mb-8 text-center">
+                    <p class="text-5xl md:text-7xl font-medium text-silver-chalice">HASSAM TAHIR</p>
+                </div>
+                <!-- Loading Text -->
+                <div class="loader-text-container text-center">
+                    <div class="loader-text font-serif-en text-sm tracking-widest opacity-0 text-silver-chalice">PORTFOLIO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen overflow-hidden">
+            <!-- 3D Background Video -->
+            <div id="hero-video" class="absolute inset-0 z-0 w-full h-full">
+                <div id="kinect-container" class="w-full h-full">
+                    <video id="kinect-video" class="w-full h-full object-cover" muted autoplay loop playsinline crossorigin="anonymous">
+                        <source src="4.mp4" type="video/mp4">
+                    </video>
+                    <canvas id="kinect-canvas" class="absolute inset-0 w-full h-full"></canvas>
+                </div>
+                <!-- Dark overlay for better text contrast -->
+                <div class="absolute inset-0 bg-black/40 z-10"></div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-20 flex flex-col justify-center min-h-screen px-5 md:px-20 py-16">
+                <!-- Top tagline -->
+                <div class="hero-tagline opacity-0 transform translate-y-8">
+                    <p class="font-serif-en text-sm md:text-lg text-silver-chalice tracking-widest mb-8">
+                        VIDEO EDITOR / MOTION GRAPHICS / VISUAL DESIGNER / CREATIVE DIRECTOR
+                    </p>
+                </div>
+
+                <!-- Main content grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Left column - Logo and intro -->
+                    <div class="lg:col-span-7">
+                        <!-- Logo -->
+                        <div class="hero-logo opacity-0 transform translate-y-12 mb-8">
+                            <picture class="block max-w-[280px] md:max-w-[480px] lg:max-w-[600px]">
+                                <img src="images/Hp.png" alt="HASSAM TAHIR" class="w-full h-auto filter drop-shadow-lg">
+                            </picture>
+                        </div>
+
+                        <!-- Introduction text -->
+                        <div class="hero-intro opacity-0 transform translate-y-12">
+                            <p class="font-serif-en text-base md:text-xl lg:text-2xl text-pampas leading-relaxed max-w-2xl">
+                                Crafting <span class="text-white font-semibold">cinematic stories</span> through video editing, 
+                                <span class="text-white font-semibold">motion graphics</span>, and visual design. 
+                                Bringing ideas to life with <span class="text-white font-semibold">precision</span> and <span class="text-white font-semibold">creativity</span>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right column - Portfolio indicator and CTA -->
+                    <div class="lg:col-span-5 flex flex-col items-center lg:items-end text-center lg:text-right">
+                        <!-- Portfolio indicator -->
+                        <div class="hero-portfolio opacity-0 transform translate-y-12 mb-8">
+                            <div class="flex flex-col items-center lg:items-end">
+                                <span class="font-serif-en text-sm md:text-base text-silver-chalice tracking-widest mb-2">
+                                    (PORTFOLIO 2024)
+                                </span>
+                                <h2 class="text-3xl md:text-5xl lg:text-6xl font-light text-white leading-tight">
+                                    Creative
+                                    <br>
+                                    Collection
+                                </h2>
+                                <div class="w-16 h-[1px] bg-silver-chalice mt-4"></div>
+                            </div>
+                        </div>
+
+                        <!-- Call to action -->
+                        <div class="hero-cta opacity-0 transform translate-y-12">
+                            <a href="#works" class="group relative inline-flex items-center gap-4 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 rounded-full px-8 py-4 border border-white/30">
+                                <span class="font-serif-en text-lg text-white">VIEW WORKS</span>
+                                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
+                                    <svg class="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating 3D elements -->
+                <div id="floating-3d-elements" class="absolute inset-0 z-15 pointer-events-none">
+                    <!-- 3D elements will be positioned here by JavaScript -->
+                </div>
+
+                <!-- Scroll indicator -->
+                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+                    <div class="scroll-indicator opacity-0">
+                        <div class="flex flex-col items-center text-silver-chalice">
+                            <span class="font-serif-en text-xs tracking-widest mb-4">SCROLL</span>
+                            <div class="w-[1px] h-16 bg-gradient-to-b from-silver-chalice to-transparent relative">
+                                <div class="scroll-dot absolute top-0 w-2 h-2 bg-white rounded-full -translate-x-1/2 animate-bounce"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software & Tools Section -->
+        <section id="tools" class="relative py-24 md:py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+            <!-- Parallax background elements -->
+            <div class="absolute inset-0 z-0">
+                <div class="parallax-bg-slow absolute w-full h-full opacity-10">
+                    <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-20 right-10 w-48 h-48 bg-gradient-to-br from-red-500 to-orange-500 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+
+            <div class="container px-5 md:px-20 max-w-none relative z-10">
+                <!-- Section Header -->
+                <div class="text-center mb-16 section-transition">
+                    <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-gray">
+                            (Software & Tools)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl leading-none font-medium text-black">
+                            <span>Professional</span>
+                            <span>Arsenal</span>
+                        </div>
+                    </h2>
+                </div>
+
+                <!-- Software Cards Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 mb-16">
+                    <!-- Adobe Premiere Pro -->
+                    <div class="software-card group cursor-pointer" data-software="premiere">
+                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="relative z-10">
+                                <div class="software-icon mb-4 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-800 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                                        Pr
+                                    </div>
+                                </div>
+                                <h3 class="text-sm md:text-base font-semibold text-center text-gray-800 mb-2">
+                                    Premiere Pro
+                                </h3>
+                                <div class="skill-level flex justify-center">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-center text-gray-500 mt-2">Expert</p>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Adobe After Effects -->
+                    <div class="software-card group cursor-pointer" data-software="aftereffects">
+                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="relative z-10">
+                                <div class="software-icon mb-4 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-purple-700 to-pink-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                                        Ae
+                                    </div>
+                                </div>
+                                <h3 class="text-sm md:text-base font-semibold text-center text-gray-800 mb-2">
+                                    After Effects
+                                </h3>
+                                <div class="skill-level flex justify-center">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-center text-gray-500 mt-2">Expert</p>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- DaVinci Resolve -->
+                    <div class="software-card group cursor-pointer" data-software="davinci">
+                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="relative z-10">
+                                <div class="software-icon mb-4 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-gray-800 to-red-600 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                        DV
+                                    </div>
+                                </div>
+                                <h3 class="text-sm md:text-base font-semibold text-center text-gray-800 mb-2">
+                                    DaVinci Resolve
+                                </h3>
+                                <div class="skill-level flex justify-center">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-center text-gray-500 mt-2">Advanced</p>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-gray-500/10 to-red-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Blender -->
+                    <div class="software-card group cursor-pointer" data-software="blender">
+                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="relative z-10">
+                                <div class="software-icon mb-4 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                                        🔮
+                                    </div>
+                                </div>
+                                <h3 class="text-sm md:text-base font-semibold text-center text-gray-800 mb-2">
+                                    Blender
+                                </h3>
+                                <div class="skill-level flex justify-center">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-center text-gray-500 mt-2">Advanced</p>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Final Cut Pro -->
+                    <div class="software-card group cursor-pointer" data-software="finalcut">
+                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="relative z-10">
+                                <div class="software-icon mb-4 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                        FCP
+                                    </div>
+                                </div>
+                                <h3 class="text-sm md:text-base font-semibold text-center text-gray-800 mb-2">
+                                    Final Cut Pro
+                                </h3>
+                                <div class="skill-level flex justify-center">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-center text-gray-500 mt-2">Advanced</p>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-gray-500/10 to-gray-700/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Cinema 4D -->
+                    <div class="software-card group cursor-pointer" data-software="cinema4d">
+                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="relative z-10">
+                                <div class="software-icon mb-4 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                        C4D
+                                    </div>
+                                </div>
+                                <h3 class="text-sm md:text-base font-semibold text-center text-gray-800 mb-2">
+                                    Cinema 4D
+                                </h3>
+                                <div class="skill-level flex justify-center">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-center text-gray-500 mt-2">Intermediate</p>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3D Software Showcase -->
+                <div id="software-3d-showcase" class="relative h-64 md:h-80 mb-16">
+                    <!-- 3D Canvas will be inserted here -->
+                    <canvas id="software-canvas" class="w-full h-full"></canvas>
+                    
+                    <!-- Overlay content -->
+                    <div class="absolute inset-0 flex items-center justify-center z-10">
+                        <div class="text-center">
+                            <h3 class="text-2xl md:text-4xl font-light text-black mb-4">
+                                Interactive 3D Experience
+                            </h3>
+                            <p class="text-base md:text-lg text-gray-600 max-w-md">
+                                Hover over the floating tools to see them in action
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workflow Process -->
+                <div class="max-w-6xl mx-auto">
+                    <h3 class="text-2xl md:text-3xl font-medium mb-12 text-center text-black section-transition">
+                        Creative Workflow
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-4 gap-6 md:gap-8">
+                        <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                                📝
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-3">01. Concept</h4>
+                            <p class="text-sm text-gray-600">Understanding project goals and creative vision</p>
+                        </div>
+                        
+                        <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                                🎬
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-3">02. Production</h4>
+                            <p class="text-sm text-gray-600">Filming, capturing, and gathering raw materials</p>
+                        </div>
+                        
+                        <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                                ✂️
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-3">03. Editing</h4>
+                            <p class="text-sm text-gray-600">Cutting, refining, and crafting the narrative</p>
+                        </div>
+                        
+                        <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                                🎨
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-3">04. Polish</h4>
+                            <p class="text-sm text-gray-600">Color grading, effects, and final touches</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parallax Gallery Section -->
+        <section id="parallax-gallery" class="relative h-screen overflow-hidden py-16 md:py-44 contents-full">
+            <div class="absolute left-0 top-0 h-full w-full bg-mine-shaft-texture"></div>
+            <div class="container px-5 md:px-20 relative z-10 h-full">
+                <div class="flex justify-between h-full">
+                    <!-- Left Column -->
+                    <ul class="flex flex-1 flex-col items-start space-y-8 md:space-y-16">
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-46 md:w-[27rem] section-transition">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="left-01" class="w-full h-auto object-cover">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-28 md:w-[14rem] section-transition">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="left-02" class="w-full h-auto object-cover">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-46 md:w-[21rem] section-transition">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="left-03" class="w-full h-auto object-cover">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                    </ul>
+
+                    <!-- Right Column -->
+                    <ul class="flex flex-1 flex-col items-end space-y-8 md:space-y-16">
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-37 md:w-[26rem] mt-20 md:mt-52 section-transition">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="right-01" class="w-full h-auto object-cover">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-28 md:w-[12.5rem] section-transition">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="right-02" class="w-full h-auto object-cover">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                        <li class="ts-parallax-gallery-image relative overflow-hidden w-32 md:w-[22rem] section-transition">
+                            <picture class="block w-full mix-blend-multiply">
+                                <img src="images/profile.jpg" alt="right-03" class="w-full h-auto object-cover">
+                            </picture>
+                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Center Content -->
+                <div class="absolute left-1/2 top-1/2 z-20 flex h-screen w-screen -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
+                    <div class="text-taupe-gray text-center">
+                        <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                            <span class="text-lg leading-none font-medium mb-4">
+                                (Visual Gallery)
+                            </span>
+                            <div class="flex flex-col gap-4 text-2xl md:text-[2.625rem] leading-none font-medium">
+                                <span>Creative</span>
+                                <span>Process</span>
+                            </div>
+                        </h2>
+                    </div>
+                    <div class="ts-focus-in mt-16 md:mt-20" data-active="true">
+                        <a href="#about" class="ts-more group relative inline-block overflow-hidden rounded-full border border-silver px-10 py-5 font-serif-en leading-none transition-all duration-[0.6s] md:px-12 md:py-6 md:text-lg hover:bg-pampas hover:text-mine-shaft">
+                            <span class="absolute left-1/2 top-1/2 z-0 h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pampas transition-all duration-[0.6s] group-hover:h-full group-hover:w-full"></span>
+                            <span class="relative z-10">DISCOVER MORE</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="relative py-24 md:py-32 bg-gray-texture">
+            <div class="container px-5 md:px-20 max-w-none">
+                <!-- About Hero -->
+                <div class="flex flex-col items-center text-center mb-20 section-transition">
+                    <h1 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-gray">
+                            (About Me)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl leading-none font-medium text-black">
+                            <span>My Journey</span>
+                            <span>Philosophy & Approach</span>
+                        </div>
+                    </h1>
+                </div>
+
+                <!-- About Content -->
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20 mb-20">
+                    <!-- Left Column - About Text -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h2 class="text-2xl md:text-3xl font-medium mb-8 text-black">
+                            About HASSAM TAHIR
+                        </h2>
+
+                        <div class="space-y-6 text-base md:text-lg leading-relaxed text-gray-700">
+                            <p>
+                                I am a visual designer and video editor based in Tokyo. I value the balance between logical and intuitive thinking, function and emotion, stillness and movement. I specialize in pursuing and expressing optimal visual representations that meet user needs and objectives.
+                            </p>
+
+                            <p>
+                                Focusing on web design, graphic design, video editing, and art direction, I provide consistent design experiences from branding to implementation. In each project, I strive to be a bridge connecting client aspirations with user experiences.
+                            </p>
+
+                            <p>
+                                I believe design is not mere decoration, but a means to solve problems and create value. I aim for designs that resonate with the heart while achieving both beauty and functionality.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Profile Details -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h3 class="text-xl md:text-2xl font-medium mb-6 text-black">
+                            Profile
+                        </h3>
+
+                        <div class="space-y-6">
+                            <div class="border-t border-gray-300 pt-4">
+                                <dt class="font-serif-en text-sm text-gray font-medium uppercase">Name</dt>
+                                <dd class="text-lg text-black">HASSAM TAHIR</dd>
+                            </div>
+
+                            <div class="border-t border-gray-300 pt-4">
+                                <dt class="font-serif-en text-sm text-gray font-medium uppercase">Location</dt>
+                                <dd class="text-lg text-black">Tokyo, Japan</dd>
+                            </div>
+
+                            <div class="border-t border-gray-300 pt-4">
+                                <dt class="font-serif-en text-sm text-gray font-medium uppercase">Specialties</dt>
+                                <dd class="text-lg text-black">
+                                    <ul class="space-y-2">
+                                        <li>Video Editing & Post-Production</li>
+                                        <li>Motion Graphics & Animation</li>
+                                        <li>Color Grading & Correction</li>
+                                        <li>Web Design & Development</li>
+                                        <li>Graphic Design</li>
+                                        <li>Art Direction</li>
+                                    </ul>
+                                </dd>
+                            </div>
+
+                            <div class="border-t border-gray-300 pt-4">
+                                <dt class="font-serif-en text-sm text-gray font-medium uppercase">Video Software</dt>
+                                <dd class="text-lg text-black">
+                                    <ul class="space-y-2">
+                                        <li>Adobe Premiere Pro</li>
+                                        <li>After Effects</li>
+                                        <li>DaVinci Resolve</li>
+                                        <li>Final Cut Pro</li>
+                                    </ul>
+                                </dd>
+                            </div>
+
+                            <div class="border-t border-gray-300 pt-4">
+                                <dt class="font-serif-en text-sm text-gray font-medium uppercase">Contact</dt>
+                                <dd class="text-lg">
+                                    <a href="mailto:taaaaiki.mode@gmail.com" class="ts-text-link hover:opacity-70 text-black">
+                                        taaaaiki.mode@gmail.com
+                                    </a>
+                                </dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Philosophy Section -->
+                <div class="max-w-6xl mx-auto mb-20">
+                    <h2 class="ts-focus-in text-2xl md:text-3xl font-medium mb-12 text-center text-black section-transition" data-active="true">
+                        Design Philosophy
+                    </h2>
+
+                    <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+                        <div class="ts-focus-in text-center section-transition" data-active="true">
+                            <h3 class="text-lg font-medium mb-4 text-black">
+                                Function & Emotion
+                            </h3>
+                            <p class="text-sm md:text-base leading-relaxed text-gray-600">
+                                Design must be functional while appealing to emotions. I pursue the harmony between usability and beauty.
+                            </p>
+                        </div>
+
+                        <div class="ts-focus-in text-center section-transition" data-active="true">
+                            <h3 class="text-lg font-medium mb-4 text-black">
+                                Stillness & Movement
+                            </h3>
+                            <p class="text-sm md:text-base leading-relaxed text-gray-600">
+                                I value the balance between static beauty and dynamic expression, choosing appropriate expressions at the right moments.
+                            </p>
+                        </div>
+
+                        <div class="ts-focus-in text-center section-transition" data-active="true">
+                            <h3 class="text-lg font-medium mb-4 text-black">
+                                Logic & Intuition
+                            </h3>
+                            <p class="text-sm md:text-base leading-relaxed text-gray-600">
+                                I combine logical approaches based on data and analysis with intuitive approaches that emphasize creativity.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills & Experience Grid -->
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20">
+                    <!-- Experience Column -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h2 class="text-2xl md:text-3xl font-medium mb-8 text-black">
+                            Career Journey
+                        </h2>
+
+                        <div class="space-y-8">
+                            <div class="border-t border-gray-300 pt-6">
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                                    <h3 class="text-lg font-medium text-black">Freelance Designer & Video Editor</h3>
+                                    <span class="font-serif-en text-sm text-gray">2020 - Present</span>
+                                </div>
+                                <p class="text-sm md:text-base leading-relaxed text-gray-600">
+                                    Since becoming independent, I have worked on a wide range of projects from video editing and motion graphics to visual identity development for various companies and brands.
+                                </p>
+                            </div>
+
+                            <div class="border-t border-gray-300 pt-6">
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                                    <h3 class="text-lg font-medium text-black">Design Studio</h3>
+                                    <span class="font-serif-en text-sm text-gray">2017 - 2020</span>
+                                </div>
+                                <p class="text-sm md:text-base leading-relaxed text-gray-600">
+                                    Worked at a Tokyo design studio on branding projects and website development for major corporations. Honed teamwork and client communication skills.
+                                </p>
+                            </div>
+
+                            <div class="border-t border-gray-300 pt-6">
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                                    <h3 class="text-lg font-medium text-black">Art University Graduate</h3>
+                                    <span class="font-serif-en text-sm text-gray">2017</span>
+                                </div>
+                                <p class="text-sm md:text-base leading-relaxed text-gray-600">
+                                    Specialized in Visual Design and Digital Media. Actively participated in competitions during studies, winning multiple awards for video editing and motion graphics.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills Column -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h2 class="text-2xl md:text-3xl font-medium mb-8 text-black">
+                            Skills & Expertise
+                        </h2>
+
+                        <div class="space-y-8">
+                            <div>
+                                <h3 class="text-lg font-medium mb-4 text-black">Video Editing</h3>
+                                <ul class="space-y-3 text-sm md:text-base">
+                                    <li class="flex justify-between items-center">
+                                        <span class="text-gray-700">Premiere Pro</span>
+                                        <span class="font-serif-en text-gray">Expert</span>
+                                    </li>
+                                    <li class="flex justify-between items-center">
+                                        <span class="text-gray-700">After Effects</span>
+                                        <span class="font-serif-en text-gray">Expert</span>
+                                    </li>
+                                    <li class="flex justify-between items-center">
+                                        <span class="text-gray-700">DaVinci Resolve</span>
+                                        <span class="font-serif-en text-gray">Advanced</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-medium mb-4 text-black">Design</h3>
+                                <ul class="space-y-3 text-sm md:text-base">
+                                    <li class="flex justify-between items-center">
+                                        <span class="text-gray-700">Visual Design</span>
+                                        <span class="font-serif-en text-gray">Expert</span>
+                                    </li>
+                                    <li class="flex justify-between items-center">
+                                        <span class="text-gray-700">Art Direction</span>
+                                        <span class="font-serif-en text-gray">Expert</span>
+                                    </li>
+                                    <li class="flex justify-between items-center">
+                                        <span class="text-gray-700">Motion Graphics</span>
+                                        <span class="font-serif-en text-gray">Advanced</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-medium mb-4 text-black">Development</h3>
+                                <ul class="space-y-3 text-sm md:text-base">
+                                    <li class="flex justify-between items-center">
+                                        <span class="text-gray-700">HTML/CSS</span>
+                                        <span class="font-serif-en text-gray">Advanced</span>
+                                    </li>
+                                    <li class="flex justify-between items-center">
+                                        <span class="text-gray-700">JavaScript</span>
+                                        <span class="font-serif-en text-gray">Intermediate</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works Section -->
+        <section id="works" class="relative py-24 md:py-32 bg-mine-shaft-texture text-pampas overflow-hidden">
+            <!-- Parallax background elements -->
+            <div class="absolute inset-0 z-0">
+                <div class="parallax-bg-medium absolute w-full h-full opacity-20">
+                    <div class="absolute top-40 left-20 w-64 h-64 bg-gradient-to-br from-purple-600 to-blue-800 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-40 right-20 w-80 h-80 bg-gradient-to-br from-orange-500 to-red-600 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+
+            <div class="container px-5 md:px-20 max-w-none relative z-10">
+                <!-- Works Header -->
+                <div class="text-center mb-20 section-transition">
+                    <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-silver-chalice">
+                            (Video Portfolio)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl lg:text-6xl leading-none font-medium text-white">
+                            <span>Creative</span>
+                            <span>Showcase</span>
+                        </div>
+                    </h2>
+                </div>
+
+                <!-- Interactive Video Gallery -->
+                <div id="video-gallery" class="mb-20">
+                    <!-- Main featured video -->
+                    <div class="main-video-container mb-12 section-transition">
+                        <div class="relative overflow-hidden rounded-2xl bg-black max-w-6xl mx-auto shadow-2xl group">
+                            <video id="main-portfolio-video" class="w-full h-auto transition-all duration-500 group-hover:scale-105" poster="images/1.jpg">
+                                <source src="assets/videos/2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            
+                            <!-- Video overlay controls -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <button class="play-button w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300">
+                                        <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Video info -->
+                            <div class="absolute bottom-6 left-6 text-white">
+                                <h4 class="text-xl md:text-2xl font-medium mb-2">Portfolio Showcase 2024</h4>
+                                <p class="text-base opacity-90">A collection of my best video editing and motion graphics work</p>
+                                <div class="flex items-center gap-4 mt-4">
+                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Commercial</span>
+                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Motion Graphics</span>
+                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Color Grading</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video thumbnails scroll gallery -->
+                    <div class="video-scroll-gallery relative">
+                        <h3 class="text-2xl md:text-3xl font-medium mb-8 text-center text-white section-transition">
+                            Project Gallery
+                        </h3>
+                        
+                        <!-- Horizontal scrolling container -->
+                        <div class="scroll-container relative overflow-hidden">
+                            <div class="flex space-x-6 overflow-x-auto scrollbar-hide pb-6" style="scroll-behavior: smooth;">
+                                <!-- Video 1 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="assets/videos/1.mp4" data-title="Commercial Project" data-description="Brand storytelling with dynamic cuts and transitions">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="assets/videos/1.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-white">
+                                            <h4 class="text-lg font-medium">Commercial Project</h4>
+                                            <p class="text-sm opacity-80">Brand storytelling</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 2 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="assets/videos/2.mp4" data-title="Music Video" data-description="Creative visual effects synchronized with beat">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="assets/videos/2.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-white">
+                                            <h4 class="text-lg font-medium">Music Video</h4>
+                                            <p class="text-sm opacity-80">Creative visual effects</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 3 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="assets/videos/3.mp4" data-title="Documentary" data-description="Emotional storytelling with careful pacing">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="assets/videos/3.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-white">
+                                            <h4 class="text-lg font-medium">Documentary</h4>
+                                            <p class="text-sm opacity-80">Emotional storytelling</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 4 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="assets/videos/4.mp4" data-title="Motion Graphics" data-description="Abstract animations and kinetic typography">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="assets/videos/4.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-white">
+                                            <h4 class="text-lg font-medium">Motion Graphics</h4>
+                                            <p class="text-sm opacity-80">Abstract animations</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 5 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="assets/videos/1.mp4" data-title="Color Grading Showcase" data-description="Professional color correction and grading techniques">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="assets/videos/1.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-white">
+                                            <h4 class="text-lg font-medium">Color Grading</h4>
+                                            <p class="text-sm opacity-80">Professional grading</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 6 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="assets/videos/2.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="assets/videos/2.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-white">
+                                            <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                            <p class="text-sm opacity-80">Advanced visual effects</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Scroll navigation for gallery -->
+                            <div class="flex justify-center mt-8 space-x-4">
+                                <button class="gallery-nav-btn gallery-prev w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 disabled:opacity-50">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <button class="gallery-nav-btn gallery-next w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project categories with stats -->
+                    <div class="grid md:grid-cols-4 gap-6 mt-16 max-w-6xl mx-auto">
+                        <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20">
+                            <div class="text-4xl mb-4">🎬</div>
+                            <h4 class="font-medium mb-2 text-white text-lg">Commercial</h4>
+                            <p class="text-sm text-silver-chalice mb-3">Brand storytelling and marketing videos</p>
+                            <div class="text-2xl font-bold text-white">25+</div>
+                            <p class="text-xs text-silver-chalice">Projects</p>
+                        </div>
+                        
+                        <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20">
+                            <div class="text-4xl mb-4">🎵</div>
+                            <h4 class="font-medium mb-2 text-white text-lg">Music Video</h4>
+                            <p class="text-sm text-silver-chalice mb-3">Creative storytelling with rhythm</p>
+                            <div class="text-2xl font-bold text-white">12+</div>
+                            <p class="text-xs text-silver-chalice">Projects</p>
+                        </div>
+                        
+                        <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20">
+                            <div class="text-4xl mb-4">📹</div>
+                            <h4 class="font-medium mb-2 text-white text-lg">Documentary</h4>
+                            <p class="text-sm text-silver-chalice mb-3">Emotional narrative editing</p>
+                            <div class="text-2xl font-bold text-white">8+</div>
+                            <p class="text-xs text-silver-chalice">Projects</p>
+                        </div>
+                        
+                        <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20">
+                            <div class="text-4xl mb-4">✨</div>
+                            <h4 class="font-medium mb-2 text-white text-lg">Motion Graphics</h4>
+                            <p class="text-sm text-silver-chalice mb-3">Abstract animations and VFX</p>
+                            <div class="text-2xl font-bold text-white">15+</div>
+                            <p class="text-xs text-silver-chalice">Projects</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Works List -->
+                <ul id="portfolio-works" class="mt-16 md:mt-24 space-y-8">
+                    <!-- Projects will be dynamically inserted here -->
+                </ul>
+
+                <!-- View All CTA -->
+                <div class="ts-focus-in mt-24 flex flex-col items-center md:mt-32 section-transition" data-active="true">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl md:text-3xl font-medium mb-4 text-white">
+                            Explore Complete Portfolio
+                        </h3>
+                        <p class="text-base md:text-lg text-silver-chalice max-w-2xl">
+                            Discover more projects, case studies, and behind-the-scenes content
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <button class="view-all-works group relative inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 rounded-full px-8 py-4 border border-white/30 text-white">
+                            <span class="font-serif-en text-lg">VIEW ALL WORKS</span>
+                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
+                                <svg class="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </button>
+                        
+                        <a href="#contact" class="group relative inline-flex items-center gap-3 bg-transparent hover:bg-white/10 transition-all duration-300 rounded-full px-8 py-4 border border-white/50 text-white">
+                            <span class="font-serif-en text-lg">HIRE ME</span>
+                            <div class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center group-hover:border-white/50 transition-all duration-300">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="relative py-24 md:py-32 bg-mine-shaft-texture text-pampas">
+            <div class="container px-5 md:px-20 max-w-none">
+                <!-- Contact Header -->
+                <div class="text-center mb-16 section-transition">
+                    <h1 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-silver-chalice">
+                            (Contact)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl leading-none font-medium">
+                            <span>Let's Create</span>
+                            <span>Something Amazing</span>
+                        </div>
+                    </h1>
+                </div>
+
+                <!-- Contact Content -->
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20 max-w-6xl mx-auto">
+                    <!-- Contact Info -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h2 class="text-2xl md:text-3xl font-medium mb-8">
+                            Get In Touch
+                        </h2>
+
+                        <div class="space-y-6 text-base md:text-lg leading-relaxed">
+                            <p>
+                                I'm always excited to work on new projects and collaborate with creative individuals and teams. Whether you need video editing, motion graphics, or visual design, let's discuss how we can bring your vision to life.
+                            </p>
+
+                            <div class="space-y-4">
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Email</dt>
+                                    <dd class="text-lg">
+                                        <a href="mailto:taaaaiki.mode@gmail.com?subject=Project Inquiry" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                            taaaaiki.mode@gmail.com
+                                        </a>
+                                    </dd>
+                                </div>
+
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Social</dt>
+                                    <dd class="text-lg space-y-2">
+                                        <div>
+                                            <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                                X (Twitter)
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                                Instagram
+                                            </a>
+                                        </div>
+                                    </dd>
+                                </div>
+
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Response Time</dt>
+                                    <dd class="text-lg">Usually within 24 hours</dd>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h3 class="text-xl md:text-2xl font-medium mb-6">
+                            Project Inquiry
+                        </h3>
+
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="name" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Name *</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-transparent border border-emperor rounded-lg text-pampas placeholder-silver-chalice focus:border-pampas focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <label for="email" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Email *</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-transparent border border-emperor rounded-lg text-pampas placeholder-silver-chalice focus:border-pampas focus:outline-none transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="company" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Company</label>
+                                <input type="text" id="company" name="company" class="w-full px-4 py-3 bg-transparent border border-emperor rounded-lg text-pampas placeholder-silver-chalice focus:border-pampas focus:outline-none transition-colors">
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="project" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Project Type</label>
+                                    <select id="project" name="project" class="w-full px-4 py-3 bg-mine-shaft border border-emperor rounded-lg text-pampas focus:border-pampas focus:outline-none transition-colors">
+                                        <option value="">Select project type</option>
+                                        <option value="video-editing">Video Editing</option>
+                                        <option value="motion-graphics">Motion Graphics</option>
+                                        <option value="web-design">Web Design</option>
+                                        <option value="graphic-design">Graphic Design</option>
+                                        <option value="art-direction">Art Direction</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="budget" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Budget Range</label>
+                                    <select id="budget" name="budget" class="w-full px-4 py-3 bg-mine-shaft border border-emperor rounded-lg text-pampas focus:border-pampas focus:outline-none transition-colors">
+                                        <option value="">Select budget range</option>
+                                        <option value="under-5k">Under $5,000</option>
+                                        <option value="5k-10k">$5,000 - $10,000</option>
+                                        <option value="10k-25k">$10,000 - $25,000</option>
+                                        <option value="25k-plus">$25,000+</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Project Details *</label>
+                                <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 bg-transparent border border-emperor rounded-lg text-pampas placeholder-silver-chalice focus:border-pampas focus:outline-none transition-colors resize-none" placeholder="Tell me about your project, timeline, and any specific requirements..."></textarea>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="ts-more group relative inline-block overflow-hidden rounded-full border border-pampas px-12 py-6 font-serif-en leading-none transition-all duration-[0.6s] text-lg text-pampas hover:bg-pampas hover:text-mine-shaft">
+                                    <span class="absolute left-1/2 top-1/2 z-0 h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pampas transition-all duration-[0.6s] group-hover:h-full group-hover:w-full"></span>
+                                    <span class="relative z-10">SEND MESSAGE</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-wrapper" class="relative mt-20">
+        <footer id="footer" class="relative w-full overflow-hidden text-pampas bg-mine-shaft-texture">
+            <div class="container px-5 pt-16 md:px-20 md:pt-24 max-w-none">
+                <ul class="flex flex-row-reverse justify-center gap-8">
+                    <li class="relative flex flex-col items-center">
+                        <span class="absolute -top-4 left-1/2 h-[6px] w-[6px] -translate-x-1/2">
+                            <span class="block h-1.5 w-1.5 rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+                        </span>
+                        <a href="#home" class="ts-text-link text-xl leading-none vertical-rl text-silver-chalice hover:text-pampas transition-colors">
+                            Home
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="#about" class="ts-text-link text-xl leading-none vertical-rl hover:text-pampas transition-colors">
+                            About
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="#works" class="ts-text-link text-xl leading-none vertical-rl hover:text-pampas transition-colors">
+                            Works
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="#contact" class="ts-text-link text-xl leading-none vertical-rl hover:text-pampas transition-colors">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mt-20 hidden justify-end md:flex">
+                    <a href="#home" class="ts-text-link ts-anchor font-serif-en text-lg hover:text-silver-chalice transition-colors">BACK TO TOP</a>
+                </div>
+
+                <ul class="mt-12 flex flex-wrap items-center justify-center gap-x-7 gap-y-4 border-t border-emperor pt-10 font-serif-en md:mt-6 md:justify-between md:gap-8">
+                    <li class="inline-block">
+                        <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link md:text-xl hover:text-silver-chalice transition-colors">
+                            X (Twitter)
+                        </a>
+                    </li>
+                    <li class="inline-block">
+                        <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link md:text-xl hover:text-silver-chalice transition-colors">
+                            INSTAGRAM
+                        </a>
+                    </li>
+                    <li class="inline-block w-full text-center md:ml-auto md:w-auto">
+                        <small class="text-base text-silver-chalice">
+                            &copy; 2024 HASSAM TAHIR
+                        </small>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Large GET IN CONTACT Text -->
+            <div class="mt-9 pb-5 md:mt-10">
+                <div class="contact">
+                    <a href="mailto:taaaaiki.mode@gmail.com?subject=Contact" target="_blank" class="group flex flex-nowrap whitespace-nowrap" aria-label="GET IN CONTACT">
+                        <span class="mx-8 block md:mx-9">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1855 172" class="h-[100px] fill-taupe-gray transition-all duration-700 group-hover:fill-transparent group-hover:stroke-taupe-gray md:h-[172px]">
+                                <g>
+                                    <path d="M1783.06,65.76c0-16.64-.24-33.2-.72-49.68-4.16,0-8.56.08-13.2.24-4.48,0-9.04.16-13.68.48-4.48.16-8.88.4-13.2.72-4.16.32-7.92.72-11.28,1.2.8-2.88,1.2-5.44,1.2-7.68,0-1.76-.4-4.24-1.2-7.44,10.56.32,20.88.64,30.96.96,10.08.16,20.4.24,30.96.24s20.88-.08,30.96-.24c10.08-.32,20.4-.64,30.96-.96-.8,3.2-1.2,5.76-1.2,7.68,0,2.08.4,4.56,1.2,7.44-3.36-.48-7.2-.88-11.52-1.2-4.16-.32-8.56-.56-13.2-.72-4.48-.32-9.04-.48-13.68-.48-4.48-.16-8.8-.24-12.96-.24-.48,16.48-.72,33.04-.72,49.68v41.28c0,10.56.16,20.96.48,31.2.48,10.24.96,20.32,1.44,30.24-3.68-.32-7.6-.48-11.76-.48s-8.08.16-11.76.48c.48-9.92.88-20,1.2-30.24.48-10.24.72-20.64.72-31.2v-41.28Z"></path>
+                                </g>
+                            </svg>
+                        </span>
+                        <span class="mx-8 block md:mx-9">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1855 172" class="h-[100px] fill-taupe-gray transition-all duration-700 group-hover:fill-transparent group-hover:stroke-taupe-gray md:h-[172px]">
+                                <g>
+                                    <path d="M1783.06,65.76c0-16.64-.24-33.2-.72-49.68-4.16,0-8.56.08-13.2.24-4.48,0-9.04.16-13.68.48-4.48.16-8.88.4-13.2.72-4.16.32-7.92.72-11.28,1.2.8-2.88,1.2-5.44,1.2-7.68,0-1.76-.4-4.24-1.2-7.44,10.56.32,20.88.64,30.96.96,10.08.16,20.4.24,30.96.24s20.88-.08,30.96-.24c10.08-.32,20.4-.64,30.96-.96-.8,3.2-1.2,5.76-1.2,7.68,0,2.08.4,4.56,1.2,7.44-3.36-.48-7.2-.88-11.52-1.2-4.16-.32-8.56-.56-13.2-.72-4.48-.32-9.04-.48-13.68-.48-4.48-.16-8.8-.24-12.96-.24-.48,16.48-.72,33.04-.72,49.68v41.28c0,10.56.16,20.96.48,31.2.48,10.24.96,20.32,1.44,30.24-3.68-.32-7.6-.48-11.76-.48s-8.08.16-11.76.48c.48-9.92.88-20,1.2-30.24.48-10.24.72-20.64.72-31.2v-41.28Z"></path>
+                                </g>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Component Scripts -->
+    <script src="components/Header.js"></script>
+    <script src="components/MobileMenu.js"></script>
+    <script src="components/ProjectCard.js"></script>
+    <script src="components/Footer.js"></script>
+    <script src="components/Advanced3DEffects.js"></script>
+
+    <!-- Vertex Shader -->
+    <script id="vs" type="x-shader/x-vertex">
+        uniform sampler2D map; uniform float width; uniform float height; uniform float nearClipping, farClipping; uniform float pointSize; uniform float zOffset; varying vec2 vUv; const float XtoZ = 1.11146; const float YtoZ = 0.83359; void main() { vUv = vec2(position.x
+        / width, position.y / height); vec4 color = texture2D(map, vUv); float depth = (color.r + color.g + color.b) / 3.0; float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping; vec4 pos = vec4( (position.x / width - 0.5) * z * XtoZ,
+        (position.y / height - 0.5) * z * YtoZ, -z + zOffset, 1.0 ); gl_PointSize = pointSize; gl_Position = projectionMatrix * modelViewMatrix * pos; }
+    </script>
+
+    <!-- Fragment Shader -->
+    <script id="fs" type="x-shader/x-fragment">
+        uniform sampler2D map; varying vec2 vUv; void main() { vec4 color = texture2D(map, vUv); gl_FragColor = vec4(color.r, color.g, color.b, 0.8); }
+    </script>
+
+    <!-- Main Single-Page Application Script -->
+    <script src="js/single-page-app.js"></script>
+
+</body>
+
+</html>

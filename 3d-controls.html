@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Effects Control Panel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .control-panel {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section h2 {
+            margin-bottom: 20px;
+            color: #E5E1DC;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #A5A5A5;
+            font-weight: 500;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            margin-bottom: 10px;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #8B7D6B;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #8B7D6B;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #8B7D6B, #A5A5A5);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 125, 107, 0.3);
+        }
+        
+        .preset-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .preset-button.energetic {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+        
+        .preset-button.subtle {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+        
+        .preset-button.minimal {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            opacity: 0.7;
+        }
+        
+        .toggle-button {
+            background: #2a2a2a;
+            border: 2px solid #8B7D6B;
+            color: #8B7D6B;
+        }
+        
+        .toggle-button.active {
+            background: #8B7D6B;
+            color: white;
+        }
+        
+        .value-display {
+            color: #E5E1DC;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .instructions {
+            background: rgba(139, 125, 107, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #8B7D6B;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #E5E1DC;
+        }
+        
+        .instructions code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #A5A5A5;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .control-panel {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="status">
+        <span id="status-text">Ready to control 3D effects</span>
+    </div>
+
+    <div class="control-panel">
+        <h1 style="text-align: center; margin-bottom: 30px; color: #E5E1DC; font-size: 2.5rem;">
+            🎮 3D Effects Control Panel
+        </h1>
+        
+        <div class="instructions">
+            <h3>How to Use:</h3>
+            <p>1. Open your portfolio website in another tab</p>
+            <p>2. Use the controls below to adjust the 3D effects in real-time</p>
+            <p>3. Or use browser console: <code>window.control3D.setBounceHeight(1.0)</code></p>
+        </div>
+
+        <!-- Quick Presets -->
+        <div class="section">
+            <h2>🎯 Quick Presets</h2>
+            <div class="grid-2">
+                <button class="button preset-button subtle" onclick="applyPreset('subtle')">
+                    Subtle & Elegant
+                </button>
+                <button class="button preset-button" onclick="applyPreset('normal')">
+                    Normal (Default)
+                </button>
+                <button class="button preset-button energetic" onclick="applyPreset('energetic')">
+                    Energetic & Dynamic
+                </button>
+                <button class="button preset-button minimal" onclick="applyPreset('minimal')">
+                    Minimal & Clean
+                </button>
+            </div>
+        </div>
+
+        <!-- Bouncing Controls -->
+        <div class="section">
+            <h2>🎾 Bouncing Effects</h2>
+            
+            <div class="control-group">
+                <label for="bounceHeight">Bounce Height (0-2): <span class="value-display" id="bounceHeightValue">0.5</span></label>
+                <input type="range" id="bounceHeight" class="slider" min="0" max="2" step="0.1" value="0.5">
+            </div>
+            
+            <div class="control-group">
+                <label for="bounceSpeed">Bounce Speed (0.01-0.1): <span class="value-display" id="bounceSpeedValue">0.02</span></label>
+                <input type="range" id="bounceSpeed" class="slider" min="0.01" max="0.1" step="0.005" value="0.02">
+            </div>
+            
+            <div class="control-group">
+                <label for="rotationSpeed">Rotation Speed (0-0.05): <span class="value-display" id="rotationSpeedValue">0.01</span></label>
+                <input type="range" id="rotationSpeed" class="slider" min="0" max="0.05" step="0.002" value="0.01">
+            </div>
+        </div>
+
+        <!-- Visual Controls -->
+        <div class="section">
+            <h2>🎨 Visual Properties</h2>
+            
+            <div class="control-group">
+                <label for="opacity">Element Opacity (0-1): <span class="value-display" id="opacityValue">0.7</span></label>
+                <input type="range" id="opacity" class="slider" min="0" max="1" step="0.05" value="0.7">
+            </div>
+            
+            <div class="control-group">
+                <label for="mouseInfluence">Mouse Influence (0-2): <span class="value-display" id="mouseInfluenceValue">0.5</span></label>
+                <input type="range" id="mouseInfluence" class="slider" min="0" max="2" step="0.1" value="0.5">
+            </div>
+            
+            <div class="grid-2">
+                <button class="button toggle-button" id="wireframeToggle" onclick="toggleWireframe()">
+                    Toggle Wireframe
+                </button>
+                <button class="button toggle-button" id="scalePulseToggle" onclick="toggleScalePulse()">
+                    Toggle Scale Pulse
+                </button>
+            </div>
+        </div>
+
+        <!-- Animation Controls -->
+        <div class="section">
+            <h2>⚡ Animation Controls</h2>
+            
+            <div class="grid-2">
+                <button class="button" onclick="pauseAnimations()">
+                    ⏸️ Pause Animations
+                </button>
+                <button class="button" onclick="resumeAnimations()">
+                    ▶️ Resume Animations
+                </button>
+                <button class="button" onclick="toggleElements()">
+                    👁️ Show/Hide Elements
+                </button>
+                <button class="button" onclick="changeColors()">
+                    🌈 Random Colors
+                </button>
+            </div>
+        </div>
+
+        <!-- Color Presets -->
+        <div class="section">
+            <h2>🎨 Color Themes</h2>
+            
+            <div class="grid-2">
+                <button class="button" onclick="setColorTheme('warm')" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">
+                    Warm Theme
+                </button>
+                <button class="button" onclick="setColorTheme('cool')" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    Cool Theme
+                </button>
+                <button class="button" onclick="setColorTheme('neon')" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    Neon Theme
+                </button>
+                <button class="button" onclick="setColorTheme('monochrome')" style="background: linear-gradient(135deg, #333, #666);">
+                    Monochrome
+                </button>
+            </div>
+        </div>
+
+        <!-- Advanced Console Commands -->
+        <div class="section">
+            <h2>💻 Console Commands</h2>
+            <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.9rem;">
+                <p><code>window.control3D.setBounceHeight(1.5)</code> - Set bounce height</p>
+                <p><code>window.control3D.setBounceSpeed(0.05)</code> - Set bounce speed</p>
+                <p><code>window.control3D.setElementOpacity(0.8)</code> - Set opacity</p>
+                <p><code>window.control3D.toggleWireframe()</code> - Toggle wireframe</p>
+                <p><code>window.control3D.presets.energetic()</code> - Apply energetic preset</p>
+                <p><code>window.control3D.pauseAnimations()</code> - Pause animations</p>
+                <p><code>window.control3D.toggleElements()</code> - Show/hide elements</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cross-tab communication setup
+        let portfolioWindow = null;
+        let controlInterface = null;
+        
+        // Try to connect to existing portfolio window or create interface
+        setTimeout(() => {
+            // First try to find existing control interface
+            if (window.control3D) {
+                controlInterface = window.control3D;
+                updateStatus('Connected to 3D controls!');
+            } else if (window.opener && window.opener.control3D) {
+                controlInterface = window.opener.control3D;
+                updateStatus('Connected via opener!');
+            } else {
+                // Load the main website in an iframe for direct access
+                loadPortfolioInFrame();
+            }
+        }, 1000);
+
+        function updateStatus(message) {
+            document.getElementById('status-text').textContent = message;
+        }
+        
+        function loadPortfolioInFrame() {
+            const iframe = document.createElement('iframe');
+            iframe.src = 'index-new.html';
+            iframe.style.position = 'fixed';
+            iframe.style.top = '-1000px';
+            iframe.style.left = '-1000px';
+            iframe.style.width = '1px';
+            iframe.style.height = '1px';
+            iframe.style.border = 'none';
+            iframe.style.opacity = '0';
+            document.body.appendChild(iframe);
+            
+            iframe.onload = () => {
+                setTimeout(() => {
+                    if (iframe.contentWindow && iframe.contentWindow.control3D) {
+                        controlInterface = iframe.contentWindow.control3D;
+                        updateStatus('Connected via iframe!');
+                    } else {
+                        updateStatus('Manual connection needed - see instructions');
+                    }
+                }, 2000);
+            };
+        }
+
+        function getControl3D() {
+            if (controlInterface) {
+                return controlInterface;
+            } else if (window.control3D) {
+                return window.control3D;
+            } else {
+                updateStatus('Portfolio website not found - open index-new.html');
+                return null;
+            }
+        }
+
+        // Preset functions
+        function applyPreset(presetName) {
+            const control = getControl3D();
+            if (control) {
+                control.presets[presetName]();
+                updateStatus(`Applied ${presetName} preset`);
+                
+                // Update slider values based on preset
+                updateSlidersFromPreset(presetName);
+            }
+        }
+
+        function updateSlidersFromPreset(presetName) {
+            const presets = {
+                subtle: { bounceHeight: 0.2, bounceSpeed: 0.015, rotationSpeed: 0.005, opacity: 0.4, mouseInfluence: 0.2 },
+                normal: { bounceHeight: 0.5, bounceSpeed: 0.02, rotationSpeed: 0.01, opacity: 0.7, mouseInfluence: 0.5 },
+                energetic: { bounceHeight: 1.0, bounceSpeed: 0.04, rotationSpeed: 0.025, opacity: 0.9, mouseInfluence: 1.0 },
+                minimal: { bounceHeight: 0.1, bounceSpeed: 0.01, rotationSpeed: 0.002, opacity: 0.3, mouseInfluence: 0.1 }
+            };
+            
+            const preset = presets[presetName];
+            if (preset) {
+                document.getElementById('bounceHeight').value = preset.bounceHeight;
+                document.getElementById('bounceSpeed').value = preset.bounceSpeed;
+                document.getElementById('rotationSpeed').value = preset.rotationSpeed;
+                document.getElementById('opacity').value = preset.opacity;
+                document.getElementById('mouseInfluence').value = preset.mouseInfluence;
+                
+                updateAllDisplays();
+            }
+        }
+
+        // Individual control functions
+        function setBounceHeight(value) {
+            const control = getControl3D();
+            if (control) {
+                control.setBounceHeight(parseFloat(value));
+                updateStatus(`Bounce height: ${value}`);
+            }
+        }
+
+        function setBounceSpeed(value) {
+            const control = getControl3D();
+            if (control) {
+                control.setBounceSpeed(parseFloat(value));
+                updateStatus(`Bounce speed: ${value}`);
+            }
+        }
+
+        function setRotationSpeed(value) {
+            const control = getControl3D();
+            if (control) {
+                control.setRotationSpeed(parseFloat(value));
+                updateStatus(`Rotation speed: ${value}`);
+            }
+        }
+
+        function setOpacity(value) {
+            const control = getControl3D();
+            if (control) {
+                control.setElementOpacity(parseFloat(value));
+                updateStatus(`Opacity: ${value}`);
+            }
+        }
+
+        function setMouseInfluence(value) {
+            const control = getControl3D();
+            if (control) {
+                control.setMouseInfluence(parseFloat(value));
+                updateStatus(`Mouse influence: ${value}`);
+            }
+        }
+
+        function toggleWireframe() {
+            const control = getControl3D();
+            if (control) {
+                control.toggleWireframe();
+                const button = document.getElementById('wireframeToggle');
+                button.classList.toggle('active');
+                updateStatus('Wireframe toggled');
+            }
+        }
+
+        function toggleScalePulse() {
+            const control = getControl3D();
+            if (control) {
+                control.toggleScalePulse();
+                const button = document.getElementById('scalePulseToggle');
+                button.classList.toggle('active');
+                updateStatus('Scale pulse toggled');
+            }
+        }
+
+        function pauseAnimations() {
+            const control = getControl3D();
+            if (control) {
+                control.pauseAnimations();
+                updateStatus('Animations paused');
+            }
+        }
+
+        function resumeAnimations() {
+            const control = getControl3D();
+            if (control) {
+                control.resumeAnimations();
+                updateStatus('Animations resumed');
+            }
+        }
+
+        function toggleElements() {
+            const control = getControl3D();
+            if (control) {
+                control.toggleElements();
+                updateStatus('Element visibility toggled');
+            }
+        }
+
+        function changeColors() {
+            const control = getControl3D();
+            if (control) {
+                const randomColors = [
+                    Math.random() * 0xffffff,
+                    Math.random() * 0xffffff,
+                    Math.random() * 0xffffff,
+                    Math.random() * 0xffffff,
+                    Math.random() * 0xffffff
+                ];
+                control.changeElementColors(randomColors);
+                updateStatus('Colors randomized');
+            }
+        }
+
+        function setColorTheme(theme) {
+            const control = getControl3D();
+            if (control) {
+                const themes = {
+                    warm: [0xff9a9e, 0xfecfef, 0xffeaa7, 0xfd79a8, 0xe17055],
+                    cool: [0x667eea, 0x764ba2, 0x00c6ff, 0x0072ff, 0x74b9ff],
+                    neon: [0xf093fb, 0xf5576c, 0x4facfe, 0x00f2fe, 0xff0080],
+                    monochrome: [0x333333, 0x666666, 0x999999, 0xcccccc, 0xffffff]
+                };
+                
+                control.changeElementColors(themes[theme]);
+                updateStatus(`Applied ${theme} color theme`);
+            }
+        }
+
+        function updateAllDisplays() {
+            document.getElementById('bounceHeightValue').textContent = document.getElementById('bounceHeight').value;
+            document.getElementById('bounceSpeedValue').textContent = document.getElementById('bounceSpeed').value;
+            document.getElementById('rotationSpeedValue').textContent = document.getElementById('rotationSpeed').value;
+            document.getElementById('opacityValue').textContent = document.getElementById('opacity').value;
+            document.getElementById('mouseInfluenceValue').textContent = document.getElementById('mouseInfluence').value;
+        }
+
+        // Event listeners for sliders
+        document.addEventListener('DOMContentLoaded', () => {
+            // Bounce height slider
+            document.getElementById('bounceHeight').addEventListener('input', (e) => {
+                setBounceHeight(e.target.value);
+                document.getElementById('bounceHeightValue').textContent = e.target.value;
+            });
+
+            // Bounce speed slider
+            document.getElementById('bounceSpeed').addEventListener('input', (e) => {
+                setBounceSpeed(e.target.value);
+                document.getElementById('bounceSpeedValue').textContent = e.target.value;
+            });
+
+            // Rotation speed slider
+            document.getElementById('rotationSpeed').addEventListener('input', (e) => {
+                setRotationSpeed(e.target.value);
+                document.getElementById('rotationSpeedValue').textContent = e.target.value;
+            });
+
+            // Opacity slider
+            document.getElementById('opacity').addEventListener('input', (e) => {
+                setOpacity(e.target.value);
+                document.getElementById('opacityValue').textContent = e.target.value;
+            });
+
+            // Mouse influence slider
+            document.getElementById('mouseInfluence').addEventListener('input', (e) => {
+                setMouseInfluence(e.target.value);
+                document.getElementById('mouseInfluenceValue').textContent = e.target.value;
+            });
+        });
+
+        // Auto-open portfolio website
+        function openPortfolioSite() {
+            window.open('index-new.html', '_blank');
+            setTimeout(() => {
+                updateStatus('Portfolio opened - controls ready!');
+            }, 2000);
+        }
+
+        // Show open button if portfolio not detected
+        setTimeout(() => {
+            if (!window.opener || !window.opener.control3D) {
+                const openButton = document.createElement('button');
+                openButton.className = 'button preset-button';
+                openButton.style.position = 'fixed';
+                openButton.style.bottom = '20px';
+                openButton.style.left = '20px';
+                openButton.textContent = '🚀 Open Portfolio Site';
+                openButton.onclick = openPortfolioSite;
+                document.body.appendChild(openButton);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
