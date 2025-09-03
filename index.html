@@ -94,6 +94,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
+                
+        .simulation-container {
+            width: 100%;
+            height: 70vh;
+            position: relative;
+        }
+        
+        #simulation {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        .simulation-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+
+
+        @media (max-width: 768px) {
+            .simulation-overlay {
+                position: relative;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                max-width: none;
+                border-radius: 0;
+            }
+        }
         /* Custom styles that can't be replaced with Tailwind */
         
         .vertical-rl {
@@ -216,6 +273,200 @@
             }
         }
         
+        .grid-container {
+            flex: 2;
+            position: relative;
+        }
+        
+        .grids {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+            height: 100%;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .grid-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.15);
+            z-index: 10;
+        }
+        /* Grid item positions */
+        
+        .item-1 {
+            grid-area: 1 / 4 / 2 / 5;
+        }
+        
+        .item-2 {
+            grid-area: 2 / 4 / 3 / 5;
+        }
+        
+        .item-3 {
+            grid-area: 2 / 3 / 3 / 4;
+        }
+        
+        .item-4 {
+            grid-area: 3 / 4 / 4 / 5;
+        }
+        
+        .item-5 {
+            grid-area: 3 / 3 / 4 / 4;
+        }
+        
+        .item-6 {
+            grid-area: 3 / 2 / 4 / 3;
+        }
+        
+        .item-7 {
+            grid-area: 4 / 4 / 5 / 5;
+        }
+        
+        .item-8 {
+            grid-area: 4 / 3 / 5 / 4;
+        }
+        
+        .item-9 {
+            grid-area: 4 / 2 / 5 / 3;
+        }
+        
+        .item-10 {
+            grid-area: 4 / 1 / 5 / 2;
+        }
+        
+        @media (max-width: 1200px) {
+            .grids {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+            }
+            .item-1 {
+                grid-area: 1 / 3 / 2 / 4;
+            }
+            .item-2 {
+                grid-area: 2 / 3 / 3 / 4;
+            }
+            .item-3 {
+                grid-area: 2 / 2 / 3 / 3;
+            }
+            .item-4 {
+                grid-area: 3 / 3 / 4 / 4;
+            }
+            .item-5 {
+                grid-area: 3 / 2 / 4 / 3;
+            }
+            .item-6 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-7 {
+                grid-area: 4 / 3 / 5 / 4;
+            }
+            .item-8 {
+                grid-area: 4 / 2 / 5 / 3;
+            }
+            .item-9 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-10 {
+                grid-area: 4 / 1 / 5 / 2;
+                display: none;
+            }
+            /* Hide one item on smaller screens */
+        }
+        
+        @media (max-width: 900px) {
+            .content {
+                flex-direction: column;
+            }
+            .grid-container {
+                min-height: 600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grids {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+                gap: 12px;
+            }
+            .item-1 {
+                grid-area: 1 / 2 / 2 / 3;
+            }
+            .item-2 {
+                grid-area: 2 / 2 / 3 / 3;
+            }
+            .item-3 {
+                grid-area: 2 / 1 / 3 / 2;
+            }
+            .item-4 {
+                grid-area: 3 / 2 / 4 / 3;
+            }
+            .item-5 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-6 {
+                grid-area: 4 / 2 / 5 / 3;
+            }
+            .item-7 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-8 {
+                grid-area: 5 / 2 / 6 / 3;
+            }
+            .item-9 {
+                grid-area: 5 / 1 / 6 / 2;
+            }
+            .item-10 {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grids {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(9, 1fr);
+            }
+            .item-1 {
+                grid-area: 1 / 1 / 2 / 2;
+            }
+            .item-2 {
+                grid-area: 2 / 1 / 3 / 2;
+            }
+            .item-3 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-4 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-5 {
+                grid-area: 5 / 1 / 6 / 2;
+            }
+            .item-6 {
+                grid-area: 6 / 1 / 7 / 2;
+            }
+            .item-7 {
+                grid-area: 7 / 1 / 8 / 2;
+            }
+            .item-8 {
+                grid-area: 8 / 1 / 9 / 2;
+            }
+            .item-9 {
+                grid-area: 9 / 1 / 10 / 2;
+            }
+        }
+        
         .scroll-nav__inside {
             animation: scrollNav 5s infinite;
         }
@@ -333,7 +584,7 @@
     <div id="menu" class="fixed top-0 left-0 z-40 h-screen w-screen bg-gray-texture transform -translate-x-full transition-transform duration-500 ease-in-out">
         <div class="relative flex h-full w-full p-5 md:p-10">
             <video class="hidden h-full max-w-[50%] items-center md:mr-4 md:flex" webkit-playsinline playsinline muted autoplay loop>
-                <source src="videos/5.mp4" type="video/mp4">
+                <source src="vids/5.mp4" type="video/mp4">
             </video>
 
             <div class="flex w-full flex-col md:flex-1">
@@ -494,8 +745,8 @@
             <div id="hero-video" class="absolute inset-0 z-0 w-full h-full">
                 <div id="kinect-container" class="w-full h-full">
                     <video id="kinect-video" class="w-full h-full object-cover" muted autoplay loop playsinline crossorigin="anonymous">
-                        <source src="videos/3.mp4" type="video/mp4">
-                        <source src="videos/3.mp4" type="video/mp4">
+                        <source src="vids/3.mp4" type="video/mp4">
+                        <source src="vids/3.mp4" type="video/mp4">
                     </video>
                     <canvas id="kinect-canvas" class="absolute inset-0 w-full h-full"></canvas>
                 </div>
@@ -567,22 +818,11 @@
                     <!-- 3D elements will be positioned here by JavaScript -->
                 </div>
 
-                <!-- Scroll indicator -->
-                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-                    <div class="scroll-indicator opacity-0">
-                        <div class="flex flex-col items-center text-silver-chalice">
-                            <span class="font-serif-en text-xs tracking-widest mb-4">SCROLL</span>
-                            <div class="w-[1px] h-16 bg-gradient-to-b from-silver-chalice to-transparent relative">
-                                <div class="scroll-dot absolute top-0 w-2 h-2 bg-white rounded-full -translate-x-1/2 animate-bounce"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
         <!-- Software & Tools Section -->
-        <section id="tools" class="relative py-24 md:py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        <section id="tools" class="relative py-24 md:py-28 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
             <!-- Parallax background elements -->
             <div class="absolute inset-0 z-0">
                 <div class="parallax-bg-slow absolute w-full h-full opacity-10">
@@ -783,7 +1023,7 @@
                         Creative Workflow
                     </h3>
 
-                    <div class="grid md:grid-cols-4 gap-6 md:gap-8">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                         <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                             <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
                                 📝
@@ -821,77 +1061,7 @@
         </section>
 
         <!-- Parallax Gallery Section -->
-        <section id="parallax-gallery" class="relative h-screen overflow-hidden py-16 md:py-44 contents-full">
-            <div class="absolute left-0 top-0 h-full w-full bg-gray-texture"></div>
-            <div class="container px-5 md:px-20 relative z-10 h-full">
-                <div class="flex justify-between h-full">
-                    <!-- Left Column -->
-                    <ul class="flex flex-1 flex-col items-start space-y-8 md:space-y-16">
-                        <li class="ts-parallax-gallery-image relative overflow-hidden w-46 md:w-[27rem] section-transition">
-                            <picture class="block w-full mix-blend-multiply">
-                                <img src="images/profile.jpg" alt="left-01" class="w-full h-auto object-cover">
-                            </picture>
-                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
-                        </li>
-                        <li class="ts-parallax-gallery-image relative overflow-hidden w-28 md:w-[14rem] section-transition">
-                            <picture class="block w-full mix-blend-multiply">
-                                <img src="images/profile.jpg" alt="left-02" class="w-full h-auto object-cover">
-                            </picture>
-                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
-                        </li>
-                        <li class="ts-parallax-gallery-image relative overflow-hidden w-46 md:w-[21rem] section-transition">
-                            <picture class="block w-full mix-blend-multiply">
-                                <img src="images/profile.jpg" alt="left-03" class="w-full h-auto object-cover">
-                            </picture>
-                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
-                        </li>
-                    </ul>
 
-                    <!-- Right Column -->
-                    <ul class="flex flex-1 flex-col items-end space-y-8 md:space-y-16">
-                        <li class="ts-parallax-gallery-image relative overflow-hidden w-37 md:w-[26rem] mt-20 md:mt-52 section-transition">
-                            <picture class="block w-full mix-blend-multiply">
-                                <img src="images/profile.jpg" alt="right-01" class="w-full h-auto object-cover">
-                            </picture>
-                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
-                        </li>
-                        <li class="ts-parallax-gallery-image relative overflow-hidden w-28 md:w-[12.5rem] section-transition">
-                            <picture class="block w-full mix-blend-multiply">
-                                <img src="images/profile.jpg" alt="right-02" class="w-full h-auto object-cover">
-                            </picture>
-                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
-                        </li>
-                        <li class="ts-parallax-gallery-image relative overflow-hidden w-32 md:w-[22rem] section-transition">
-                            <picture class="block w-full mix-blend-multiply">
-                                <img src="images/profile.jpg" alt="right-03" class="w-full h-auto object-cover">
-                            </picture>
-                            <div class="bg-layer absolute -bottom-1/2 left-0 -z-10 h-[200%] w-full bg-taupe-gray"></div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Center Content -->
-                <div class="absolute left-1/2 top-1/2 z-20 flex h-screen w-screen -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
-                    <div class="text-taupe-gray text-center">
-                        <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
-                            <span class="text-lg leading-none font-medium mb-4">
-                                (Visual Gallery)
-                            </span>
-                            <div class="flex flex-col gap-4 text-2xl md:text-[2.625rem] leading-none font-medium">
-                                <span>Creative</span>
-                                <span>Process</span>
-                            </div>
-                        </h2>
-                    </div>
-                    <div class="ts-focus-in mt-16 md:mt-20" data-active="true">
-                        <a href="#about" class="ts-more group relative inline-block overflow-hidden rounded-full border border-silver px-10 py-5 font-serif-en leading-none transition-all duration-[0.6s] md:px-12 md:py-6 md:text-lg hover:bg-pampas hover:text-mine-shaft">
-                            <span class="absolute left-1/2 top-1/2 z-0 h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pampas transition-all duration-[0.6s] group-hover:h-full group-hover:w-full"></span>
-                            <span class="relative z-10">DISCOVER MORE</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- About Section -->
         <section id="about" class="relative py-24 md:py-32 bg-gray-texture">
@@ -1156,8 +1326,8 @@
                     <!-- Main featured video -->
                     <div class="main-video-container mb-12 section-transition">
                         <div class="relative overflow-hidden rounded-2xl bg-black max-w-6xl mx-auto shadow-2xl group">
-                            <video id="main-portfolio-video" class="w-full h-auto transition-all duration-500 group-hover:scale-105">
-                                <source src="videos/2.mp4" type="video/mp4">
+                            <video id="main-portfolio-video" class="w-full h-56 md:h-auto transition-all duration-500 group-hover:scale-105">
+                                <source src="vids/2.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
 
@@ -1177,9 +1347,9 @@
                                 <h4 class="text-xl md:text-2xl font-medium mb-2">Portfolio Showcase 2024</h4>
                                 <p class="text-base opacity-90">A collection of my best video editing and motion graphics work</p>
                                 <div class="flex items-center gap-4 mt-4">
-                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Commercial</span>
-                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Motion Graphics</span>
-                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Color Grading</span>
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Commercial</span>
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Motion Graphics</span>
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Color Grading</span>
                                 </div>
                             </div>
                         </div>
@@ -1195,10 +1365,10 @@
                         <div class="scroll-container relative overflow-hidden">
                             <div class="flex space-x-6 overflow-x-auto scrollbar-hide pb-6" style="scroll-behavior: smooth;">
                                 <!-- Video 1 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/Pakistan.mp4" data-title="Commercial Project" data-description="Brand storytelling with dynamic cuts and transitions">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/Pakistan.mp4" data-title="Commercial Project" data-description="Brand storytelling with dynamic cuts and transitions">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="videos/Pakistan.mp4" type="video/mp4">
+                                            <source src="vids/Pakistan.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1217,10 +1387,10 @@
                                 </div>
 
                                 <!-- Video 2 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/Sahiba .mp4" data-title="Music Video" data-description="Creative visual effects synchronized with beat">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/Sahiba .mp4" data-title="Music Video" data-description="Creative visual effects synchronized with beat">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="videos/Sahiba .mp4" type="video/mp4">
+                                            <source src="vids/Sahiba .mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1239,10 +1409,10 @@
                                 </div>
 
                                 <!-- Video 3 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/2.mp4" data-title="Documentary" data-description="Emotional storytelling with careful pacing">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/2.mp4" data-title="Documentary" data-description="Emotional storytelling with careful pacing">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="videos/2.mp4" type="video/mp4">
+                                            <source src="vids/2.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1261,10 +1431,10 @@
                                 </div>
 
                                 <!-- Video 4 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/4.mp4" data-title="Motion Graphics" data-description="Abstract animations and kinetic typography">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/4.mp4" data-title="Motion Graphics" data-description="Abstract animations and kinetic typography">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="videos/4.mp4" type="video/mp4">
+                                            <source src="vids/4.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1283,10 +1453,10 @@
                                 </div>
 
                                 <!-- Video 5 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/3.mp4" data-title="Color Grading Showcase" data-description="Professional color correction and grading techniques">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/3.mp4" data-title="Color Grading Showcase" data-description="Professional color correction and grading techniques">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="videos/3.mp4" type="video/mp4">
+                                            <source src="vids/3.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1305,10 +1475,10 @@
                                 </div>
 
                                 <!-- Video 6 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="videos/1.mp4" type="video/mp4">
+                                            <source src="vids/1.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1341,10 +1511,254 @@
                                 </button>
                             </div>
                         </div>
+
                     </div>
 
+                        <section id="simulation-section" class="flocking-section">
+        <div class="simulation-container">
+            <div id="simulation"></div>
+            <div class="simulation-overlay">
+                                    <!-- Project Categories with Stats -->
+                    <div class="content">
+
+                   
+                    </div>
+
+                <div class="controls">
+                    <button class="btn" id="pause-btn">Pause</button>
+                    <button class="btn" id="reset-btn">Reset</button>
+                </div>
+            </div>
+        </div>
+    </section>
+     <div class="grid-container">
+                            <div class="grids">
+                                <div class="grid-item item-1">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-2">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-3">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-4">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-5">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-6">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-7">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-8">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-9">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item item-10">
+                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="vids/1.mp4" type="video/mp4">
+                                        </video>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 text-gray">
+                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                                <p class="text-sm opacity-80">Advanced visual effects</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     <!-- Project categories with stats -->
-                    <div class="grid md:grid-cols-4 gap-6 mt-16 max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 max-w-6xl mx-auto">
                         <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-pampas/20 transition-all duration-300 border border-white/20">
                             <div class="text-4xl mb-4">🎬</div>
                             <h4 class="font-medium mb-2 text-gray text-lg">Commercial</h4>
@@ -1380,9 +1794,6 @@
                 </div>
 
                 <!-- Portfolio Works List -->
-                <ul id="portfolio-works" class="mt-16 md:mt-24 space-y-8">
-                    <!-- Projects will be dynamically inserted here -->
-                </ul>
 
                 <!-- View All CTA -->
                 <div class="ts-focus-in mt-24 flex flex-col items-center md:mt-32 section-transition" data-active="true">
@@ -1405,7 +1816,7 @@
                             </div>
                         </button>
 
-                        <a href="#contact" class="group relative inline-flex items-center gap-3 bg-transparent hover:bg-white/10 transition-all duration-300 rounded-full px-8 py-4 border border-pampas text-gray">
+                        <a href="#contact" class="group  relative inline-flex items-center justify-between gap-3 bg-transparent hover:bg-white/10 transition-all duration-300 rounded-full px-8 py-4 border border-pampas text-gray">
                             <span class="font-serif-en text-lg">HIRE ME</span>
                             <div class="w-8 h-8 rounded-full border border-gray flex items-center justify-center group-hover:border-pampas transition-all duration-300">
                                 <svg class="w-4 h-4 text-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1548,7 +1959,7 @@
     </main>
 
     <!-- Footer -->
-    <div id="footer-wrapper" class="relative mt-20">
+    <div id="footer-wrapper" class="relative mt-10">
         <footer id="footer" class="relative w-full overflow-hidden text-pampas bg-gray-texture">
             <div class="container px-5 pt-16 md:px-20 md:pt-24 max-w-none">
                 <ul class="flex flex-row-reverse justify-center gap-8">
@@ -1581,7 +1992,7 @@
                     <a href="#home" class="ts-text-link ts-anchor font-serif-en text-lg hover:text-silver-chalice transition-colors">BACK TO TOP</a>
                 </div>
 
-                <ul class="mt-12 flex flex-wrap items-center justify-center gap-x-7 gap-y-4 border-t border-emperor pt-10 font-serif-en md:mt-6 md:justify-between md:gap-8">
+                <ul class="mt-12 mb-5 flex flex-wrap items-center justify-center gap-x-7 gap-y-4 border-t border-emperor pt-10 font-serif-en md:mt-6 md:justify-between md:gap-8">
                     <li class="inline-block">
                         <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link md:text-xl hover:text-silver-chalice transition-colors">
                             X (Twitter)
@@ -1598,28 +2009,6 @@
                         </small>
                     </li>
                 </ul>
-            </div>
-
-            <!-- Large GET IN CONTACT Text -->
-            <div class="mt-9 pb-5 md:mt-10">
-                <div class="contact">
-                    <a href="mailto:taaaaiki.mode@gmail.com?subject=Contact" target="_blank" class="group flex flex-nowrap whitespace-nowrap" aria-label="GET IN CONTACT">
-                        <span class="mx-8 block md:mx-9">
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1855 172" class="h-[100px] fill-black transition-all duration-700 group-hover:fill-red-500 group-hover:stroke-red-600 md:h-[172px]">
-                                <g>
-                                    <path d="M1783.06,65.76c0-16.64-.24-33.2-.72-49.68-4.16,0-8.56.08-13.2.24-4.48,0-9.04.16-13.68.48-4.48.16-8.88.4-13.2.72-4.16.32-7.92.72-11.28,1.2.8-2.88,1.2-5.44,1.2-7.68,0-1.76-.4-4.24-1.2-7.44,10.56.32,20.88.64,30.96.96,10.08.16,20.4.24,30.96.24s20.88-.08,30.96-.24c10.08-.32,20.4-.64,30.96-.96-.8,3.2-1.2,5.76-1.2,7.68,0,2.08.4,4.56,1.2,7.44-3.36-.48-7.2-.88-11.52-1.2-4.16-.32-8.56-.56-13.2-.72-4.48-.32-9.04-.48-13.68-.48-4.48-.16-8.8-.24-12.96-.24-.48,16.48-.72,33.04-.72,49.68v41.28c0,10.56.16,20.96.48,31.2.48,10.24.96,20.32,1.44,30.24-3.68-.32-7.6-.48-11.76-.48s-8.08.16-11.76.48c.48-9.92.88-20,1.2-30.24.48-10.24.72-20.64.72-31.2v-41.28Z"></path>
-                                </g>
-                            </svg>
-                        </span>
-                        <span class="mx-8 block md:mx-9">
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1855 172" class="h-[100px] fill-black transition-all duration-700 group-hover:fill-red-500 group-hover:stroke-red-600 md:h-[172px]">
-                                <g>
-                                    <path d="M1783.06,65.76c0-16.64-.24-33.2-.72-49.68-4.16,0-8.56.08-13.2.24-4.48,0-9.04.16-13.68.48-4.48.16-8.88.4-13.2.72-4.16.32-7.92.72-11.28,1.2.8-2.88,1.2-5.44,1.2-7.68,0-1.76-.4-4.24-1.2-7.44,10.56.32,20.88.64,30.96.96,10.08.16,20.4.24,30.96.24s20.88-.08,30.96-.24c10.08-.32,20.4-.64,30.96-.96-.8,3.2-1.2,5.76-1.2,7.68,0,2.08.4,4.56,1.2,7.44-3.36-.48-7.2-.88-11.52-1.2-4.16-.32-8.56-.56-13.2-.72-4.48-.32-9.04-.48-13.68-.48-4.48-.16-8.8-.24-12.96-.24-.48,16.48-.72,33.04-.72,49.68v41.28c0,10.56.16,20.96.48,31.2.48,10.24.96,20.32,1.44,30.24-3.68-.32-7.6-.48-11.76-.48s-8.08.16-11.76.48c.48-9.92.88-20,1.2-30.24.48-10.24.72-20.64.72-31.2v-41.28Z"></path>
-                                </g>
-                            </svg>
-                        </span>
-                    </a>
-                </div>
             </div>
         </footer>
     </div>
@@ -1646,15 +2035,8 @@
     <!-- Simplified Animation Controllers -->
     <script src="js/preloader-simple.js"></script>
 
-    <!-- Enhanced Smooth Scroll Manager -->
-    <script src="js/smooth-scroll-manager.js"></script>
-
 
     <script src="js/advanced-3d-controller.js"></script>
-    <!-- <script src="js/enhanced-video-controller.js"></script> -->
-
-    <!-- Fixed 3D Controller -->
-    <!-- <script src="js/advanced-fixed.js"></script> -->
 
     <!-- Main Single-Page Application Script -->
     <script src="js/single-page-app.js"></script>
@@ -1797,6 +2179,469 @@
         });
     </script>
 
+
+  <!-- Shaders -->
+  <script id="fragmentShaderPosition" type="x-shader/x-fragment">
+    uniform float time;
+    uniform float delta;
+    void main() {
+      vec2 uv = gl_FragCoord.xy / resolution.xy;
+      vec4 tmpPos = texture2D(texturePosition, uv);
+      vec3 position = tmpPos.xyz;
+      vec3 velocity = texture2D(textureVelocity, uv).xyz;
+      float phase = tmpPos.w;
+      phase = mod((phase + delta + length(velocity.xz) * delta * 3. + max(velocity.y, 0.0) * delta * 6.), 62.83);
+      gl_FragColor = vec4(position + velocity * delta * 15., phase);
+    }
+  </script>
+
+     
+    <!-- Three.js and related libraries -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        // Import with correct paths using the importmap
+        import * as THREE from 'three';
+        import Stats from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/stats.module.js';
+        import { GUI } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/lil-gui.module.min.js';
+        import { GPUComputationRenderer } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/misc/GPUComputationRenderer.js';
+
+        const WIDTH = 32;
+        const BIRDS = WIDTH * WIDTH;
+
+        class BirdGeometry extends THREE.BufferGeometry {
+            constructor() {
+                super();
+                const trianglesPerBird = 3;
+                const triangles = BIRDS * trianglesPerBird;
+                const points = triangles * 3;
+
+                const vertices = new THREE.BufferAttribute(new Float32Array(points * 3), 3);
+                const birdColors = new THREE.BufferAttribute(new Float32Array(points * 3), 3);
+                const references = new THREE.BufferAttribute(new Float32Array(points * 2), 2);
+                const birdVertex = new THREE.BufferAttribute(new Float32Array(points), 1);
+
+                this.setAttribute('position', vertices);
+                this.setAttribute('birdColor', birdColors);
+                this.setAttribute('reference', references);
+                this.setAttribute('birdVertex', birdVertex);
+
+                let v = 0;
+                function verts_push(...args) {
+                    for (let i = 0; i < args.length; i++) {
+                        vertices.array[v++] = args[i];
+                    }
+                }
+
+                const wingsSpan = 20;
+                for (let f = 0; f < BIRDS; f++) {
+                    verts_push(0, -0, -20, 0, 4, -20, 0, 0, 30);
+                    verts_push(0, 0, -15, -wingsSpan, 0, 0, 0, 0, 15);
+                    verts_push(0, 0, 15, wingsSpan, 0, 0, 0, 0, -15);
+                }
+
+                for (let i = 0; i < triangles * 3; i++) {
+                    const triangleIndex = ~~(i / 3);
+                    const birdIndex = ~~(triangleIndex / trianglesPerBird);
+                    const x = (birdIndex % WIDTH) / WIDTH;
+                    const y = ~~(birdIndex / WIDTH) / WIDTH;
+
+                    const c = new THREE.Color(0x666666 + ~~(i / 9) / BIRDS * 0x666666);
+                    birdColors.array[i * 3 + 0] = c.r;
+                    birdColors.array[i * 3 + 1] = c.g;
+                    birdColors.array[i * 3 + 2] = c.b;
+
+                    references.array[i * 2] = x;
+                    references.array[i * 2 + 1] = y;
+
+                    birdVertex.array[i] = i % 9;
+                }
+
+                this.scale(0.2, 0.2, 0.2);
+            }
+        }
+
+        let container, stats;
+        let camera, scene, renderer;
+        let mouseX = 0, mouseY = 0;
+        let windowHalfX = window.innerWidth / 2;
+        let windowHalfY = window.innerHeight / 2;
+
+        const BOUNDS = 800, BOUNDS_HALF = BOUNDS / 2;
+        let last = performance.now();
+
+        let gpuCompute;
+        let velocityVariable, positionVariable;
+        let positionUniforms, velocityUniforms, birdUniforms;
+        
+        let animationId = null;
+        let isPaused = false;
+
+        init();
+
+        function init() {
+            container = document.getElementById('simulation');
+            
+            // Set up camera
+            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 1, 3000);
+            camera.position.z = 350;
+
+            // Set up scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+            scene.fog = new THREE.Fog(0x000000, 100, 1000);
+
+            // Set up renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+
+            initComputeRenderer();
+
+            // Set up stats
+            stats = new Stats();
+            stats.dom.style.position = 'absolute';
+            stats.dom.style.top = '10px';
+            stats.dom.style.right = '10px';
+            container.appendChild(stats.dom);
+
+            // Handle mouse movement
+            container.addEventListener('pointermove', onPointerMove);
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+            
+            // Set up control buttons
+            document.getElementById('pause-btn').addEventListener('click', togglePause);
+            document.getElementById('reset-btn').addEventListener('click', resetSimulation);
+
+            initBirds();
+            animate();
+        }
+        
+        function onWindowResize() {
+            const container = document.getElementById('simulation');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        function initComputeRenderer() {
+            gpuCompute = new GPUComputationRenderer(WIDTH, WIDTH, renderer);
+
+            const dtPosition = gpuCompute.createTexture();
+            const dtVelocity = gpuCompute.createTexture();
+
+            fillPositionTexture(dtPosition);
+            fillVelocityTexture(dtVelocity);
+
+            velocityVariable = gpuCompute.addVariable('textureVelocity',
+                document.getElementById('fragmentShaderVelocity').textContent, dtVelocity);
+            positionVariable = gpuCompute.addVariable('texturePosition',
+                document.getElementById('fragmentShaderPosition').textContent, dtPosition);
+
+            gpuCompute.setVariableDependencies(velocityVariable, [positionVariable, velocityVariable]);
+            gpuCompute.setVariableDependencies(positionVariable, [positionVariable, velocityVariable]);
+
+            positionUniforms = positionVariable.material.uniforms;
+            velocityUniforms = velocityVariable.material.uniforms;
+
+            positionUniforms['time'] = { value: 0.0 };
+            positionUniforms['delta'] = { value: 0.0 };
+            velocityUniforms['time'] = { value: 1.0 };
+            velocityUniforms['delta'] = { value: 0.0 };
+            velocityUniforms['testing'] = { value: 1.0 };
+            velocityUniforms['separationDistance'] = { value: 20.0 };
+            velocityUniforms['alignmentDistance'] = { value: 20.0 };
+            velocityUniforms['cohesionDistance'] = { value: 20.0 };
+            velocityUniforms['freedomFactor'] = { value: 0.75 };
+            velocityUniforms['predator'] = { value: new THREE.Vector3() };
+
+            velocityVariable.material.defines.BOUNDS = BOUNDS.toFixed(2);
+
+            velocityVariable.wrapS = THREE.RepeatWrapping;
+            velocityVariable.wrapT = THREE.RepeatWrapping;
+            positionVariable.wrapS = THREE.RepeatWrapping;
+            positionVariable.wrapT = THREE.RepeatingWrapping;
+
+            const error = gpuCompute.init();
+            if (error !== null) console.error(error);
+        }
+
+        function initBirds() {
+            const geometry = new BirdGeometry();
+            birdUniforms = {
+                'color': { value: new THREE.Color(0xff2200) },
+                'texturePosition': { value: null },
+                'textureVelocity': { value: null },
+                'time': { value: 1.0 },
+                'delta': { value: 0.0 }
+            };
+
+            const material = new THREE.ShaderMaterial({
+                uniforms: birdUniforms,
+                vertexShader: document.getElementById('birdVS').textContent,
+                fragmentShader: document.getElementById('birdFS').textContent,
+                side: THREE.DoubleSide
+            });
+
+            const birdMesh = new THREE.Mesh(geometry, material);
+            birdMesh.rotation.y = Math.PI / 2;
+            birdMesh.matrixAutoUpdate = false;
+            birdMesh.updateMatrix();
+            scene.add(birdMesh);
+        }
+
+        function fillPositionTexture(texture) {
+            const theArray = texture.image.data;
+            for (let k = 0, kl = theArray.length; k < kl; k += 4) {
+                const x = Math.random() * BOUNDS - BOUNDS_HALF;
+                const y = Math.random() * BOUNDS - BOUNDS_HALF;
+                const z = Math.random() * BOUNDS - BOUNDS_HALF;
+                theArray[k + 0] = x;
+                theArray[k + 1] = y;
+                theArray[k + 2] = z;
+                theArray[k + 3] = 1;
+            }
+        }
+
+        function fillVelocityTexture(texture) {
+            const theArray = texture.image.data;
+            for (let k = 0, kl = theArray.length; k < kl; k += 4) {
+                const x = Math.random() - 0.5;
+                const y = Math.random() - 0.5;
+                const z = Math.random() - 0.5;
+                theArray[k + 0] = x * 10;
+                theArray[k + 1] = y * 10;
+                theArray[k + 2] = z * 10;
+                theArray[k + 3] = 1;
+            }
+        }
+
+        function onPointerMove(event) {
+            if (event.isPrimary === false) return;
+            
+            const rect = container.getBoundingClientRect();
+            mouseX = event.clientX - rect.left - container.clientWidth / 2;
+            mouseY = event.clientY - rect.top - container.clientHeight / 2;
+        }
+        
+        function togglePause() {
+            isPaused = !isPaused;
+            const btn = document.getElementById('pause-btn');
+            btn.textContent = isPaused ? 'Resume' : 'Pause';
+            
+            if (!isPaused) {
+                animate();
+            }
+        }
+        
+        function resetSimulation() {
+            initComputeRenderer();
+        }
+
+        function animate() {
+            if (isPaused) return;
+            
+            animationId = requestAnimationFrame(animate);
+            render();
+            stats.update();
+        }
+
+        function render() {
+            const now = performance.now();
+            let delta = (now - last) / 1000;
+            if (delta > 1) delta = 1;
+            last = now;
+
+            positionUniforms['time'].value = now;
+            positionUniforms['delta'].value = delta;
+            velocityUniforms['time'].value = now;
+            velocityUniforms['delta'].value = delta;
+            birdUniforms['time'].value = now;
+            birdUniforms['delta'].value = delta;
+
+            velocityUniforms['predator'].value.set(
+                0.5 * mouseX / (container.clientWidth / 2),
+                -0.5 * mouseY / (container.clientHeight / 2),
+                0
+            );
+
+            mouseX = 10000;
+            mouseY = 10000;
+
+            gpuCompute.compute();
+
+            birdUniforms['texturePosition'].value = gpuCompute.getCurrentRenderTarget(positionVariable).texture;
+            birdUniforms['textureVelocity'].value = gpuCompute.getCurrentRenderTarget(velocityVariable).texture;
+
+            renderer.render(scene, camera);
+        }
+    </script>
+
+    <!-- Shaders -->
+    <script id="fragmentShaderPosition" type="x-shader/x-fragment">
+        uniform float time;
+        uniform float delta;
+        void main() {
+            vec2 uv = gl_FragCoord.xy / resolution.xy;
+            vec4 tmpPos = texture2D(texturePosition, uv);
+            vec3 position = tmpPos.xyz;
+            vec3 velocity = texture2D(textureVelocity, uv).xyz;
+            float phase = tmpPos.w;
+            phase = mod((phase + delta + length(velocity.xz) * delta * 3. + max(velocity.y, 0.0) * delta * 6.), 62.83);
+            gl_FragColor = vec4(position + velocity * delta * 15., phase);
+        }
+    </script>
+
+    <script id="fragmentShaderVelocity" type="x-shader/x-fragment">
+        uniform float time;
+        uniform float testing;
+        uniform float delta;
+        uniform float separationDistance;
+        uniform float alignmentDistance;
+        uniform float cohesionDistance;
+        uniform float freedomFactor;
+        uniform vec3 predator;
+
+        const float PI = 3.141592653589793;
+        const float PI_2 = PI * 2.0;
+
+        void main() {
+            float zoneRadius = separationDistance + alignmentDistance + cohesionDistance;
+            float separationThresh = separationDistance / zoneRadius;
+            float alignmentThresh = (separationDistance + alignmentDistance) / zoneRadius;
+            float zoneRadiusSquared = zoneRadius * zoneRadius;
+
+            vec2 uv = gl_FragCoord.xy / resolution.xy;
+            vec3 selfPosition = texture2D(texturePosition, uv).xyz;
+            vec3 selfVelocity = texture2D(textureVelocity, uv).xyz;
+
+            vec3 velocity = selfVelocity;
+            float limit = 9.0;
+
+            // Predator avoidance
+            vec3 dir = predator * BOUNDS - selfPosition;
+            dir.z = 0.;
+            float dist = length(dir);
+            float distSquared = dist * dist;
+            float preyRadius = 150.0;
+            float preyRadiusSq = preyRadius * preyRadius;
+
+            if (dist < preyRadius) {
+                float f = (distSquared / preyRadiusSq - 1.0) * delta * 100.;
+                velocity += normalize(dir) * f;
+                limit += 5.0;
+            }
+
+            // Move towards center
+            vec3 central = vec3(0., 0., 0.);
+            dir = selfPosition - central;
+            dist = length(dir);
+            dir.y *= 2.5;
+            velocity -= normalize(dir) * delta * 5.;
+
+            // Flocking
+            for (float y = 0.0; y < resolution.y; y++) {
+                for (float x = 0.0; x < resolution.x; x++) {
+                    vec2 ref = vec2(x + 0.5, y + 0.5) / resolution.xy;
+                    vec3 birdPosition = texture2D(texturePosition, ref).xyz;
+                    dir = birdPosition - selfPosition;
+                    dist = length(dir);
+                    if (dist < 0.0001) continue;
+
+                    float distSquaredLocal = dist * dist;
+                    if (distSquaredLocal > zoneRadiusSquared) continue;
+
+                    float percent = distSquaredLocal / zoneRadiusSquared;
+
+                    if (percent < separationThresh) {
+                        float f = (separationThresh / percent - 1.0) * delta;
+                        velocity -= normalize(dir) * f;
+                    } else if (percent < alignmentThresh) {
+                        float threshDelta = alignmentThresh - separationThresh;
+                        float adjustedPercent = (percent - separationThresh) / threshDelta;
+                        vec3 birdVelocity = texture2D(textureVelocity, ref).xyz;
+                        float f = (0.5 - cos(adjustedPercent * PI_2) * 0.5 + 0.5) * delta;
+                        velocity += normalize(birdVelocity) * f;
+                    } else {
+                        float threshDelta = 1.0 - alignmentThresh;
+                        float adjustedPercent = (threshDelta == 0.0) ? 1.0 : (percent - alignmentThresh) / threshDelta;
+                        float f = (0.5 - (cos(adjustedPercent * PI_2) * -0.5 + 0.5)) * delta;
+                        velocity += normalize(dir) * f;
+                    }
+                }
+            }
+
+            // Limit speed
+            if (length(velocity) > limit) {
+                velocity = normalize(velocity) * limit;
+            }
+
+            gl_FragColor = vec4(velocity, 1.0);
+        }
+    </script>
+
+    <script type="x-shader/x-vertex" id="birdVS">
+        attribute vec2 reference;
+        attribute float birdVertex;
+        attribute vec3 birdColor;
+        uniform sampler2D texturePosition;
+        uniform sampler2D textureVelocity;
+        uniform float time;
+        varying vec4 vColor;
+        varying float z;
+        void main() {
+            vec4 tmpPos = texture2D(texturePosition, reference);
+            vec3 pos = tmpPos.xyz;
+            vec3 velocity = normalize(texture2D(textureVelocity, reference).xyz);
+            vec3 newPosition = position;
+
+            if (birdVertex == 4.0 || birdVertex == 7.0) {
+                newPosition.y = sin(tmpPos.w) * 5.;
+            }
+
+            newPosition = mat3(modelMatrix) * newPosition;
+            velocity.z *= -1.;
+
+            float xz = length(velocity.xz);
+            float x = sqrt(1. - velocity.y * velocity.y);
+
+            float cosry = velocity.x / xz;
+            float sinry = velocity.z / xz;
+            float cosrz = x;
+            float sinrz = velocity.y;
+
+            mat3 maty = mat3(cosry, 0, -sinry, 0, 1, 0, sinry, 0, cosry);
+            mat3 matz = mat3(cosrz, sinrz, 0, -sinrz, cosrz, 0, 0, 0, 1);
+
+            newPosition = maty * matz * newPosition;
+            newPosition += pos;
+
+            z = newPosition.z;
+            vColor = vec4(birdColor, 1.0);
+
+            gl_Position = projectionMatrix * viewMatrix * vec4(newPosition, 1.0);
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="birdFS">
+        varying vec4 vColor;
+        varying float z;
+        uniform vec3 color;
+        void main() {
+            float z2 = 0.2 + (1000. - z) / 1000. * vColor.x;
+            gl_FragColor = vec4(z2, z2, z2, 1.0);
+        }
+    </script>
 </body>
 
 </html>
