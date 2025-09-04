@@ -94,65 +94,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-                
-        .simulation-container {
-            width: 100%;
-            height: 70vh;
-            position: relative;
-        }
-        
-        #simulation {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-        
-        .simulation-overlay {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            max-width: 400px;
-        }
-        
-        .controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 1.5rem;
-            gap: 1rem;
-        }
-        
-        .btn {
-            padding: 0.8rem 1.5rem;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-        
-        .btn:hover {
-            background: #2980b9;
-        }
-
-
-        @media (max-width: 768px) {
-            .simulation-overlay {
-                position: relative;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                max-width: none;
-                border-radius: 0;
-            }
-        }
         /* Custom styles that can't be replaced with Tailwind */
-        
+                .gallery-iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
         .vertical-rl {
             writing-mode: vertical-rl;
             text-orientation: mixed;
@@ -584,7 +531,7 @@
     <div id="menu" class="fixed top-0 left-0 z-40 h-screen w-screen bg-gray-texture transform -translate-x-full transition-transform duration-500 ease-in-out">
         <div class="relative flex h-full w-full p-5 md:p-10">
             <video class="hidden h-full max-w-[50%] items-center md:mr-4 md:flex" webkit-playsinline playsinline muted autoplay loop>
-                <source src="vids/5.mp4" type="video/mp4">
+                <source src="videos/5.mp4" type="video/mp4">
             </video>
 
             <div class="flex w-full flex-col md:flex-1">
@@ -745,8 +692,8 @@
             <div id="hero-video" class="absolute inset-0 z-0 w-full h-full">
                 <div id="kinect-container" class="w-full h-full">
                     <video id="kinect-video" class="w-full h-full object-cover" muted autoplay loop playsinline crossorigin="anonymous">
-                        <source src="vids/3.mp4" type="video/mp4">
-                        <source src="vids/3.mp4" type="video/mp4">
+                        <source src="videos/3.mp4" type="video/mp4">
+                        <source src="videos/3.mp4" type="video/mp4">
                     </video>
                     <canvas id="kinect-canvas" class="absolute inset-0 w-full h-full"></canvas>
                 </div>
@@ -822,6 +769,13 @@
         </section>
 
         <!-- Software & Tools Section -->
+
+
+
+
+        <iframe src="alice-story.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+
+
         <section id="tools" class="relative py-24 md:py-28 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
             <!-- Parallax background elements -->
             <div class="absolute inset-0 z-0">
@@ -833,7 +787,7 @@
 
             <div class="container px-5 md:px-20 max-w-none relative z-10">
                 <!-- Section Header -->
-                <div class="text-center mb-16 section-transition">
+                <div class="text-center mb-8 section-transition">
                     <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
                         <span class="text-lg leading-none font-medium mb-4 text-gray">
                             (Software & Tools)
@@ -844,472 +798,26 @@
                         </div>
                     </h2>
                 </div>
-
-                <!-- Software Cards Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 mb-16">
-                    <!-- Adobe Premiere Pro -->
-                    <div class="software-card group cursor-pointer" data-software="premiere">
-                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
-                            <div class="relative z-10">
-                                <div class="software-icon mb-4 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-800 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                                        Pr
-                                    </div>
-                                </div>
-                                <h3 class="text-sm md:text-base font-semibold text-center text-gray mb-2">
-                                    Premiere Pro
-                                </h3>
-                                <div class="skill-level flex justify-center">
-                                    <div class="flex space-x-1">
-                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-center text-taupe-gray mt-2">Expert</p>
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-                    </div>
-
-                    <!-- Adobe After Effects -->
-                    <div class="software-card group cursor-pointer" data-software="aftereffects">
-                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
-                            <div class="relative z-10">
-                                <div class="software-icon mb-4 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-purple-700 to-pink-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                                        Ae
-                                    </div>
-                                </div>
-                                <h3 class="text-sm md:text-base font-semibold text-center text-gray mb-2">
-                                    After Effects
-                                </h3>
-                                <div class="skill-level flex justify-center">
-                                    <div class="flex space-x-1">
-                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-center text-taupe-gray mt-2">Expert</p>
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-                    </div>
-
-                    <!-- DaVinci Resolve -->
-                    <div class="software-card group cursor-pointer" data-software="davinci">
-                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
-                            <div class="relative z-10">
-                                <div class="software-icon mb-4 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-gray-800 to-red-600 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                                        DV
-                                    </div>
-                                </div>
-                                <h3 class="text-sm md:text-base font-semibold text-center text-gray mb-2">
-                                    DaVinci Resolve
-                                </h3>
-                                <div class="skill-level flex justify-center">
-                                    <div class="flex space-x-1">
-                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-red-600 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-center text-taupe-gray mt-2">Advanced</p>
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-br from-gray-500/10 to-red-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-                    </div>
-
-                    <!-- Blender -->
-                    <div class="software-card group cursor-pointer" data-software="blender">
-                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
-                            <div class="relative z-10">
-                                <div class="software-icon mb-4 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                                        🔮
-                                    </div>
-                                </div>
-                                <h3 class="text-sm md:text-base font-semibold text-center text-gray mb-2">
-                                    Blender
-                                </h3>
-                                <div class="skill-level flex justify-center">
-                                    <div class="flex space-x-1">
-                                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-center text-taupe-gray mt-2">Advanced</p>
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-                    </div>
-
-                    <!-- Final Cut Pro -->
-                    <div class="software-card group cursor-pointer" data-software="finalcut">
-                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
-                            <div class="relative z-10">
-                                <div class="software-icon mb-4 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                                        FCP
-                                    </div>
-                                </div>
-                                <h3 class="text-sm md:text-base font-semibold text-center text-gray mb-2">
-                                    Final Cut Pro
-                                </h3>
-                                <div class="skill-level flex justify-center">
-                                    <div class="flex space-x-1">
-                                        <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-center text-taupe-gray mt-2">Advanced</p>
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-br from-gray-500/10 to-gray-700/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-                    </div>
-
-                    <!-- Cinema 4D -->
-                    <div class="software-card group cursor-pointer" data-software="cinema4d">
-                        <div class="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
-                            <div class="relative z-10">
-                                <div class="software-icon mb-4 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                                        C4D
-                                    </div>
-                                </div>
-                                <h3 class="text-sm md:text-base font-semibold text-center text-gray mb-2">
-                                    Cinema 4D
-                                </h3>
-                                <div class="skill-level flex justify-center">
-                                    <div class="flex space-x-1">
-                                        <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-center text-taupe-gray mt-2">Intermediate</p>
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-                    </div>
-                </div>
+                <iframe src="3d_gallery.html" style="width: 100%; height: 80vh; border: none;"></iframe>
 
                 <!-- 3D Software Showcase -->
-                <div id="software-3d-showcase" class="relative h-64 md:h-80 mb-16">
+                <div id="software-3d-showcase" class="relative h-64 md:h-80 my-5">
                     <!-- 3D Canvas will be inserted here -->
                     <canvas id="software-canvas" class="w-full h-full"></canvas>
 
                 </div>
-
-                <!-- Workflow Process -->
-                <div class="max-w-6xl mx-auto">
-                    <h3 class="text-2xl md:text-3xl font-medium mb-12 text-center text-black section-transition">
-                        Creative Workflow
-                    </h3>
-
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                        <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
-                                📝
-                            </div>
-                            <h4 class="font-semibold text-gray-800 mb-3 text-gray">01. Concept</h4>
-                            <p class="text-sm text-taupe-gray">Understanding project goals and creative vision</p>
-                        </div>
-
-                        <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
-                                🎬
-                            </div>
-                            <h4 class="font-semibold text-gray-800 mb-3 text-gray">02. Production</h4>
-                            <p class="text-sm text-taupe-gray">Filming, capturing, and gathering raw materials</p>
-                        </div>
-
-                        <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
-                                ✂️
-                            </div>
-                            <h4 class="font-semibold text-gray-800 mb-3 text-gray">03. Editing</h4>
-                            <p class="text-sm text-taupe-gray">Cutting, refining, and crafting the narrative</p>
-                        </div>
-
-                        <div class="workflow-step text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
-                                🎨
-                            </div>
-                            <h4 class="font-semibold text-gray-800 mb-3 text-gray">04. Polish</h4>
-                            <p class="text-sm text-taupe-gray">Color grading, effects, and final touches</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- Parallax Gallery Section -->
 
 
-        <!-- About Section -->
-        <section id="about" class="relative py-24 md:py-32 bg-gray-texture">
-            <div class="container px-5 md:px-20 max-w-none">
-                <!-- About Hero -->
-                <div class="flex flex-col items-center text-center mb-20 section-transition">
-                    <h1 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
-                        <span class="text-lg leading-none font-medium mb-4 text-gray">
-                            (About Me)
-                        </span>
-                        <div class="flex flex-col gap-4 text-3xl md:text-5xl leading-none font-medium text-black">
-                            <span>My Journey</span>
-                            <span>Philosophy & Approach</span>
-                        </div>
-                    </h1>
-                </div>
-
-                <!-- About Content -->
-                <div class="grid md:grid-cols-2 gap-12 md:gap-20 mb-20">
-                    <!-- Left Column - About Text -->
-                    <div class="ts-focus-in section-transition" data-active="true">
-                        <h2 class="text-2xl md:text-3xl font-medium mb-8 text-black">
-                            About HASSAM TAHIR
-                        </h2>
-
-                        <div class="space-y-6 text-base md:text-lg leading-relaxed text-taupe-gray">
-                            <p>
-                                I am a visual designer and video editor based in Tokyo. I value the balance between logical and intuitive thinking, function and emotion, stillness and movement. I specialize in pursuing and expressing optimal visual representations that meet user needs
-                                and objectives.
-                            </p>
-
-                            <p>
-                                Focusing on web design, graphic design, video editing, and art direction, I provide consistent design experiences from branding to implementation. In each project, I strive to be a bridge connecting client aspirations with user experiences.
-                            </p>
-
-                            <p>
-                                I believe design is not mere decoration, but a means to solve problems and create value. I aim for designs that resonate with the heart while achieving both beauty and functionality.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Right Column - Profile Details -->
-                    <div class="ts-focus-in section-transition" data-active="true">
-                        <h3 class="text-xl md:text-2xl font-medium mb-6 text-black">
-                            Profile
-                        </h3>
-
-                        <div class="space-y-6">
-                            <div class="border-t border-gray-300 pt-4">
-                                <dt class="font-serif-en text-sm text-taupe-gray font-medium uppercase">Name</dt>
-                                <dd class="text-lg text-black">HASSAM TAHIR</dd>
-                            </div>
-
-                            <div class="border-t border-gray-300 pt-4">
-                                <dt class="font-serif-en text-sm text-taupe-gray font-medium uppercase">Location</dt>
-                                <dd class="text-lg text-black">Tokyo, Japan</dd>
-                            </div>
-
-                            <div class="border-t border-gray-300 pt-4">
-                                <dt class="font-serif-en text-sm text-taupe-gray font-medium uppercase">Specialties</dt>
-                                <dd class="text-lg text-black">
-                                    <ul class="space-y-2">
-                                        <li>Video Editing & Post-Production</li>
-                                        <li>Motion Graphics & Animation</li>
-                                        <li>Color Grading & Correction</li>
-                                        <li>Web Design & Development</li>
-                                        <li>Graphic Design</li>
-                                        <li>Art Direction</li>
-                                    </ul>
-                                </dd>
-                            </div>
-
-                            <div class="border-t border-gray-300 pt-4">
-                                <dt class="font-serif-en text-sm text-taupe-gray font-medium uppercase">Video Software</dt>
-                                <dd class="text-lg text-black">
-                                    <ul class="space-y-2">
-                                        <li>Adobe Premiere Pro</li>
-                                        <li>After Effects</li>
-                                        <li>DaVinci Resolve</li>
-                                        <li>Final Cut Pro</li>
-                                    </ul>
-                                </dd>
-                            </div>
-
-                            <div class="border-t border-gray-300 pt-4">
-                                <dt class="font-serif-en text-sm text-taupe-gray font-medium uppercase">Contact</dt>
-                                <dd class="text-lg">
-                                    <a href="mailto:taaaaiki.mode@gmail.com" class="ts-text-link hover:opacity-70 text-black">
-                                        taaaaiki.mode@gmail.com
-                                    </a>
-                                </dd>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Philosophy Section -->
-                <div class="max-w-6xl mx-auto mb-20">
-                    <h2 class="ts-focus-in text-2xl md:text-3xl font-medium mb-12 text-center text-black section-transition" data-active="true">
-                        Design Philosophy
-                    </h2>
-
-                    <div class="grid md:grid-cols-3 gap-8 md:gap-12">
-                        <div class="ts-focus-in text-center section-transition" data-active="true">
-                            <h3 class="text-lg font-medium mb-4 text-black">
-                                Function & Emotion
-                            </h3>
-                            <p class="text-sm md:text-base leading-relaxed text-gray-600">
-                                Design must be functional while appealing to emotions. I pursue the harmony between usability and beauty.
-                            </p>
-                        </div>
-
-                        <div class="ts-focus-in text-center section-transition" data-active="true">
-                            <h3 class="text-lg font-medium mb-4 text-black">
-                                Stillness & Movement
-                            </h3>
-                            <p class="text-sm md:text-base leading-relaxed text-gray-600">
-                                I value the balance between static beauty and dynamic expression, choosing appropriate expressions at the right moments.
-                            </p>
-                        </div>
-
-                        <div class="ts-focus-in text-center section-transition" data-active="true">
-                            <h3 class="text-lg font-medium mb-4 text-black">
-                                Logic & Intuition
-                            </h3>
-                            <p class="text-sm md:text-base leading-relaxed text-gray-600">
-                                I combine logical approaches based on data and analysis with intuitive approaches that emphasize creativity.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skills & Experience Grid -->
-                <div class="grid md:grid-cols-2 gap-12 md:gap-20">
-                    <!-- Experience Column -->
-                    <div class="ts-focus-in section-transition" data-active="true">
-                        <h2 class="text-2xl md:text-3xl font-medium mb-8 text-black">
-                            Career Journey
-                        </h2>
-
-                        <div class="space-y-8">
-                            <div class="border-t border-gray-300 pt-6">
-                                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                                    <h3 class="text-lg font-medium text-black">Freelance Designer & Video Editor</h3>
-                                    <span class="font-serif-en text-sm text-taupe-gray">2020 - Present</span>
-                                </div>
-                                <p class="text-sm md:text-base leading-relaxed text-gray-600">
-                                    Since becoming independent, I have worked on a wide range of projects from video editing and motion graphics to visual identity development for various companies and brands.
-                                </p>
-                            </div>
-
-                            <div class="border-t border-gray-300 pt-6">
-                                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                                    <h3 class="text-lg font-medium text-black">Design Studio</h3>
-                                    <span class="font-serif-en text-sm text-taupe-gray">2017 - 2020</span>
-                                </div>
-                                <p class="text-sm md:text-base leading-relaxed text-gray-600">
-                                    Worked at a Tokyo design studio on branding projects and website development for major corporations. Honed teamwork and client communication skills.
-                                </p>
-                            </div>
-
-                            <div class="border-t border-gray-300 pt-6">
-                                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                                    <h3 class="text-lg font-medium text-black">Art University Graduate</h3>
-                                    <span class="font-serif-en text-sm text-taupe-gray">2017</span>
-                                </div>
-                                <p class="text-sm md:text-base leading-relaxed text-gray-600">
-                                    Specialized in Visual Design and Digital Media. Actively participated in competitions during studies, winning multiple awards for video editing and motion graphics.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Skills Column -->
-                    <div class="ts-focus-in section-transition" data-active="true">
-                        <h2 class="text-2xl md:text-3xl font-medium mb-8 text-black">
-                            Skills & Expertise
-                        </h2>
-
-                        <div class="space-y-8">
-                            <div>
-                                <h3 class="text-lg font-medium mb-4 text-black">Video Editing</h3>
-                                <ul class="space-y-3 text-sm md:text-base">
-                                    <li class="flex justify-between items-center">
-                                        <span class="text-taupe-gray">Premiere Pro</span>
-                                        <span class="font-serif-en text-gray">Expert</span>
-                                    </li>
-                                    <li class="flex justify-between items-center">
-                                        <span class="text-taupe-gray">After Effects</span>
-                                        <span class="font-serif-en text-gray">Expert</span>
-                                    </li>
-                                    <li class="flex justify-between items-center">
-                                        <span class="text-taupe-gray">DaVinci Resolve</span>
-                                        <span class="font-serif-en text-gray">Advanced</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h3 class="text-lg font-medium mb-4 text-black">Design</h3>
-                                <ul class="space-y-3 text-sm md:text-base">
-                                    <li class="flex justify-between items-center">
-                                        <span class="text-taupe-gray">Visual Design</span>
-                                        <span class="font-serif-en text-gray">Expert</span>
-                                    </li>
-                                    <li class="flex justify-between items-center">
-                                        <span class="text-taupe-gray">Art Direction</span>
-                                        <span class="font-serif-en text-gray">Expert</span>
-                                    </li>
-                                    <li class="flex justify-between items-center">
-                                        <span class="text-taupe-gray">Motion Graphics</span>
-                                        <span class="font-serif-en text-gray">Advanced</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h3 class="text-lg font-medium mb-4 text-black">Development</h3>
-                                <ul class="space-y-3 text-sm md:text-base">
-                                    <li class="flex justify-between items-center">
-                                        <span class="text-taupe-gray">HTML/CSS</span>
-                                        <span class="font-serif-en text-gray">Advanced</span>
-                                    </li>
-                                    <li class="flex justify-between items-center">
-                                        <span class="text-taupe-gray">JavaScript</span>
-                                        <span class="font-serif-en text-gray">Intermediate</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Works Section -->
-        <section id="works" class="relative py-24 md:py-32 bg-gray-texture text-pampas overflow-hidden">
-            <!-- Parallax background elements -->
-            <div class="absolute inset-0 z-0">
-                <div class="parallax-bg-medium absolute w-full h-full opacity-20">
-                    <div class="absolute top-40 left-20 w-64 h-64 bg-gradient-to-br from-purple-600 to-blue-800 rounded-full blur-3xl"></div>
-                    <div class="absolute bottom-40 right-20 w-80 h-80 bg-gradient-to-br from-orange-500 to-red-600 rounded-full blur-3xl"></div>
-                </div>
-            </div>
+        <section id="works" class="relative py-24 bg-gray-texture text-pampas overflow-hidden">
 
             <div class="container px-5 md:px-20 max-w-none relative z-10">
                 <!-- Works Header -->
-                <div class="text-center mb-20 section-transition">
+                <div class="text-center mb-10 section-transition">
                     <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
                         <span class="text-lg leading-none font-medium mb-4 text-silver-chalice">
                             (Video Portfolio)
@@ -1320,14 +828,18 @@
                         </div>
                     </h2>
                 </div>
-
+                
+                    <section class="gallery-section">
+        <iframe src="gallery.html" class="gallery-iframe" id="culture-gallery"></iframe>
+    </section>
+    
                 <!-- Interactive Video Gallery -->
                 <div id="video-gallery" class="mb-20">
                     <!-- Main featured video -->
                     <div class="main-video-container mb-12 section-transition">
                         <div class="relative overflow-hidden rounded-2xl bg-black max-w-6xl mx-auto shadow-2xl group">
                             <video id="main-portfolio-video" class="w-full h-56 md:h-auto transition-all duration-500 group-hover:scale-105">
-                                <source src="vids/2.mp4" type="video/mp4">
+                                <source src="videos/2.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
 
@@ -1365,10 +877,10 @@
                         <div class="scroll-container relative overflow-hidden">
                             <div class="flex space-x-6 overflow-x-auto scrollbar-hide pb-6" style="scroll-behavior: smooth;">
                                 <!-- Video 1 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/Pakistan.mp4" data-title="Commercial Project" data-description="Brand storytelling with dynamic cuts and transitions">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/Pakistan.mp4" data-title="Commercial Project" data-description="Brand storytelling with dynamic cuts and transitions">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/Pakistan.mp4" type="video/mp4">
+                                            <source src="videos/Pakistan.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1387,10 +899,10 @@
                                 </div>
 
                                 <!-- Video 2 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/Sahiba .mp4" data-title="Music Video" data-description="Creative visual effects synchronized with beat">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/Sahiba .mp4" data-title="Music Video" data-description="Creative visual effects synchronized with beat">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/Sahiba .mp4" type="video/mp4">
+                                            <source src="videos/Sahiba .mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1409,10 +921,10 @@
                                 </div>
 
                                 <!-- Video 3 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/2.mp4" data-title="Documentary" data-description="Emotional storytelling with careful pacing">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/2.mp4" data-title="Documentary" data-description="Emotional storytelling with careful pacing">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/2.mp4" type="video/mp4">
+                                            <source src="videos/2.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1431,10 +943,10 @@
                                 </div>
 
                                 <!-- Video 4 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/4.mp4" data-title="Motion Graphics" data-description="Abstract animations and kinetic typography">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/4.mp4" data-title="Motion Graphics" data-description="Abstract animations and kinetic typography">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/4.mp4" type="video/mp4">
+                                            <source src="videos/4.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1453,10 +965,10 @@
                                 </div>
 
                                 <!-- Video 5 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/3.mp4" data-title="Color Grading Showcase" data-description="Professional color correction and grading techniques">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/3.mp4" data-title="Color Grading Showcase" data-description="Professional color correction and grading techniques">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/3.mp4" type="video/mp4">
+                                            <source src="videos/3.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1475,10 +987,10 @@
                                 </div>
 
                                 <!-- Video 6 -->
-                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
                                     <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
                                         <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
+                                            <source src="videos/1.mp4" type="video/mp4">
                                         </video>
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute inset-0 flex items-center justify-center">
@@ -1514,284 +1026,11 @@
 
                     </div>
 
-                        <section id="simulation-section" class="flocking-section">
-        <div class="simulation-container">
-            <div id="simulation"></div>
-            <div class="simulation-overlay">
-                                    <!-- Project Categories with Stats -->
-                    <div class="content">
 
-                   
-                    </div>
 
-                <div class="controls">
-                    <button class="btn" id="pause-btn">Pause</button>
-                    <button class="btn" id="reset-btn">Reset</button>
                 </div>
-            </div>
-        </div>
-    </section>
-     <div class="grid-container">
-                            <div class="grids">
-                                <div class="grid-item item-1">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-2">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-3">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-4">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-5">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-6">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-7">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-8">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-9">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid-item item-10">
-                                    <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="vids/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
-                                        <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                            <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
-                                            <source src="vids/1.mp4" type="video/mp4">
-                                        </video>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                                                        <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z"/>
-                                                    </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="absolute bottom-4 left-4 text-gray">
-                                                <h4 class="text-lg font-medium">VFX & Compositing</h4>
-                                                <p class="text-sm opacity-80">Advanced visual effects</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <iframe src="particle-hero.html" style="width: 100%; height: 80vh; border: none;"></iframe>
 
-
-                    <!-- Project categories with stats -->
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 max-w-6xl mx-auto">
-                        <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-pampas/20 transition-all duration-300 border border-white/20">
-                            <div class="text-4xl mb-4">🎬</div>
-                            <h4 class="font-medium mb-2 text-gray text-lg">Commercial</h4>
-                            <p class="text-sm text-silver-chalice mb-3">Brand storytelling and marketing videos</p>
-                            <div class="text-2xl font-bold text-gray">25+</div>
-                            <p class="text-xs text-silver-chalice">Projects</p>
-                        </div>
-
-                        <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-pampas/20 transition-all duration-300 border border-white/20">
-                            <div class="text-4xl mb-4">🎵</div>
-                            <h4 class="font-medium mb-2 text-gray text-lg">Music Video</h4>
-                            <p class="text-sm text-silver-chalice mb-3">Creative storytelling with rhythm</p>
-                            <div class="text-2xl font-bold text-gray">12+</div>
-                            <p class="text-xs text-silver-chalice">Projects</p>
-                        </div>
-
-                        <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-pampas/20 transition-all duration-300 border border-white/20">
-                            <div class="text-4xl mb-4">📹</div>
-                            <h4 class="font-medium mb-2 text-gray text-lg">Documentary</h4>
-                            <p class="text-sm text-silver-chalice mb-3">Emotional narrative editing</p>
-                            <div class="text-2xl font-bold text-gray">8+</div>
-                            <p class="text-xs text-silver-chalice">Projects</p>
-                        </div>
-
-                        <div class="category-card text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-pampas/20 transition-all duration-300 border border-white/20">
-                            <div class="text-4xl mb-4">✨</div>
-                            <h4 class="font-medium mb-2 text-gray text-lg">Motion Graphics</h4>
-                            <p class="text-sm text-silver-chalice mb-3">Abstract animations and VFX</p>
-                            <div class="text-2xl font-bold text-gray">15+</div>
-                            <p class="text-xs text-silver-chalice">Projects</p>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Portfolio Works List -->
 
