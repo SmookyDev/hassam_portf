@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Card Carousel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz@12..36&display=swap');
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: "TikTok Sans", sans-serif;
+        }
+        
+        .cards-wrapper {
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .card {
+            position: absolute;
+            width: 20vw;
+            max-width: 300px;
+            min-width: 190px;
+            aspect-ratio: 0.6;
+            box-shadow: -4px 4px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            user-select: none;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .cursor {
+            position: fixed;
+            left: -45px;
+            top: -60px;
+            font-size: 90px;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="carousel">
+        <div class="cards-wrapper"></div>
+    </section>
+    <div class="cursor">👉</div>
+
+    <script>
+        console.clear();
+        const nCards = 22; // works best with at least 15 cards
+        const carousel = document.querySelector(".carousel");
+        const cardsDiv = document.querySelector(".cards-wrapper");
+        const rots = [];
+        let dir;
+
+        // 🔥 List of wallpapers
+        const wallpapers = [
+            "images/al.png", // Adobe Cloud
+            "images/light.png", // DaVinci Resolve
+            "images/ph.png",
+            "images/davinci.png", // CapCut
+        ];
+
+        // create the cards & rotation positions
+        for (let i = 0; i < nCards; i++) {
+            const card = document.createElement("div");
+            cardsDiv.append(card);
+            rots.push(gsap.utils.clamp(-90, 90, i * 18 - 90));
+            gsap.set(card, {
+                attr: {
+                    class: "card"
+                },
+                xPercent: -50,
+                transformOrigin: "50% 275%",
+                rotate: rots[i],
+                backgroundImage: `url(${wallpapers[i % wallpapers.length]})`
+            });
+        }
+
+        // mouse follower
+        let cursorX = gsap.quickTo(".cursor", "x", {
+                ease: "power4"
+            }),
+            cursorY = gsap.quickTo(".cursor", "y", {
+                ease: "power4"
+            }),
+            cursorDir = gsap.quickSetter(".cursor", "scaleX");
+
+        carousel.onpointerenter = () => gsap.to('.cursor', {
+            opacity: 1
+        });
+        carousel.onpointerleave = () => {
+            delayedMove.pause();
+            gsap.to('.cursor', {
+                opacity: 0
+            });
+        };
+        carousel.onpointermove = (e) => {
+            dir = e.x < innerWidth / 2 ? -1 : 1;
+            cursorDir(dir);
+            cursorX(e.x);
+            cursorY(e.y);
+        };
+
+        // rotate carousel
+        const delayedMove = gsap.to(window, {
+            paused: true,
+            repeat: -1,
+            onRepeat: move,
+            onStart: move,
+            duration: 0.15
+        });
+
+        carousel.onpointerdown = () => delayedMove.play(0);
+        carousel.onpointerup = () => delayedMove.pause();
+
+        function move() {
+            if (dir > 0) cardsDiv.append(cardsDiv.firstElementChild);
+            else cardsDiv.prepend(cardsDiv.lastElementChild);
+
+            for (let i = 0; i < nCards; i++) {
+                const card = cardsDiv.children[i];
+                let dur = 0;
+                let delay = 0;
+                if (i > 0 && i < 11) { // only animate cards at index 1 - 10
+                    dur = 1.35;
+                    delay = gsap.utils.interpolate(0, 0.4, dir < 0 ? 1 - i / 10 : i / 10);
+                    delay = Math.round(delay * 1000) / 1000;
+                }
+                gsap.to(card, {
+                    duration: dur,
+                    delay: delay,
+                    rotate: rots[i],
+                    ease: "elastic.out(0.5)"
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

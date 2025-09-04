@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HASSAM TAHIR Portfolio - Video Editor & Visual Designer</title>
+    <meta name="description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HASSAM TAHIR Portfolio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://HaTh.com/">
+    <meta property="og:description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="HASSAM TAHIR Portfolio">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@HaTh0021">
+    <meta name="twitter:title" content="HASSAM TAHIR Portfolio">
+    <meta name="twitter:description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+    <meta name="twitter:creator" content="@HaTh0021">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href="images/hero/shadow-image.png" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero/fv-moving-sp.png" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero/fv-moving.png" fetchpriority="high">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'taupe-gray': '#8B7D6B',
+                        'pampas': '#ee890b',
+                        'mine-shaft': '#2A2A2A',
+                        'silver-chalice': '#8B7D6B',
+                        'emperor': '#545454',
+                        'gray': '#808080',
+                        'silver': '#C0C0C0',
+                    },
+                    fontFamily: {
+                        'serif': ['Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'HG Mincho E', 'MS Mincho', 'serif'],
+                        'serif-en': ['Times New Roman', 'Times', 'serif'],
+                    },
+                    spacing: {
+                        '0.375': '0.375rem',
+                        '1.4': '1.4rem',
+                        '1.42': '1.42rem',
+                        '1.14': '1.14rem',
+                        '0.85': '0.85rem',
+                        '4.6': '4.6rem',
+                        '5.5': '5.5rem',
+                        '15.5': '15.5rem',
+                        '17.5': '17.5rem',
+                        '22.2': '22.2rem',
+                        '37': '9.25rem',
+                        '41': '10.25rem',
+                        '46': '11.5rem',
+                    },
+                    fontSize: {
+                        '0.928': '0.928rem',
+                        '1.4': '1.4rem',
+                        '1.75': '1.75rem',
+                        '2.625': '2.625rem',
+                        '6.5': '6.5rem',
+                    },
+                    borderRadius: {
+                        '30': '30px',
+                    },
+                    transitionDuration: {
+                        '600': '600ms',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Optimized CSS -->
+    <link rel="stylesheet" href="css/tailwind-optimized.css">
+
+    <!-- Three.js for 3D elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP for enhanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Custom styles that can't be replaced with Tailwind */
+                .gallery-iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+        .vertical-rl {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        
+        .horizontal-tb {
+            writing-mode: horizontal-tb;
+        }
+        
+        .contents-full {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+        
+        .bg-mine-shaft-texture {
+            background-color: #2A2A2A;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        
+        .bg-gray-texture {
+            background-color: #F5F5F5;
+            background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        /* Section transitions */
+        
+        .section-transition {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section-transition.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Background color transitions */
+        
+        .bg[data-color="dark"] .bg__bright {
+            animation: bgAnimationRemove 1s ease-in-out forwards;
+        }
+        
+        .bg[data-color="dark"] .bg__dark,
+        .bg[data-color="bright"] .bg__bright {
+            animation: bgAnimationAdd 1s ease-in-out forwards;
+        }
+        
+        .bg[data-color="bright"] .bg__dark {
+            animation: bgAnimationRemove 1s ease-in-out forwards;
+        }
+        
+        @keyframes bgAnimationAdd {
+            0% {
+                opacity: 0;
+                visibility: hidden;
+            }
+            100% {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        
+        @keyframes bgAnimationRemove {
+            0% {
+                opacity: 1;
+                visibility: visible;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        /* Header color changes */
+        
+        #header[data-color="dark"] {
+            color: #ee890b;
+        }
+        
+        #header[data-color="bright"] {
+            color: #000000;
+        }
+        /* Scroll animations */
+        
+        @keyframes textFocusIn {
+            0% {
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+        
+        .ts-focus-in[data-active="true"] {
+            animation: textFocusIn 1s ease-in-out forwards;
+        }
+        /* Scroll navigation animation */
+        
+        @keyframes scrollNav {
+            0% {
+                top: 0;
+                opacity: 1;
+            }
+            40% {
+                top: 50%;
+                opacity: 0.5;
+            }
+            80% {
+                top: 100%;
+                opacity: 0;
+            }
+            100% {
+                top: 0;
+                opacity: 0;
+            }
+        }
+        
+        .grid-container {
+            flex: 2;
+            position: relative;
+        }
+        
+        .grids {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+            height: 100%;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .grid-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.15);
+            z-index: 10;
+        }
+        /* Grid item positions */
+        
+        .item-1 {
+            grid-area: 1 / 4 / 2 / 5;
+        }
+        
+        .item-2 {
+            grid-area: 2 / 4 / 3 / 5;
+        }
+        
+        .item-3 {
+            grid-area: 2 / 3 / 3 / 4;
+        }
+        
+        .item-4 {
+            grid-area: 3 / 4 / 4 / 5;
+        }
+        
+        .item-5 {
+            grid-area: 3 / 3 / 4 / 4;
+        }
+        
+        .item-6 {
+            grid-area: 3 / 2 / 4 / 3;
+        }
+        
+        .item-7 {
+            grid-area: 4 / 4 / 5 / 5;
+        }
+        
+        .item-8 {
+            grid-area: 4 / 3 / 5 / 4;
+        }
+        
+        .item-9 {
+            grid-area: 4 / 2 / 5 / 3;
+        }
+        
+        .item-10 {
+            grid-area: 4 / 1 / 5 / 2;
+        }
+        
+        @media (max-width: 1200px) {
+            .grids {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+            }
+            .item-1 {
+                grid-area: 1 / 3 / 2 / 4;
+            }
+            .item-2 {
+                grid-area: 2 / 3 / 3 / 4;
+            }
+            .item-3 {
+                grid-area: 2 / 2 / 3 / 3;
+            }
+            .item-4 {
+                grid-area: 3 / 3 / 4 / 4;
+            }
+            .item-5 {
+                grid-area: 3 / 2 / 4 / 3;
+            }
+            .item-6 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-7 {
+                grid-area: 4 / 3 / 5 / 4;
+            }
+            .item-8 {
+                grid-area: 4 / 2 / 5 / 3;
+            }
+            .item-9 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-10 {
+                grid-area: 4 / 1 / 5 / 2;
+                display: none;
+            }
+            /* Hide one item on smaller screens */
+        }
+        
+        @media (max-width: 900px) {
+            .content {
+                flex-direction: column;
+            }
+            .grid-container {
+                min-height: 600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grids {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+                gap: 12px;
+            }
+            .item-1 {
+                grid-area: 1 / 2 / 2 / 3;
+            }
+            .item-2 {
+                grid-area: 2 / 2 / 3 / 3;
+            }
+            .item-3 {
+                grid-area: 2 / 1 / 3 / 2;
+            }
+            .item-4 {
+                grid-area: 3 / 2 / 4 / 3;
+            }
+            .item-5 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-6 {
+                grid-area: 4 / 2 / 5 / 3;
+            }
+            .item-7 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-8 {
+                grid-area: 5 / 2 / 6 / 3;
+            }
+            .item-9 {
+                grid-area: 5 / 1 / 6 / 2;
+            }
+            .item-10 {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grids {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(9, 1fr);
+            }
+            .item-1 {
+                grid-area: 1 / 1 / 2 / 2;
+            }
+            .item-2 {
+                grid-area: 2 / 1 / 3 / 2;
+            }
+            .item-3 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-4 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-5 {
+                grid-area: 5 / 1 / 6 / 2;
+            }
+            .item-6 {
+                grid-area: 6 / 1 / 7 / 2;
+            }
+            .item-7 {
+                grid-area: 7 / 1 / 8 / 2;
+            }
+            .item-8 {
+                grid-area: 8 / 1 / 9 / 2;
+            }
+            .item-9 {
+                grid-area: 9 / 1 / 10 / 2;
+            }
+        }
+        
+        .scroll-nav__inside {
+            animation: scrollNav 5s infinite;
+        }
+        /* Parallax gallery effects */
+        
+        .ts-parallax-gallery-image {
+            transition: filter 0.5s ease;
+        }
+        
+        .ts-parallax-gallery-image img,
+        .ts-parallax-gallery-image .bg-layer {
+            transition: all 1s ease;
+        }
+        
+        .ts-parallax-gallery-image:nth-child(odd) .bg-layer {
+            transform: skewY(-10deg);
+        }
+        
+        .ts-parallax-gallery-image:nth-child(even) .bg-layer {
+            transform: skewY(10deg);
+        }
+        
+        .ts-parallax-gallery-image:not(.is-active) img {
+            filter: grayscale(100%);
+        }
+        
+        .ts-parallax-gallery-image.is-active img {
+            filter: grayscale(0);
+        }
+        
+        .ts-parallax-gallery-image.is-active .bg-layer {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        /* Video container styles */
+        
+        #kinect-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        #kinect-video {
+            display: none;
+        }
+        
+        #kinect-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        /* Project modal animations */
+        
+        .project-modal {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .project-modal.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body id="body" class="overflow-x-hidden font-serif text-pampas transition-colors scroll-smooth" data-bg-color="dark">
+
+    <!-- Background -->
+    <div id="bg" class="fixed left-0 top-0 -z-10 h-full w-screen" data-color="dark">
+        <div class="relative h-full w-full">
+            <div class="bg__dark absolute left-0 top-0 h-full w-full bg-gray-texture opacity-100"></div>
+            <div class="bg__bright absolute left-0 top-0 h-full w-full bg-gray-texture opacity-0"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="fixed left-0 top-0 z-30 w-screen transition-all duration-300" data-color="dark">
+        <div class="container flex items-start px-5 py-5 md:px-20 md:py-10 max-w-none">
+            <a href="#home" class="ts-logo transition-all hover:opacity-30" aria-label="HASSAM TAHIR">
+                <p class="h-auto text-3xl md:text-5xl font-medium">HASSAM TAHIR</p>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="ts-header-list ml-auto hidden gap-8 transition-colors ease-in-out md:flex">
+                <li class="relative">
+                    <a href="#contact" class="ts-text-link text-2xl vertical-rl md:text-lg nav-link transition-colors duration-300" data-section="contact">
+                        Contact
+                    </a>
+                </li>
+                <li class="relative">
+                    <a href="#works" class="ts-text-link text-2xl vertical-rl md:text-lg nav-link transition-colors duration-300" data-section="works">
+                        Works
+                    </a>
+                </li>
+                <li class="relative">
+                    <a href="#about" class="ts-text-link text-2xl vertical-rl md:text-lg nav-link transition-colors duration-300" data-section="about">
+                        About
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Menu Button -->
+            <button class="ts-menu-open border-silver ml-auto md:ml-14 hover:bg-mine-shaft hover:text-pampas text-black font-serif-en border rounded-[30px] pt-1 pb-0.5 px-3 md:pt-[6px] md:pb-[5px] md:px-4 flex gap-2 items-center group transition duration-700" data-color="dark">
+                <span class="inline-block">MENU</span>
+                <span class="block h-1.5 w-1.5 rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="menu" class="fixed top-0 left-0 z-40 h-screen w-screen bg-gray-texture transform -translate-x-full transition-transform duration-500 ease-in-out">
+        <div class="relative flex h-full w-full p-5 md:p-10">
+            <video class="hidden h-full max-w-[50%] items-center md:mr-4 md:flex" webkit-playsinline playsinline muted autoplay loop>
+                <source src="videos/5.mp4" type="video/mp4">
+            </video>
+
+            <div class="flex w-full flex-col md:flex-1">
+                <button class="ts-menu-close text-pampas border-emperor absolute top-5 md:top-10 right-5 md:right-20 hover:bg-pampas hover:text-mine-shaft font-serif-en border rounded-[30px] pt-1 pb-0.5 px-3 md:pt-[6px] md:pb-[5px] md:px-4 flex gap-2 items-center group transition duration-700">
+                    <span class="inline-block">CLOSE</span>
+                    <span class="block h-1.5 w-1.5 rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+                </button>
+
+                <div class="flex w-full flex-1 flex-col items-center py-10">
+                    <div class="flex w-full flex-1 items-center justify-center">
+                        <ul class="flex h-full max-h-[22.2rem] w-full max-w-[85%] flex-row-reverse justify-between md:max-h-[30rem] md:w-auto md:max-w-full md:justify-normal md:gap-12">
+                            <li class="flex leading-none">
+                                <a href="#home" class="group relative duration-[0.6s] vertical-rl hover:opacity-70 menu-nav-link" data-section="home">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(01)</span>
+                                    </span>
+                                    <span class="mt-6 text-2xl text-pampas md:mt-8 md:text-[2rem]">Home</span>
+                                    <span class="mb-3 mt-4 h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                    </span>
+                                    <span class="font-serif-en text-sm text-silver-chalice md:text-base">
+                                            <span>HOME</span>
+                                    </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="#about" class="group relative duration-[0.6s] vertical-rl hover:opacity-70 menu-nav-link" data-section="about">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(02)</span>
+                                    </span>
+                                    <span class="mt-6 text-2xl text-pampas md:mt-8 md:text-[2rem]">About</span>
+                                    <span class="mb-3 mt-4 h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                    </span>
+                                    <span class="font-serif-en text-sm text-silver-chalice md:text-base">
+                                            <span>ABOUT</span>
+                                    </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="#works" class="group relative duration-[0.6s] vertical-rl hover:opacity-70 menu-nav-link" data-section="works">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(03)</span>
+                                    </span>
+                                    <span class="mt-6 text-2xl text-pampas md:mt-8 md:text-[2rem]">Works</span>
+                                    <span class="mb-3 mt-4 h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                    </span>
+                                    <span class="font-serif-en text-sm text-silver-chalice md:text-base">
+                                            <span>WORKS</span>
+                                    </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="flex leading-none">
+                                <a href="#contact" class="group relative duration-[0.6s] vertical-rl hover:opacity-70 menu-nav-link" data-section="contact">
+                                    <span class="flex flex-row items-center vertical-rl">
+                                        <span class="text-taupe-gray horizontal-tb">
+                                            <span>(04)</span>
+                                    </span>
+                                    <span class="mt-6 text-2xl text-pampas md:mt-8 md:text-[2rem]">Contact</span>
+                                    <span class="mb-3 mt-4 h-full flex-1 md:mb-4 md:mt-6">
+                                            <span class="block h-full w-[1px] bg-emperor"></span>
+                                    </span>
+                                    <span class="font-serif-en text-sm text-silver-chalice md:text-base">
+                                            <span>CONTACT</span>
+                                    </span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="mt-4 flex gap-8">
+                        <li>
+                            <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link font-serif-en text-xl text-pampas hover:opacity-70 transition-opacity">
+                                X (Twitter)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link font-serif-en text-xl text-pampas hover:opacity-70 transition-opacity">
+                                INSTAGRAM
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main" class="overflow-x-hidden">
+
+        <!-- Advanced 3D Page Loader -->
+        <div class="ts-page-loader fixed left-0 top-0 z-50 h-screen w-screen flex items-center justify-center transition-all duration-1000 bg-black" data-color="dark">
+            <!-- 3D Canvas Background -->
+            <div id="preloader-3d-canvas" class="absolute inset-0 z-1"></div>
+
+            <!-- Preloader Content -->
+            <div class="loader-container relative z-10 max-w-lg p-8 text-center">
+                <!-- Main Logo Animation -->
+                <div class="loader-logo-container mb-8">
+                    <h1 class="text-5xl md:text-7xl font-medium text-white mb-4 opacity-0 transform translate-y-8 transition-all duration-1000" id="preloader-title">
+                        HASSAM TAHIR
+                    </h1>
+                    <div class="w-32 h-[2px] bg-gradient-to-r from-transparent via-pampas to-transparent mx-auto mb-6 opacity-0" id="preloader-line"></div>
+                </div>
+
+                <!-- Video Editor Elements -->
+                <div class="video-editor-elements mb-8 opacity-0" id="preloader-elements">
+                    <div class="flex justify-center items-center space-x-6 mb-6">
+                        <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                        <div class="text-silver-chalice font-serif-en text-xs tracking-widest">RENDERING</div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse animation-delay-500"></div>
+                    </div>
+
+                    <!-- Progress Timeline -->
+                    <div class="timeline-container mb-6">
+                        <div class="w-full bg-gray-700 h-1 rounded-full overflow-hidden">
+                            <div id="preloader-progress" class="h-full bg-gradient-to-r from-white via-pampas to-white transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between mt-2 text-xs text-silver-chalice font-serif-en">
+                            <span>00:00</span>
+                            <span id="progress-text">Loading...</span>
+                            <span>03:47</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Text -->
+                <div class="loader-text-container">
+                    <div class="loader-text font-serif-en text-sm tracking-widest text-silver-chalice opacity-0" id="portfolio-text">
+                        VIDEO EDITOR PORTFOLIO
+                    </div>
+                    <div class="mt-4 text-xs text-gray-400 opacity-0" id="loading-status">
+                        Initializing 3D Environment...
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Skip Button -->
+            <button id="skip-preloader" class="absolute bottom-8 right-8 text-xs text-silver-chalice hover:text-gray transition-colors font-serif-en border border-silver-chalice/30 px-4 py-2 rounded-full hover:border-pampas opacity-0">
+                SKIP INTRO
+            </button>
+        </div>
+
+
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen overflow-hidden">
+            <!-- 3D Background Video -->
+            <div id="hero-video" class="absolute inset-0 z-0 w-full h-full">
+                <div id="kinect-container" class="w-full h-full">
+                    <video id="kinect-video" class="w-full h-full object-cover" muted autoplay loop playsinline crossorigin="anonymous">
+                        <source src="videos/3.mp4" type="video/mp4">
+                        <source src="videos/3.mp4" type="video/mp4">
+                    </video>
+                    <canvas id="kinect-canvas" class="absolute inset-0 w-full h-full"></canvas>
+                </div>
+                <!-- Dark overlay for better text contrast -->
+                <!-- <div class="absolute inset-0 bg-black/40 z-10"></div> -->
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-20 flex flex-col justify-center min-h-screen px-5 md:px-20 py-16">
+                <!-- Top tagline -->
+                <div class="hero-tagline opacity-0 transform translate-y-8">
+                    <p class="font-serif-en text-sm md:text-lg text-silver-chalice tracking-widest mb-8">
+                        VIDEO EDITOR / MOTION GRAPHICS / VISUAL DESIGNER / CREATIVE DIRECTOR
+                    </p>
+                </div>
+
+                <!-- Main content grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Left column - Logo and intro -->
+                    <div class="lg:col-span-7">
+                        <!-- Logo -->
+                        <div class="hero-logo opacity-0 transform translate-y-12 mb-8">
+                            <picture class="block max-w-[280px] md:max-w-[480px] lg:max-w-[600px]">
+                                <!-- <img src="images/Hp.png" alt="HASSAM TAHIR" class="w-full h-auto filter drop-shadow-lg"> -->
+                            </picture>
+                        </div>
+
+                        <!-- Introduction text -->
+                        <div class="hero-intro opacity-0 transform translate-y-12">
+                            <p class="font-serif-en text-base md:text-xl lg:text-2xl text-pampas leading-relaxed max-w-2xl">
+                                Crafting <span class="text-gray font-semibold">cinematic stories</span> through video editing,
+                                <span class="text-gray font-semibold">motion graphics</span>, and visual design. Bringing ideas to life with <span class="text-gray font-semibold">precision</span> and <span class="text-gray font-semibold">creativity</span>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right column - Portfolio indicator and CTA -->
+                    <div class="lg:col-span-5 flex flex-col items-center lg:items-end text-center lg:text-right">
+                        <!-- Portfolio indicator -->
+                        <div class="hero-portfolio opacity-0 transform translate-y-12 mb-8">
+                            <div class="flex flex-col items-center lg:items-end">
+                                <span class="font-serif-en text-sm md:text-base text-silver-chalice tracking-widest mb-2">
+                                    (PORTFOLIO 2024)
+                                </span>
+                                <h2 class="text-3xl md:text-5xl lg:text-6xl font-light text-gray leading-tight">
+                                    Creative
+                                    <br> Collection
+                                </h2>
+                                <div class="w-16 h-[1px] bg-silver-chalice mt-4"></div>
+                            </div>
+                        </div>
+
+                        <!-- Call to action -->
+                        <div class="hero-cta opacity-0 transform translate-y-12">
+                            <a href="#works" class="group relative inline-flex items-center gap-4 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 rounded-full px-8 py-4 border border-gray">
+                                <span class="font-serif-en text-lg text-gray">VIEW WORKS</span>
+                                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
+                                    <svg class="w-4 h-4 text-gray transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating 3D elements -->
+                <div id="floating-3d-elements" class="absolute inset-0 z-15 pointer-events-none">
+                    <!-- 3D elements will be positioned here by JavaScript -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Software & Tools Section -->
+
+
+
+
+        <iframe src="alice-story.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+
+
+        <section id="tools" class="relative py-24 md:py-28 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+            <!-- Parallax background elements -->
+            <div class="absolute inset-0 z-0">
+                <div class="parallax-bg-slow absolute w-full h-full opacity-10">
+                    <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-20 right-10 w-48 h-48 bg-gradient-to-br from-red-500 to-orange-500 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+
+            <div class="container px-5 md:px-20 max-w-none relative z-10">
+                <!-- Section Header -->
+                <div class="text-center mb-8 section-transition">
+                    <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-gray">
+                            (Software & Tools)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl leading-none font-medium text-black">
+                            <span>Professional</span>
+                            <span>Arsenal</span>
+                        </div>
+                    </h2>
+                </div>
+                <iframe src="3d_gallery.html" style="width: 100%; height: 80vh; border: none;"></iframe>
+
+                <!-- 3D Software Showcase -->
+                <div id="software-3d-showcase" class="relative h-64 md:h-80 my-5">
+                    <!-- 3D Canvas will be inserted here -->
+                    <canvas id="software-canvas" class="w-full h-full"></canvas>
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <!-- Works Section -->
+        <section id="works" class="relative py-24 bg-gray-texture text-pampas overflow-hidden">
+
+            <div class="container px-5 md:px-20 max-w-none relative z-10">
+                <!-- Works Header -->
+                <div class="text-center mb-10 section-transition">
+                    <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-silver-chalice">
+                            (Video Portfolio)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl lg:text-6xl leading-none font-medium text-gray">
+                            <span>Creative</span>
+                            <span>Showcase</span>
+                        </div>
+                    </h2>
+                </div>
+                
+                    <section class="gallery-section">
+        <iframe src="gallery.html" class="gallery-iframe" id="culture-gallery"></iframe>
+    </section>
+    
+                <!-- Interactive Video Gallery -->
+                <div id="video-gallery" class="mb-20">
+                    <!-- Main featured video -->
+                    <div class="main-video-container mb-12 section-transition">
+                        <div class="relative overflow-hidden rounded-2xl bg-black max-w-6xl mx-auto shadow-2xl group">
+                            <video id="main-portfolio-video" class="w-full h-56 md:h-auto transition-all duration-500 group-hover:scale-105">
+                                <source src="videos/2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <!-- Video overlay controls -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <button class="play-button w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300">
+                                        <svg class="w-8 h-8 text-gray ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Video info -->
+                            <div class="absolute bottom-6 left-6 text-gray">
+                                <h4 class="text-xl md:text-2xl font-medium mb-2">Portfolio Showcase 2024</h4>
+                                <p class="text-base opacity-90">A collection of my best video editing and motion graphics work</p>
+                                <div class="flex items-center gap-4 mt-4">
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Commercial</span>
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Motion Graphics</span>
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Color Grading</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video thumbnails scroll gallery -->
+                    <div class="video-scroll-gallery relative">
+                        <h3 class="text-2xl md:text-3xl font-medium mb-8 text-center text-gray section-transition">
+                            Project Gallery
+                        </h3>
+
+                        <!-- Horizontal scrolling container -->
+                        <div class="scroll-container relative overflow-hidden">
+                            <div class="flex space-x-6 overflow-x-auto scrollbar-hide pb-6" style="scroll-behavior: smooth;">
+                                <!-- Video 1 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/Pakistan.mp4" data-title="Commercial Project" data-description="Brand storytelling with dynamic cuts and transitions">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/Pakistan.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-gray">
+                                            <h4 class="text-lg font-medium">Commercial Project</h4>
+                                            <p class="text-sm opacity-80">Brand storytelling</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 2 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/Sahiba .mp4" data-title="Music Video" data-description="Creative visual effects synchronized with beat">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/Sahiba .mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-gray">
+                                            <h4 class="text-lg font-medium">Music Video</h4>
+                                            <p class="text-sm opacity-80">Creative visual effects</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 3 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/2.mp4" data-title="Documentary" data-description="Emotional storytelling with careful pacing">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/2.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-gray">
+                                            <h4 class="text-lg font-medium">Documentary</h4>
+                                            <p class="text-sm opacity-80">Emotional storytelling</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 4 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/4.mp4" data-title="Motion Graphics" data-description="Abstract animations and kinetic typography">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/4.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-gray">
+                                            <h4 class="text-lg font-medium">Motion Graphics</h4>
+                                            <p class="text-sm opacity-80">Abstract animations</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 5 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/3.mp4" data-title="Color Grading Showcase" data-description="Professional color correction and grading techniques">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/3.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-gray">
+                                            <h4 class="text-lg font-medium">Color Grading</h4>
+                                            <p class="text-sm opacity-80">Professional grading</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 6 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                    <div class="relative overflow-hidden rounded-xl bg-black shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/1.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-gray ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-gray">
+                                            <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                            <p class="text-sm opacity-80">Advanced visual effects</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Scroll navigation for gallery -->
+                            <div class="flex justify-center mt-8 space-x-4">
+                                <button class="gallery-nav-btn gallery-prev w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 disabled:opacity-50">
+                                    <svg class="w-5 h-5 text-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <button class="gallery-nav-btn gallery-next w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300">
+                                    <svg class="w-5 h-5 text-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            <iframe src="particle-hero.html" style="width: 100%; height: 80vh; border: none;"></iframe>
+
+
+                <!-- Portfolio Works List -->
+
+                <!-- View All CTA -->
+                <div class="ts-focus-in mt-24 flex flex-col items-center md:mt-32 section-transition" data-active="true">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl md:text-3xl font-medium mb-4 text-gray">
+                            Explore Complete Portfolio
+                        </h3>
+                        <p class="text-base md:text-lg text-silver-chalice max-w-2xl">
+                            Discover more projects, case studies, and behind-the-scenes content
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <button class="view-all-works group relative inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 rounded-full px-8 py-4 border border-gray text-gray">
+                            <span class="font-serif-en text-lg">VIEW ALL WORKS</span>
+                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
+                                <svg class="w-4 h-4 text-gray transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </button>
+
+                        <a href="#contact" class="group  relative inline-flex items-center justify-between gap-3 bg-transparent hover:bg-white/10 transition-all duration-300 rounded-full px-8 py-4 border border-pampas text-gray">
+                            <span class="font-serif-en text-lg">HIRE ME</span>
+                            <div class="w-8 h-8 rounded-full border border-gray flex items-center justify-center group-hover:border-pampas transition-all duration-300">
+                                <svg class="w-4 h-4 text-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="relative py-24 md:py-32 bg-gray-texture text-pampas">
+            <div class="container px-5 md:px-20 max-w-none">
+                <!-- Contact Header -->
+                <div class="text-center mb-16 section-transition">
+                    <h1 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-silver-chalice">
+                            (Contact)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl leading-none font-medium">
+                            <span>Let's Create</span>
+                            <span>Something Amazing</span>
+                        </div>
+                    </h1>
+                </div>
+
+                <!-- Contact Content -->
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20 max-w-6xl mx-auto">
+                    <!-- Contact Info -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h2 class="text-2xl md:text-3xl font-medium mb-8">
+                            Get In Touch
+                        </h2>
+
+                        <div class="space-y-6 text-base md:text-lg leading-relaxed">
+                            <p>
+                                I'm always excited to work on new projects and collaborate with creative individuals and teams. Whether you need video editing, motion graphics, or visual design, let's discuss how we can bring your vision to life.
+                            </p>
+
+                            <div class="space-y-4">
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Email</dt>
+                                    <dd class="text-lg">
+                                        <a href="mailto:taaaaiki.mode@gmail.com?subject=Project Inquiry" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                            taaaaiki.mode@gmail.com
+                                        </a>
+                                    </dd>
+                                </div>
+
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Social</dt>
+                                    <dd class="text-lg space-y-2">
+                                        <div>
+                                            <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                                X (Twitter)
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                                Instagram
+                                            </a>
+                                        </div>
+                                    </dd>
+                                </div>
+
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Response Time</dt>
+                                    <dd class="text-lg">Usually within 24 hours</dd>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h3 class="text-xl md:text-2xl font-medium mb-6">
+                            Project Inquiry
+                        </h3>
+
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="name" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Name *</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-transparent border border-emperor rounded-lg text-pampas placeholder-silver-chalice focus:border-pampas focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <label for="email" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Email *</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-transparent border border-emperor rounded-lg text-pampas placeholder-silver-chalice focus:border-pampas focus:outline-none transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="company" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Company</label>
+                                <input type="text" id="company" name="company" class="w-full px-4 py-3 bg-transparent border border-emperor rounded-lg text-pampas placeholder-silver-chalice focus:border-pampas focus:outline-none transition-colors">
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="project" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Project Type</label>
+                                    <select id="project" name="project" class="w-full px-4 py-3 bg-mine-shaft border border-emperor rounded-lg text-pampas focus:border-pampas focus:outline-none transition-colors">
+                                        <option value="">Select project type</option>
+                                        <option value="video-editing">Video Editing</option>
+                                        <option value="motion-graphics">Motion Graphics</option>
+                                        <option value="web-design">Web Design</option>
+                                        <option value="graphic-design">Graphic Design</option>
+                                        <option value="art-direction">Art Direction</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="budget" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Budget Range</label>
+                                    <select id="budget" name="budget" class="w-full px-4 py-3 bg-mine-shaft border border-emperor rounded-lg text-pampas focus:border-pampas focus:outline-none transition-colors">
+                                        <option value="">Select budget range</option>
+                                        <option value="under-5k">Under $5,000</option>
+                                        <option value="5k-10k">$5,000 - $10,000</option>
+                                        <option value="10k-25k">$10,000 - $25,000</option>
+                                        <option value="25k-plus">$25,000+</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block font-serif-en text-sm font-medium text-silver-chalice mb-2">Project Details *</label>
+                                <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 bg-transparent border border-emperor rounded-lg text-pampas placeholder-silver-chalice focus:border-pampas focus:outline-none transition-colors resize-none" placeholder="Tell me about your project, timeline, and any specific requirements..."></textarea>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="ts-more group relative inline-block overflow-hidden rounded-full border border-pampas px-12 py-6 font-serif-en leading-none transition-all duration-[0.6s] text-lg text-pampas hover:bg-pampas hover:text-mine-shaft">
+                                    <span class="absolute left-1/2 top-1/2 z-0 h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pampas transition-all duration-[0.6s] group-hover:h-full group-hover:w-full"></span>
+                                    <span class="relative z-10">SEND MESSAGE</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-wrapper" class="relative mt-10">
+        <footer id="footer" class="relative w-full overflow-hidden text-pampas bg-gray-texture">
+            <div class="container px-5 pt-16 md:px-20 md:pt-24 max-w-none">
+                <ul class="flex flex-row-reverse justify-center gap-8">
+                    <li class="relative flex flex-col items-center">
+                        <span class="absolute -top-4 left-1/2 h-[6px] w-[6px] -translate-x-1/2">
+                            <span class="block h-1.5 w-1.5 rounded-full bg-taupe-gray transition-transform group-hover:scale-125"></span>
+                        </span>
+                        <a href="#home" class="ts-text-link text-xl leading-none vertical-rl text-silver-chalice hover:text-pampas transition-colors">
+                            Home
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="#about" class="ts-text-link text-xl leading-none vertical-rl hover:text-pampas transition-colors">
+                            About
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="#works" class="ts-text-link text-xl leading-none vertical-rl hover:text-pampas transition-colors">
+                            Works
+                        </a>
+                    </li>
+                    <li class="relative flex flex-col items-center">
+                        <a href="#contact" class="ts-text-link text-xl leading-none vertical-rl hover:text-pampas transition-colors">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mt-20 hidden justify-end md:flex">
+                    <a href="#home" class="ts-text-link ts-anchor font-serif-en text-lg hover:text-silver-chalice transition-colors">BACK TO TOP</a>
+                </div>
+
+                <ul class="mt-12 mb-5 flex flex-wrap items-center justify-center gap-x-7 gap-y-4 border-t border-emperor pt-10 font-serif-en md:mt-6 md:justify-between md:gap-8">
+                    <li class="inline-block">
+                        <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link md:text-xl hover:text-silver-chalice transition-colors">
+                            X (Twitter)
+                        </a>
+                    </li>
+                    <li class="inline-block">
+                        <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link md:text-xl hover:text-silver-chalice transition-colors">
+                            INSTAGRAM
+                        </a>
+                    </li>
+                    <li class="inline-block w-full text-center md:ml-auto md:w-auto">
+                        <small class="text-base text-silver-chalice">
+                            &copy; 2024 HASSAM TAHIR
+                        </small>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Component Scripts -->
+    <script src="components/Header.js"></script>
+    <script src="components/MobileMenu.js"></script>
+    <script src="components/ProjectCard.js"></script>
+    <script src="components/Footer.js"></script>
+    <script src="components/Advanced3DEffects.js"></script>
+
+    <!-- Vertex Shader -->
+    <script id="vs" type="x-shader/x-vertex">
+        uniform sampler2D map; uniform float width; uniform float height; uniform float nearClipping, farClipping; uniform float pointSize; uniform float zOffset; varying vec2 vUv; const float XtoZ = 1.11146; const float YtoZ = 0.83359; void main() { vUv = vec2(position.x
+        / width, position.y / height); vec4 color = texture2D(map, vUv); float depth = (color.r + color.g + color.b) / 3.0; float z = (1.0 - depth) * (farClipping - nearClipping) + nearClipping; vec4 pos = vec4( (position.x / width - 0.5) * z * XtoZ,
+        (position.y / height - 0.5) * z * YtoZ, -z + zOffset, 1.0 ); gl_PointSize = pointSize; gl_Position = projectionMatrix * modelViewMatrix * pos; }
+    </script>
+
+    <!-- Fragment Shader -->
+    <script id="fs" type="x-shader/x-fragment">
+        uniform sampler2D map; varying vec2 vUv; void main() { vec4 color = texture2D(map, vUv); gl_FragColor = vec4(color.r, color.g, color.b, 1.0); }
+    </script>
+
+    <!-- Simplified Animation Controllers -->
+    <script src="js/preloader-simple.js"></script>
+
+
+    <script src="js/advanced-3d-controller.js"></script>
+
+    <!-- Main Single-Page Application Script -->
+    <script src="js/single-page-app.js"></script>
+    <!-- Main Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("kinect-container");
+            const video = document.getElementById("kinect-video");
+
+            // Force autoplay (some browsers block it unless muted)
+            video.muted = true;
+            video.autoplay = true;
+            video.loop = true;
+
+            // Try playing video
+            video.play().catch(err => {
+                console.warn("Autoplay blocked. User interaction required:", err);
+            });
+
+            video.addEventListener("loadeddata", () => {
+                console.log("Video ready, initializing effect...");
+
+                let scene, camera, renderer;
+                let geometry, mesh, material;
+                let mouse, center;
+
+                // Renderer
+                renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById("kinect-canvas"),
+                    alpha: true,
+                    antialias: true
+                });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(container.clientWidth, container.clientHeight);
+
+                // Camera
+                camera = new THREE.PerspectiveCamera(
+                    50,
+                    container.clientWidth / container.clientHeight,
+                    1,
+                    10000
+                );
+                camera.position.set(0, 0, 800);
+
+                // Scene
+                scene = new THREE.Scene();
+                center = new THREE.Vector3(0, 0, -1000);
+
+                // Texture
+                const texture = new THREE.VideoTexture(video);
+                texture.minFilter = THREE.NearestFilter;
+                texture.generateMipmaps = false;
+
+                const width = 780,
+                    height = 480;
+                const nearClipping = 850,
+                    farClipping = 4000;
+
+                // Geometry
+                geometry = new THREE.BufferGeometry();
+                const vertices = new Float32Array(width * height * 3);
+                for (let i = 0, j = 0, l = vertices.length; i < l; i += 3, j++) {
+                    vertices[i] = j % width;
+                    vertices[i + 1] = Math.floor(j / width);
+                }
+                geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+
+                // Material with shaders
+                material = new THREE.ShaderMaterial({
+                    uniforms: {
+                        opacity: {
+                            value: 1.0
+                        },
+                        map: {
+                            value: texture
+                        },
+                        width: {
+                            value: width
+                        },
+                        height: {
+                            value: height
+                        },
+                        nearClipping: {
+                            value: 3000
+                        },
+                        farClipping: {
+                            value: 500
+                        },
+                        pointSize: {
+                            value: 1
+                        },
+                        zOffset: {
+                            value: 50
+                        }
+                    },
+                    vertexShader: document.getElementById("vs").textContent,
+                    fragmentShader: document.getElementById("fs").textContent,
+                    blending: THREE.AdditiveBlending,
+                    depthTest: false,
+                    depthWrite: false,
+                    transparent: true
+                });
+
+                // Mesh
+                mesh = new THREE.Points(geometry, material);
+                scene.add(mesh);
+
+                // Mouse interaction
+                mouse = new THREE.Vector3(0, 0, 1);
+                document.addEventListener("mousemove", onDocumentMouseMove);
+
+                function onDocumentMouseMove(event) {
+                    const rect = container.getBoundingClientRect();
+                    mouse.x = (event.clientX - rect.left - container.clientWidth / 2) * 8;
+                    mouse.y = (event.clientY - rect.top - container.clientHeight / 2) * 8;
+                }
+
+                // Resize
+                window.addEventListener("resize", onWindowResize);
+
+                function onWindowResize() {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+
+                // Animate
+                function animate() {
+                    requestAnimationFrame(animate);
+
+                    camera.position.x += (mouse.x - camera.position.x) * 0.05;
+                    camera.position.y += (-mouse.y - camera.position.y) * 0.05;
+                    camera.lookAt(center);
+
+                    renderer.render(scene, camera);
+                }
+
+                animate();
+            });
+        });
+    </script>
+
+
+  <!-- Shaders -->
+  <script id="fragmentShaderPosition" type="x-shader/x-fragment">
+    uniform float time;
+    uniform float delta;
+    void main() {
+      vec2 uv = gl_FragCoord.xy / resolution.xy;
+      vec4 tmpPos = texture2D(texturePosition, uv);
+      vec3 position = tmpPos.xyz;
+      vec3 velocity = texture2D(textureVelocity, uv).xyz;
+      float phase = tmpPos.w;
+      phase = mod((phase + delta + length(velocity.xz) * delta * 3. + max(velocity.y, 0.0) * delta * 6.), 62.83);
+      gl_FragColor = vec4(position + velocity * delta * 15., phase);
+    }
+  </script>
+
+     
+    <!-- Three.js and related libraries -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        // Import with correct paths using the importmap
+        import * as THREE from 'three';
+        import Stats from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/stats.module.js';
+        import { GUI } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/lil-gui.module.min.js';
+        import { GPUComputationRenderer } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/misc/GPUComputationRenderer.js';
+
+        const WIDTH = 32;
+        const BIRDS = WIDTH * WIDTH;
+
+        class BirdGeometry extends THREE.BufferGeometry {
+            constructor() {
+                super();
+                const trianglesPerBird = 3;
+                const triangles = BIRDS * trianglesPerBird;
+                const points = triangles * 3;
+
+                const vertices = new THREE.BufferAttribute(new Float32Array(points * 3), 3);
+                const birdColors = new THREE.BufferAttribute(new Float32Array(points * 3), 3);
+                const references = new THREE.BufferAttribute(new Float32Array(points * 2), 2);
+                const birdVertex = new THREE.BufferAttribute(new Float32Array(points), 1);
+
+                this.setAttribute('position', vertices);
+                this.setAttribute('birdColor', birdColors);
+                this.setAttribute('reference', references);
+                this.setAttribute('birdVertex', birdVertex);
+
+                let v = 0;
+                function verts_push(...args) {
+                    for (let i = 0; i < args.length; i++) {
+                        vertices.array[v++] = args[i];
+                    }
+                }
+
+                const wingsSpan = 20;
+                for (let f = 0; f < BIRDS; f++) {
+                    verts_push(0, -0, -20, 0, 4, -20, 0, 0, 30);
+                    verts_push(0, 0, -15, -wingsSpan, 0, 0, 0, 0, 15);
+                    verts_push(0, 0, 15, wingsSpan, 0, 0, 0, 0, -15);
+                }
+
+                for (let i = 0; i < triangles * 3; i++) {
+                    const triangleIndex = ~~(i / 3);
+                    const birdIndex = ~~(triangleIndex / trianglesPerBird);
+                    const x = (birdIndex % WIDTH) / WIDTH;
+                    const y = ~~(birdIndex / WIDTH) / WIDTH;
+
+                    const c = new THREE.Color(0x666666 + ~~(i / 9) / BIRDS * 0x666666);
+                    birdColors.array[i * 3 + 0] = c.r;
+                    birdColors.array[i * 3 + 1] = c.g;
+                    birdColors.array[i * 3 + 2] = c.b;
+
+                    references.array[i * 2] = x;
+                    references.array[i * 2 + 1] = y;
+
+                    birdVertex.array[i] = i % 9;
+                }
+
+                this.scale(0.2, 0.2, 0.2);
+            }
+        }
+
+        let container, stats;
+        let camera, scene, renderer;
+        let mouseX = 0, mouseY = 0;
+        let windowHalfX = window.innerWidth / 2;
+        let windowHalfY = window.innerHeight / 2;
+
+        const BOUNDS = 800, BOUNDS_HALF = BOUNDS / 2;
+        let last = performance.now();
+
+        let gpuCompute;
+        let velocityVariable, positionVariable;
+        let positionUniforms, velocityUniforms, birdUniforms;
+        
+        let animationId = null;
+        let isPaused = false;
+
+        init();
+
+        function init() {
+            container = document.getElementById('simulation');
+            
+            // Set up camera
+            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 1, 3000);
+            camera.position.z = 350;
+
+            // Set up scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+            scene.fog = new THREE.Fog(0x000000, 100, 1000);
+
+            // Set up renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+
+            initComputeRenderer();
+
+            // Set up stats
+            stats = new Stats();
+            stats.dom.style.position = 'absolute';
+            stats.dom.style.top = '10px';
+            stats.dom.style.right = '10px';
+            container.appendChild(stats.dom);
+
+            // Handle mouse movement
+            container.addEventListener('pointermove', onPointerMove);
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+            
+            // Set up control buttons
+            document.getElementById('pause-btn').addEventListener('click', togglePause);
+            document.getElementById('reset-btn').addEventListener('click', resetSimulation);
+
+            initBirds();
+            animate();
+        }
+        
+        function onWindowResize() {
+            const container = document.getElementById('simulation');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        function initComputeRenderer() {
+            gpuCompute = new GPUComputationRenderer(WIDTH, WIDTH, renderer);
+
+            const dtPosition = gpuCompute.createTexture();
+            const dtVelocity = gpuCompute.createTexture();
+
+            fillPositionTexture(dtPosition);
+            fillVelocityTexture(dtVelocity);
+
+            velocityVariable = gpuCompute.addVariable('textureVelocity',
+                document.getElementById('fragmentShaderVelocity').textContent, dtVelocity);
+            positionVariable = gpuCompute.addVariable('texturePosition',
+                document.getElementById('fragmentShaderPosition').textContent, dtPosition);
+
+            gpuCompute.setVariableDependencies(velocityVariable, [positionVariable, velocityVariable]);
+            gpuCompute.setVariableDependencies(positionVariable, [positionVariable, velocityVariable]);
+
+            positionUniforms = positionVariable.material.uniforms;
+            velocityUniforms = velocityVariable.material.uniforms;
+
+            positionUniforms['time'] = { value: 0.0 };
+            positionUniforms['delta'] = { value: 0.0 };
+            velocityUniforms['time'] = { value: 1.0 };
+            velocityUniforms['delta'] = { value: 0.0 };
+            velocityUniforms['testing'] = { value: 1.0 };
+            velocityUniforms['separationDistance'] = { value: 20.0 };
+            velocityUniforms['alignmentDistance'] = { value: 20.0 };
+            velocityUniforms['cohesionDistance'] = { value: 20.0 };
+            velocityUniforms['freedomFactor'] = { value: 0.75 };
+            velocityUniforms['predator'] = { value: new THREE.Vector3() };
+
+            velocityVariable.material.defines.BOUNDS = BOUNDS.toFixed(2);
+
+            velocityVariable.wrapS = THREE.RepeatWrapping;
+            velocityVariable.wrapT = THREE.RepeatWrapping;
+            positionVariable.wrapS = THREE.RepeatWrapping;
+            positionVariable.wrapT = THREE.RepeatingWrapping;
+
+            const error = gpuCompute.init();
+            if (error !== null) console.error(error);
+        }
+
+        function initBirds() {
+            const geometry = new BirdGeometry();
+            birdUniforms = {
+                'color': { value: new THREE.Color(0xff2200) },
+                'texturePosition': { value: null },
+                'textureVelocity': { value: null },
+                'time': { value: 1.0 },
+                'delta': { value: 0.0 }
+            };
+
+            const material = new THREE.ShaderMaterial({
+                uniforms: birdUniforms,
+                vertexShader: document.getElementById('birdVS').textContent,
+                fragmentShader: document.getElementById('birdFS').textContent,
+                side: THREE.DoubleSide
+            });
+
+            const birdMesh = new THREE.Mesh(geometry, material);
+            birdMesh.rotation.y = Math.PI / 2;
+            birdMesh.matrixAutoUpdate = false;
+            birdMesh.updateMatrix();
+            scene.add(birdMesh);
+        }
+
+        function fillPositionTexture(texture) {
+            const theArray = texture.image.data;
+            for (let k = 0, kl = theArray.length; k < kl; k += 4) {
+                const x = Math.random() * BOUNDS - BOUNDS_HALF;
+                const y = Math.random() * BOUNDS - BOUNDS_HALF;
+                const z = Math.random() * BOUNDS - BOUNDS_HALF;
+                theArray[k + 0] = x;
+                theArray[k + 1] = y;
+                theArray[k + 2] = z;
+                theArray[k + 3] = 1;
+            }
+        }
+
+        function fillVelocityTexture(texture) {
+            const theArray = texture.image.data;
+            for (let k = 0, kl = theArray.length; k < kl; k += 4) {
+                const x = Math.random() - 0.5;
+                const y = Math.random() - 0.5;
+                const z = Math.random() - 0.5;
+                theArray[k + 0] = x * 10;
+                theArray[k + 1] = y * 10;
+                theArray[k + 2] = z * 10;
+                theArray[k + 3] = 1;
+            }
+        }
+
+        function onPointerMove(event) {
+            if (event.isPrimary === false) return;
+            
+            const rect = container.getBoundingClientRect();
+            mouseX = event.clientX - rect.left - container.clientWidth / 2;
+            mouseY = event.clientY - rect.top - container.clientHeight / 2;
+        }
+        
+        function togglePause() {
+            isPaused = !isPaused;
+            const btn = document.getElementById('pause-btn');
+            btn.textContent = isPaused ? 'Resume' : 'Pause';
+            
+            if (!isPaused) {
+                animate();
+            }
+        }
+        
+        function resetSimulation() {
+            initComputeRenderer();
+        }
+
+        function animate() {
+            if (isPaused) return;
+            
+            animationId = requestAnimationFrame(animate);
+            render();
+            stats.update();
+        }
+
+        function render() {
+            const now = performance.now();
+            let delta = (now - last) / 1000;
+            if (delta > 1) delta = 1;
+            last = now;
+
+            positionUniforms['time'].value = now;
+            positionUniforms['delta'].value = delta;
+            velocityUniforms['time'].value = now;
+            velocityUniforms['delta'].value = delta;
+            birdUniforms['time'].value = now;
+            birdUniforms['delta'].value = delta;
+
+            velocityUniforms['predator'].value.set(
+                0.5 * mouseX / (container.clientWidth / 2),
+                -0.5 * mouseY / (container.clientHeight / 2),
+                0
+            );
+
+            mouseX = 10000;
+            mouseY = 10000;
+
+            gpuCompute.compute();
+
+            birdUniforms['texturePosition'].value = gpuCompute.getCurrentRenderTarget(positionVariable).texture;
+            birdUniforms['textureVelocity'].value = gpuCompute.getCurrentRenderTarget(velocityVariable).texture;
+
+            renderer.render(scene, camera);
+        }
+    </script>
+
+    <!-- Shaders -->
+    <script id="fragmentShaderPosition" type="x-shader/x-fragment">
+        uniform float time;
+        uniform float delta;
+        void main() {
+            vec2 uv = gl_FragCoord.xy / resolution.xy;
+            vec4 tmpPos = texture2D(texturePosition, uv);
+            vec3 position = tmpPos.xyz;
+            vec3 velocity = texture2D(textureVelocity, uv).xyz;
+            float phase = tmpPos.w;
+            phase = mod((phase + delta + length(velocity.xz) * delta * 3. + max(velocity.y, 0.0) * delta * 6.), 62.83);
+            gl_FragColor = vec4(position + velocity * delta * 15., phase);
+        }
+    </script>
+
+    <script id="fragmentShaderVelocity" type="x-shader/x-fragment">
+        uniform float time;
+        uniform float testing;
+        uniform float delta;
+        uniform float separationDistance;
+        uniform float alignmentDistance;
+        uniform float cohesionDistance;
+        uniform float freedomFactor;
+        uniform vec3 predator;
+
+        const float PI = 3.141592653589793;
+        const float PI_2 = PI * 2.0;
+
+        void main() {
+            float zoneRadius = separationDistance + alignmentDistance + cohesionDistance;
+            float separationThresh = separationDistance / zoneRadius;
+            float alignmentThresh = (separationDistance + alignmentDistance) / zoneRadius;
+            float zoneRadiusSquared = zoneRadius * zoneRadius;
+
+            vec2 uv = gl_FragCoord.xy / resolution.xy;
+            vec3 selfPosition = texture2D(texturePosition, uv).xyz;
+            vec3 selfVelocity = texture2D(textureVelocity, uv).xyz;
+
+            vec3 velocity = selfVelocity;
+            float limit = 9.0;
+
+            // Predator avoidance
+            vec3 dir = predator * BOUNDS - selfPosition;
+            dir.z = 0.;
+            float dist = length(dir);
+            float distSquared = dist * dist;
+            float preyRadius = 150.0;
+            float preyRadiusSq = preyRadius * preyRadius;
+
+            if (dist < preyRadius) {
+                float f = (distSquared / preyRadiusSq - 1.0) * delta * 100.;
+                velocity += normalize(dir) * f;
+                limit += 5.0;
+            }
+
+            // Move towards center
+            vec3 central = vec3(0., 0., 0.);
+            dir = selfPosition - central;
+            dist = length(dir);
+            dir.y *= 2.5;
+            velocity -= normalize(dir) * delta * 5.;
+
+            // Flocking
+            for (float y = 0.0; y < resolution.y; y++) {
+                for (float x = 0.0; x < resolution.x; x++) {
+                    vec2 ref = vec2(x + 0.5, y + 0.5) / resolution.xy;
+                    vec3 birdPosition = texture2D(texturePosition, ref).xyz;
+                    dir = birdPosition - selfPosition;
+                    dist = length(dir);
+                    if (dist < 0.0001) continue;
+
+                    float distSquaredLocal = dist * dist;
+                    if (distSquaredLocal > zoneRadiusSquared) continue;
+
+                    float percent = distSquaredLocal / zoneRadiusSquared;
+
+                    if (percent < separationThresh) {
+                        float f = (separationThresh / percent - 1.0) * delta;
+                        velocity -= normalize(dir) * f;
+                    } else if (percent < alignmentThresh) {
+                        float threshDelta = alignmentThresh - separationThresh;
+                        float adjustedPercent = (percent - separationThresh) / threshDelta;
+                        vec3 birdVelocity = texture2D(textureVelocity, ref).xyz;
+                        float f = (0.5 - cos(adjustedPercent * PI_2) * 0.5 + 0.5) * delta;
+                        velocity += normalize(birdVelocity) * f;
+                    } else {
+                        float threshDelta = 1.0 - alignmentThresh;
+                        float adjustedPercent = (threshDelta == 0.0) ? 1.0 : (percent - alignmentThresh) / threshDelta;
+                        float f = (0.5 - (cos(adjustedPercent * PI_2) * -0.5 + 0.5)) * delta;
+                        velocity += normalize(dir) * f;
+                    }
+                }
+            }
+
+            // Limit speed
+            if (length(velocity) > limit) {
+                velocity = normalize(velocity) * limit;
+            }
+
+            gl_FragColor = vec4(velocity, 1.0);
+        }
+    </script>
+
+    <script type="x-shader/x-vertex" id="birdVS">
+        attribute vec2 reference;
+        attribute float birdVertex;
+        attribute vec3 birdColor;
+        uniform sampler2D texturePosition;
+        uniform sampler2D textureVelocity;
+        uniform float time;
+        varying vec4 vColor;
+        varying float z;
+        void main() {
+            vec4 tmpPos = texture2D(texturePosition, reference);
+            vec3 pos = tmpPos.xyz;
+            vec3 velocity = normalize(texture2D(textureVelocity, reference).xyz);
+            vec3 newPosition = position;
+
+            if (birdVertex == 4.0 || birdVertex == 7.0) {
+                newPosition.y = sin(tmpPos.w) * 5.;
+            }
+
+            newPosition = mat3(modelMatrix) * newPosition;
+            velocity.z *= -1.;
+
+            float xz = length(velocity.xz);
+            float x = sqrt(1. - velocity.y * velocity.y);
+
+            float cosry = velocity.x / xz;
+            float sinry = velocity.z / xz;
+            float cosrz = x;
+            float sinrz = velocity.y;
+
+            mat3 maty = mat3(cosry, 0, -sinry, 0, 1, 0, sinry, 0, cosry);
+            mat3 matz = mat3(cosrz, sinrz, 0, -sinrz, cosrz, 0, 0, 0, 1);
+
+            newPosition = maty * matz * newPosition;
+            newPosition += pos;
+
+            z = newPosition.z;
+            vColor = vec4(birdColor, 1.0);
+
+            gl_Position = projectionMatrix * viewMatrix * vec4(newPosition, 1.0);
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="birdFS">
+        varying vec4 vColor;
+        varying float z;
+        uniform vec3 color;
+        void main() {
+            float z2 = 0.2 + (1000. - z) / 1000. * vColor.x;
+            gl_FragColor = vec4(z2, z2, z2, 1.0);
+        }
+    </script>
+</body>
+
+</html>
